@@ -12,20 +12,20 @@ public class Main extends Application {
 	private Pane rootLayout;
 
 	/*
-	 * Chargement au lancement de l'application de le vue "view-connexion.fxml"
+	 * Chargement au lancement de l'application de le vue "view-inscription.fxml"
 	 */
 	@Override
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Main.class.getResource("/fxml/view-connexion.fxml"));
+			loader.setLocation(Main.class.getResource("/fxml/view-inscription.fxml"));
 			System.out.println(loader.getLocation());
 			rootLayout = loader.load();
 
 			Scene scene = new Scene(rootLayout);
 			primaryStage.setScene(scene);
 			primaryStage.show();
-			primaryStage.setTitle("GSB Gestion des frais - Compta Fiche de frais");
+			primaryStage.setTitle("meeting booking inscription");
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

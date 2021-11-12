@@ -41,7 +41,7 @@ public class DBConnex {
 		
 		ResultSet rs = null ;
 		try {
-			String sql ="SELECT id , nom , prenom, login, statut  FROM utilisateur where login = '" + login + "' and mdp = '"+ mdp +"'";
+			String sql ="";
 			rs = unStatement.executeQuery(sql);
 			if (!rs.next()) {
 				rs =null;

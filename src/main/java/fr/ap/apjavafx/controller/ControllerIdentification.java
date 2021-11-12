@@ -25,8 +25,8 @@ public class ControllerIdentification implements Initializable {
 	 * Les variables du fichier FXML associ�
 	 */
 	@FXML private Label messageConnexionLabel;
-	@FXML private TextField serveurTextField;
-	@FXML private TextField portTextField;
+	@FXML private TextField prenomTextField;
+	@FXML private TextField nomTextField;
 	@FXML private TextField loginTextField;
 	@FXML private PasswordField mdpPasswordField;
 	
@@ -97,8 +97,7 @@ public class ControllerIdentification implements Initializable {
 	 ***/
 	@Override
 	public void initialize(URL location , ResourceBundle ressources) {
-		serveurTextField.setText("127.0.0.1");
-		portTextField.setText("3306");
+
 	}
 	
 	
