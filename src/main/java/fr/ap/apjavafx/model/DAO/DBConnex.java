@@ -15,7 +15,7 @@ public class DBConnex {
 		
 		Statement statement = null;
 		 try {
-				Connection	connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/gsb?user=phpmya&password=M?ysql22");
+				Connection	connection = DriverManager.getConnection("jdbc:mysql://localhost/meetingbooker?user=root&password=");
 			
 				statement = connection.createStatement();
 				

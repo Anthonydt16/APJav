@@ -41,7 +41,7 @@ public class ControllerIdentification implements Initializable {
 		//En param�tre le login et mdp saisis et la d�claration de connexion.
 		//Le ResultSet r�cup�re la r�ponse du serveur SGBD.
 		ResultSet rs = DBConnex.authentification(loginTextField.getText() , mdpPasswordField.getText(), DBConnex.connexion() );
-		
+
 		
 		//Traitement de la r�ponse du SGBD
 		//Chargement des diff�rentes vues en fonction du statut de la personne authentifi�e.
