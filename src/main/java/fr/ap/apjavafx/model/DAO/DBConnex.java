@@ -17,7 +17,7 @@ public class DBConnex {
 		
 		Statement statement = null;
 		 try {
-				Connection	connection = DriverManager.getConnection("jdbc:mysql://"+settings.db_host+"/"+settings.db_user+"?user="+ settings.db_user +"&password="+ settings.db_password + "");
+				Connection	connection = DriverManager.getConnection("jdbc:mysql://"+settings.db_host+"/"+settings.db_url+"?user="+ settings.db_user +"&password="+ settings.db_password + "");
 			
 				statement = connection.createStatement();
 				
