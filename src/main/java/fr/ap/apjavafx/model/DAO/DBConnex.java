@@ -39,11 +39,11 @@ public class DBConnex {
 	 * @param unStatement
 	 * @return ResultSet
 	 */
-	public static ResultSet  authentification(String login , String mdp, Statement unStatement) {
+	public static ResultSet authentification(String login , String mdp, Statement unStatement) {
 		
 		ResultSet rs = null ;
 		try {
-			String sql ="";
+			String sql ="SELECT LOGIN, NOM, PRENOM, ADRESSE, TELEPHONE, MAIL WHERE LOGIN="+ login +"AND PASSWORD="+ mdp +";";
 			rs = unStatement.executeQuery(sql);
 			if (!rs.next()) {
 				rs =null;

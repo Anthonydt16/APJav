@@ -1,4 +1,4 @@
 package fr.ap.apjavafx.controller;
 
-public class controllerConnexion {
+public class controllerInscription {
 }
