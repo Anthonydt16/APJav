@@ -7,8 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.ap.apjavafx.controller.controllerAccueil">
    <children>
       <Text fx:id="txtTitre" layoutX="253.0" layoutY="89.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Accueil" textAlignment="CENTER">
          <font>
@@ -20,7 +19,7 @@
             <Font size="21.0" />
          </font>
       </Button>
-      <Button fx:id="inputInscipt" layoutX="411.0" layoutY="336.0" mnemonicParsing="false" text="Inscription">
+      <Button fx:id="inputInscipt" layoutX="411.0" layoutY="336.0" mnemonicParsing="false" onAction="#clickInscription" text="Inscription">
          <font>
             <Font size="21.0" />
          </font>
