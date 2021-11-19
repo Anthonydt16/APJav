@@ -1,5 +1,7 @@
 package fr.ap.apjavafx.model.DAO;
 
+import fr.ap.apjavafx.lib.settings;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -15,7 +17,7 @@ public class DBConnex {
 		
 		Statement statement = null;
 		 try {
-				Connection	connection = DriverManager.getConnection("jdbc:mysql://localhost/meetingbooker?user=root&password=");
+				Connection	connection = DriverManager.getConnection("jdbc:mysql://"+settings.db_host+"/"+settings.db_user+"?user="+ settings.db_user +"&password="+ settings.db_password + "");
 			
 				statement = connection.createStatement();
 				

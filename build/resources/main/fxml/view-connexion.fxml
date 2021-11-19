@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="423.0" prefWidth="557.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane prefHeight="439.0" prefWidth="571.0">
+         <children>
+            <TextField id="inputPassword" fx:id="inputPassword" layoutX="210.0" layoutY="238.0" />
+            <Text id="idPassword" fx:id="textPassword" layoutX="107.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="password" />
+            <ImageView fitHeight="37.0" fitWidth="199.0" layoutX="14.0" layoutY="14.0">
+               <image>
+                  <Image url="@../image/meetingBooking.PNG" />
+               </image>
+            </ImageView>
+            <TextField fx:id="inputLogin" layoutX="210.0" layoutY="175.0" />
+            <Text fx:id="textLogin" layoutX="121.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" />
+            <Text fx:id="textTitre" layoutX="164.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Connexion" textAlignment="CENTER">
+               <font>
+                  <Font size="51.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <Button id="validerConnexion" fx:id="btnValider" layoutX="226.0" layoutY="326.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="valider" />
+   </children>
+</AnchorPane>
