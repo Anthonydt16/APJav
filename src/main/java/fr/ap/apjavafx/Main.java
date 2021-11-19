@@ -18,14 +18,14 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Main.class.getResource("/fxml/view-inscription.fxml"));
+			loader.setLocation(Main.class.getResource("/fxml/view-Accueil.fxml"));
 			System.out.println(loader.getLocation());
 			rootLayout = loader.load();
 
 			Scene scene = new Scene(rootLayout);
 			primaryStage.setScene(scene);
 			primaryStage.show();
-			primaryStage.setTitle("meeting booking inscription");
+			primaryStage.setTitle("meeting booking Accueil");
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
