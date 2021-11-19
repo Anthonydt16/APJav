@@ -19,6 +19,7 @@ public class Utilisateur {
     private String ville;
     private Date dateEmbauche;
     private ArrayList<FicheFrais> mesFiches;
+    private UtilisateurStatus status;
     
 
     public Utilisateur(String unId, String unNom , String unPrenom  , String unLogin , String unMdp , String unStatut ,  String uneAdresse , String unCp , String uneVille , Date uneDateEmb)
@@ -34,7 +35,12 @@ public class Utilisateur {
         ville = uneVille;
         dateEmbauche = uneDateEmb;
         mesFiches = new ArrayList<FicheFrais>();
-    }
+//        status = UtilisateurStatus.ADMIN;
+//
+//        if (status == UtilisateurStatus.ADMIN)
+//            UtilisateurStatus.ADMIN.name();
+//        UtilisateurStatus.valueOf("ADMIN");
+        }
 
 
 	public String getLogin() {
