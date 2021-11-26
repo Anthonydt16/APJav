@@ -38,17 +38,14 @@ public class controllerConnexion implements Initializable {
         if(inputLogin.getText() == null || inputPassword.getText() == null){
             System.out.println("null");
         }else{
-            Utilisateur unUtilisateur = authentification(inputLogin.getText() , inputPassword.getText());
-            if(unUtilisateur.getLOGIN() == inputLogin.getText() && unUtilisateur.getPASSWORD() == inputPassword.getText()){
-                //connexion reussi
-            }else{
-                //en cas d'echec de connexion
+            Utilisateur unUtilisateur = authentification(inputLogin.getText() , inputPassword.getText(),inputPassword.getText(), inputLogin.getText()  );
+            if(unUtilisateur != null){
+
+                System.out.println(unUtilisateur.getLOGIN());
+
             }
-             System.out.println(unUtilisateur.getLOGIN());
 
-            System.out.println(authentification(inputLogin.getText() , inputPassword.getText()));
         }
-
 
         FXMLLoader loader1 = new FXMLLoader();
         loader1.setLocation(Main.class.getResource("/fxml/view-Connexion.fxml"));
