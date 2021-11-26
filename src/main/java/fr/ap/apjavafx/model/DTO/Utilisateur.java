@@ -8,61 +8,171 @@ import java.util.ArrayList;
 
 public class Utilisateur {
 
-    private String login;
+	private String id;
     private String nom ;
     private String prenom;
+    private String login;
+    private String mdp;
+    private String statut;
     private String adresse;
-    private int telephone;
+    private String cp;
+    private String ville;
+    private Date dateEmbauche;
+    private ArrayList<FicheFrais> mesFiches;
+    private UtilisateurStatus status;
     
 
-    public Utilisateur(String unLogin , String unNom , String unPrenom  , String uneAdresse , int telephone)
+    public Utilisateur(String unId, String unNom , String unPrenom  , String unLogin , String unMdp , String unStatut ,  String uneAdresse , String unCp , String uneVille , Date uneDateEmb)
     {
+        id = unId;
         nom = unNom;
         prenom = unPrenom;
         login = unLogin;
+        mdp = unMdp;
+        statut = unStatut;
         adresse = uneAdresse;
-        telephone = telephone;
+        cp = unCp;
+        ville = uneVille;
+        dateEmbauche = uneDateEmb;
+        mesFiches = new ArrayList<FicheFrais>();
+//        status = UtilisateurStatus.ADMIN;
+//
+//        if (status == UtilisateurStatus.ADMIN)
+//            UtilisateurStatus.ADMIN.name();
+//        UtilisateurStatus.valueOf("ADMIN");
+        }
+
+
+	public String getLogin() {
+		return login;
+	}
+
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+
+	public String getMdp() {
+		return mdp;
+	}
+
+
+	public void setMdp(String mdp) {
+		this.mdp = mdp;
+	}
+
+
+	public String getCp() {
+		return cp;
+	}
+
+
+	public void setCp(String cp) {
+		this.cp = cp;
+	}
+
+
+	public ArrayList<FicheFrais> getMesFiches() {
+		return mesFiches;
+	}
+
+
+	public void setMesFiches(ArrayList<FicheFrais> mesFiches) {
+		this.mesFiches = mesFiches;
+	}
+
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+
+
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
+	}
+
+
+	public void setVille(String ville) {
+		this.ville = ville;
+	}
+
+
+	public void setDateEmbauche(Date dateEmbauche) {
+		this.dateEmbauche = dateEmbauche;
+	}
+
+
+
+
+    public String getId()
+    {
+        return id;
     }
 
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getNom() {
+    public String getNom()
+    {
         return nom;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public String getPrenom() {
+    public String getPrenom()
+    {
         return prenom;
     }
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    public String getAdresse() {
+    public String getAdresse()
+    {
         return adresse;
     }
 
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
+    public String getCodePostal()
+    {
+        return cp;
     }
 
-    public int getTelephone() {
-        return telephone;
+    public String getVille()
+    {
+        return ville;
     }
 
-    public void setTelephone(int telephone) {
-        this.telephone = telephone;
+    public Date getDateEmbauche()
+    {
+        return dateEmbauche;
     }
+
+    public String getNomComplet()
+    {
+        return  nom + " " + prenom;
+    }
+
+    public String getCPVille()
+    {
+        return cp + " " +  ville;
+    }
+
+    public ArrayList<FicheFrais> getFichesDeFrais()
+    {
+        return mesFiches;
+    }
+   
+    public String getStatut() {
+		return statut;
+	}
+
+
+	public void setStatut(String statut) {
+		this.statut = statut;
+	}
 }
 	
 
