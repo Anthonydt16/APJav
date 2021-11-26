@@ -21,7 +21,7 @@ import java.util.ResourceBundle;
 
 public class controllerAccueil implements Initializable {
     /**
-     * Les variables du fichier FXML associ�
+     * Les variables du fichier FXML associé
      */
     @FXML
     private Label textTitre;
@@ -30,30 +30,28 @@ public class controllerAccueil implements Initializable {
     private Pane rootLayout;
     @FXML	protected void clickConnex(ActionEvent e) throws IOException {
         FXMLLoader loader1 = new FXMLLoader();
-        loader1.setLocation(Main.class.getResource("/fxml/view-Connexion.fxml"));
+        loader1.setLocation(Main.class.getResource("/fxml/view-connexion.fxml"));
         Pane ConnexionLayout = (Pane) loader1.load();
         Stage ConnexionStage = new Stage();
         Scene ConnectScene = new Scene(ConnexionLayout);
         ConnexionStage.setScene(ConnectScene);
 
-        ConnexionStage.setTitle("Connexion");
+        ConnexionStage.setTitle("Meeting Booking - Connexion");
         ConnexionStage.initModality(Modality.APPLICATION_MODAL);
         ConnexionStage.show();
-
     }
 
-    @FXML	protected void clickInscription(ActionEvent e) throws IOException {
+    @FXML
+    protected void clickInscription(ActionEvent e) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource("/fxml/view-Inscription.fxml"));
-        Pane InscriptionLayout = (Pane) loader.load();
+        Pane InscriptionLayout = (Pane)loader.load();
         Stage InscriptionStage = new Stage();
         Scene InscriptionScene = new Scene(InscriptionLayout);
         InscriptionStage.setScene(InscriptionScene);
-
         InscriptionStage.setTitle("Inscription");
         InscriptionStage.initModality(Modality.APPLICATION_MODAL);
         InscriptionStage.show();
-
     }
 
     @Override

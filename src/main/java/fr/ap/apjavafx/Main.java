@@ -25,7 +25,7 @@ public class Main extends Application {
 			Scene scene = new Scene(rootLayout);
 			primaryStage.setScene(scene);
 			primaryStage.show();
-			primaryStage.setTitle("meeting booking Accueil");
+			primaryStage.setTitle("Meeting Booking - Accueil");
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

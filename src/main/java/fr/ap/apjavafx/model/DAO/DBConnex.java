@@ -10,7 +10,7 @@ import java.sql.Statement;
 
 public class DBConnex {
 	/**
-	 * M�thode de connexion � la base de donn�es
+	 * Méthode de connexion à la base de données
 	 * @return  Statement
 	 */
 	public static Statement connexion() {
@@ -58,7 +58,7 @@ public class DBConnex {
 	
 	
 	/**
-	 * M�thode permettant l'envoi de requ�tes "select" � la base de donn�es
+	 * Méthode permettant l'envoi de requêtes "select" à la base de données
 	 * @param requete
 	 * @param unStatement
 	 * @return ResultSet
@@ -81,7 +81,7 @@ public class DBConnex {
 	}
 	
 	/**
-	  * M�thode permettant l'envoi de requ�tes "update, insert, delete" � la base de donn�es
+	  * Méthode permettant l'envoi de requêtes "update, insert, delete" à la base de données
 	 * @param requete
 	 * @param unStatement
 	 * @return Integer
