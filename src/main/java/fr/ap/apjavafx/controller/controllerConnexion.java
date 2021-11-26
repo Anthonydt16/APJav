@@ -35,10 +35,15 @@ public class controllerConnexion implements Initializable {
     @FXML private Button btnValider;
     @FXML	protected void onClickValide(ActionEvent e) throws IOException, SQLException {
         System.out.println("teste");
-        if(inputLogin.getText() == null && inputPassword.getText() == null){
+        if(inputLogin.getText() == null || inputPassword.getText() == null){
             System.out.println("null");
         }else{
             Utilisateur unUtilisateur = authentification(inputLogin.getText() , inputPassword.getText());
+            if(unUtilisateur.getLOGIN() == inputLogin.getText() && unUtilisateur.getPASSWORD() == inputPassword.getText()){
+                //connexion reussi
+            }else{
+                //en cas d'echec de connexion
+            }
              System.out.println(unUtilisateur.getLOGIN());
 
             System.out.println(authentification(inputLogin.getText() , inputPassword.getText()));
