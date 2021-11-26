@@ -1,6 +1,7 @@
 package fr.ap.apjavafx.controller;
 
 import fr.ap.apjavafx.Main;
+import fr.ap.apjavafx.model.DTO.Utilisateur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +16,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
+
+import static fr.ap.apjavafx.model.DAO.DBConnex.authentification;
 
 public class controllerConnexion implements Initializable {
 
@@ -27,9 +33,16 @@ public class controllerConnexion implements Initializable {
     @FXML private TextField inputLogin;
     @FXML private TextField inputPassword;
     @FXML private Button btnValider;
-    @FXML	protected void clickConnex(ActionEvent e) throws IOException {
+    @FXML	protected void onClickValide(ActionEvent e) throws IOException, SQLException {
+        System.out.println("teste");
+        if(inputLogin.getText() == null && inputPassword.getText() == null){
+            System.out.println("null");
+        }else{
+            Utilisateur unUtilisateur = authentification(inputLogin.getText() , inputPassword.getText());
+             System.out.println(unUtilisateur.getLOGIN());
 
-
+            System.out.println(authentification(inputLogin.getText() , inputPassword.getText()));
+        }
 
 
         FXMLLoader loader1 = new FXMLLoader();
