@@ -1,14 +1,8 @@
 package fr.ap.apjavafx.model.DTO;
 
-
-import java.util.Date;
-import java.util.ArrayList;
-
-
-
-public class Utilisateur {
-
-	private String LOGIN;
+public class Commercial {
+    private String LOGIN;
+    private String POURCENTAGECOMMERCIAL;
     private String PASSWORD ;
     private String NOM;
     private String PRENOM;
@@ -16,8 +10,9 @@ public class Utilisateur {
     private String TELEPHONE;
     private String MAIL;
 
-    public Utilisateur(String LOGIN, String PASSWORD, String NOM, String PRENOM, String ADRESSE, String TELEPHONE, String MAIL) {
+    public Commercial(String LOGIN, String POURCENTAGECOMMERCIAL, String PASSWORD, String NOM, String PRENOM, String ADRESSE, String TELEPHONE, String MAIL) {
         this.LOGIN = LOGIN;
+        this.POURCENTAGECOMMERCIAL = POURCENTAGECOMMERCIAL;
         this.PASSWORD = PASSWORD;
         this.NOM = NOM;
         this.PRENOM = PRENOM;
@@ -26,13 +21,20 @@ public class Utilisateur {
         this.MAIL = MAIL;
     }
 
-
     public String getLOGIN() {
         return LOGIN;
     }
 
     public void setLOGIN(String LOGIN) {
         this.LOGIN = LOGIN;
+    }
+
+    public String getPOURCENTAGECOMMERCIAL() {
+        return POURCENTAGECOMMERCIAL;
+    }
+
+    public void setPOURCENTAGECOMMERCIAL(String POURCENTAGECOMMERCIAL) {
+        this.POURCENTAGECOMMERCIAL = POURCENTAGECOMMERCIAL;
     }
 
     public String getPASSWORD() {

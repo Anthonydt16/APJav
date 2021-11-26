@@ -9,9 +9,9 @@ public class UtilisateurDAO {
 	 * @param id (id utilidsateur)
 	 * @return ResultSet
 	 */
-	public static ResultSet unUtilisateur(String id)
-	{
-		String requete = "SELECT *  FROM utilisateur where  id = '" + id + "'";
-		return DBConnex.getRS(requete, DBConnex.connexion());
-	}
+//	public static ResultSet unUtilisateur(String id)
+//	{
+//		String requete = "SELECT *  FROM utilisateur where  id = '" + id + "'";
+//		return DBConnex.getRS(requete, DBConnex.connexion());
+//	}
 }
