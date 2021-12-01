@@ -22,42 +22,4 @@ public class DBConnex {
 
 
 	}
-
-	/**
-	 * M�thode d'authentification des l'utilisteur
-	 *
-	 * @param login
-	 * @param mdp
-	 */
-	public static Utilisateur authentification(String login, String mdp, String inputLogin, String inputPassword) {
-
-		try(PreparedStatement statement = DBConnex.getConnexion().prepareStatement("SELECT * FROM `utilisateur` where LOGIN = ? and PASSWORD = ?")) {
-			statement.setString(1, login);
-			statement.setString(2, mdp);
-			Utilisateur unUser;
-			try(ResultSet result = statement.executeQuery()) {
-
-
-				if (result.next()) {
-					System.out.println("teste pt");
-
-					if (result.getString(1) == inputLogin && result.getString(2) == inputPassword){
-						//connexion reussi
-						 unUser = new Utilisateur(result.getString(1), result.getString(2), result.getString(3), result.getString(4), result.getString(5), result.getString(6), result.getString(7));
-					}else{
-						//en cas d'echec de connexion
-						 unUser = null;
-					}
-					return unUser;
-				}
-
-
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
-		}
-		return null;
-	}
 }
