@@ -9,7 +9,7 @@ public class administrateur {
     private String TELEPHONE;
     private String MAIL;
 
-    public administrateur(String LOGIN, String PASSWORD, String NOM, String PRENOM, String ADRESSE, String TELEPHONE, String MAIL) {
+    public administrateur(String string, String LOGIN, String PASSWORD, String NOM, String PRENOM, String ADRESSE, String TELEPHONE, String MAIL) {
         this.LOGIN = LOGIN;
         this.PASSWORD = PASSWORD;
         this.NOM = NOM;

@@ -8,13 +8,14 @@ import java.util.ArrayList;
 
 public class Utilisateur {
 
-	private String LOGIN;
+    private String LOGIN;
     private String PASSWORD ;
     private String NOM;
     private String PRENOM;
     private String ADRESSE;
     private String TELEPHONE;
     private String MAIL;
+    private String Statut;
 
     public Utilisateur(String LOGIN, String PASSWORD, String NOM, String PRENOM, String ADRESSE, String TELEPHONE, String MAIL) {
         this.LOGIN = LOGIN;
@@ -81,5 +82,12 @@ public class Utilisateur {
 
     public void setMAIL(String MAIL) {
         this.MAIL = MAIL;
+    }
+    public String getStatut() {
+        return Statut;
+    }
+
+    public void setStatut(String statut) {
+        Statut = statut;
     }
 }
