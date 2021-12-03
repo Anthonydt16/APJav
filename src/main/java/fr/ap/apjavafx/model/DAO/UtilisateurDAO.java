@@ -18,7 +18,6 @@ public class UtilisateurDAO {
 		try (PreparedStatement statement = DBConnex.getConnexion().prepareStatement("SELECT * FROM `utilisateur` where LOGIN = ? and PASSWORD = ?")) {
 			statement.setString(1, login);
 			statement.setString(2, mdp);
-			System.out.println(statement);
 			Utilisateur unUser;
 
 			try (ResultSet result = statement.executeQuery()) {

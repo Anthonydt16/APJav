@@ -45,7 +45,7 @@ public class controllerConnexion implements Initializable {
     }
 
     /**
-     * Les variables du fichier FXML associ�
+     * Les variables du fichier FXML associé
      */
 
     @FXML private TextField inputLogin;
@@ -54,10 +54,10 @@ public class controllerConnexion implements Initializable {
     @FXML private Button btnValider;
 
     @FXML	protected void onClickValide(ActionEvent e) throws IOException, SQLException {
-        System.out.println("teste");
-        Adherent unAdherent =null;
+        Adherent unAdherent = null;
         administrateur unAdmin =null;
         Commercial unCommercial = null;
+
         if(inputLogin.getText() == null || MD5(inputPassword.getText()) == null){
             System.out.println("null");
         }else{
@@ -93,7 +93,7 @@ public class controllerConnexion implements Initializable {
                 Scene ConnectScene = new Scene(ConnexionLayout);
                 ConnexionStage.setScene(ConnectScene);
 
-                ConnexionStage.setTitle("Connexion");
+                ConnexionStage.setTitle("Commerciaux - fiches clients");
                 ConnexionStage.initModality(Modality.APPLICATION_MODAL);
                 ConnexionStage.show();
             }

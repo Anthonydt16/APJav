@@ -39,7 +39,6 @@ public class controllerAccueil implements Initializable {
         ConnexionStage.setTitle("Connexion");
         ConnexionStage.initModality(Modality.APPLICATION_MODAL);
         ConnexionStage.show();
-
     }
 
     @FXML	protected void clickInscription(ActionEvent e) throws IOException {
@@ -57,7 +56,6 @@ public class controllerAccueil implements Initializable {
     }
 
     @Override
-
     public void initialize(URL location, ResourceBundle resources) {
 
     }
