@@ -1,6 +1,6 @@
 package fr.ap.apjavafx.model.DTO;
 
-public class administrateur {
+public class Administrateur {
     private String LOGIN;
     private String PASSWORD ;
     private String NOM;
@@ -9,7 +9,7 @@ public class administrateur {
     private String TELEPHONE;
     private String MAIL;
 
-    public administrateur(String string, String LOGIN, String PASSWORD, String NOM, String PRENOM, String ADRESSE, String TELEPHONE, String MAIL) {
+    public Administrateur( String LOGIN, String PASSWORD, String NOM, String PRENOM, String ADRESSE, String TELEPHONE, String MAIL) {
         this.LOGIN = LOGIN;
         this.PASSWORD = PASSWORD;
         this.NOM = NOM;

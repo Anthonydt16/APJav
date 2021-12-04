@@ -22,20 +22,19 @@ import java.util.ArrayList;
 
 import static fr.ap.apjavafx.model.DAO.LieuDAO.SelectLieux;
 
-public class controllerAfficherSalle {
+public class controllerAfficherLieu {
 
-    private static int myVariable;
 
     @FXML private TableView <LieuDTO> TableAffichageLieux;
-    @FXML private TableColumn<LieuDTO, Integer> idLieuCol;
+    @FXML private TableColumn<LieuDTO,Integer> idLieuCol;
     @FXML private TableColumn <LieuDTO,String> NomLieuCol;
     @FXML private TableColumn <LieuDTO,String> AdresseCol;
     @FXML private TableColumn <LieuDTO,String> AnnulationCol;
-    @FXML private TableColumn <LieuDTO,String> NbEtoileCol;
+    @FXML private TableColumn <LieuDTO,Integer> NbEtoileCol;
     @FXML private TableColumn <LieuDTO,String> DescriptifCol;
     @FXML private TableColumn <LieuDTO,Integer> CoordonneXCol;
     @FXML private TableColumn <LieuDTO,Integer> CoordonneYCol;
-    @FXML private TableColumn <LieuDTO,String> VilleCol;
+    @FXML private TableColumn <LieuDTO,Integer> VilleCol;
 
     @FXML private Button buttonAdd;
     @FXML private Button ButtonSupp;
@@ -61,11 +60,11 @@ public class controllerAfficherSalle {
         NomLieuCol.setCellValueFactory(new PropertyValueFactory<LieuDTO,String>("libelleLieu"));
         AdresseCol.setCellValueFactory(new PropertyValueFactory<LieuDTO,String>("adresseLieu"));
         AnnulationCol.setCellValueFactory(new PropertyValueFactory<LieuDTO,String>("annulationGratuite"));
-        NbEtoileCol.setCellValueFactory(new PropertyValueFactory<LieuDTO,String>("nbEtoile"));
+        NbEtoileCol.setCellValueFactory(new PropertyValueFactory<LieuDTO,Integer>("nbEtoile"));
         DescriptifCol.setCellValueFactory(new PropertyValueFactory<LieuDTO,String>("descriptif"));
         CoordonneXCol.setCellValueFactory(new PropertyValueFactory<LieuDTO,Integer>("coordX"));
         CoordonneYCol.setCellValueFactory(new PropertyValueFactory<LieuDTO,Integer>("coordY"));
-        VilleCol.setCellValueFactory(new PropertyValueFactory<LieuDTO,String>("ville"));
+        VilleCol.setCellValueFactory(new PropertyValueFactory<LieuDTO,Integer>("ville"));
 
         TableAffichageLieux.setItems(data);
     }
@@ -83,11 +82,10 @@ public class controllerAfficherSalle {
             FXMLLoader loader3 = new FXMLLoader();
             loader3.setLocation(Main.class.getResource("/fxml/view-SalleUnLieu.fxml"));
             Pane SalleLieux = (Pane) loader3.load();
+            controllerSalleUnLieu controller = loader3.getController();
+            controller.setId(TableAffichageLieux.getSelectionModel().getSelectedItem());
+            controller.setup();
 
-//            controllerSalleUnLieu unControleurSalleUnLieu = new controllerSalleUnLieu();
-//            System.out.println(TableAffichageLieux.getSelectionModel().getSelectedItem().getIdLieu());
-//            unControleurSalleUnLieu.RecupIdLieu(TableAffichageLieux.getSelectionModel().getSelectedItem().getIdLieu());
-            myVariable = TableAffichageLieux.getSelectionModel().getSelectedItem().getIdLieu();
             Stage SalleLieuxStage = new Stage();
             Scene SalleLieuxScene = new Scene(SalleLieux);
             SalleLieuxStage.setScene(SalleLieuxScene);
@@ -98,7 +96,5 @@ public class controllerAfficherSalle {
         }
     }
 
-    public static int getMyVariable(){
-        return myVariable;
-    }
+
 }

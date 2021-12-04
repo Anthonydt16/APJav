@@ -3,7 +3,7 @@ package fr.ap.apjavafx.model.DAO;
 import fr.ap.apjavafx.model.DTO.Adherent;
 import fr.ap.apjavafx.model.DTO.Commercial;
 import fr.ap.apjavafx.model.DTO.Utilisateur;
-import fr.ap.apjavafx.model.DTO.administrateur;
+import fr.ap.apjavafx.model.DTO.Administrateur;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -114,15 +114,15 @@ public class UtilisateurDAO {
 			return unCommercial;
 		}
 	}
-	public static administrateur statutAdmin(Utilisateur user) throws SQLException {
-		administrateur unAdministrateur = null;
+	public static Administrateur statutAdmin(Utilisateur user) throws SQLException {
+		Administrateur unAdministrateur = null;
 		try (PreparedStatement statement = DBConnex.getConnexion().prepareStatement("select A.* from utilisateur as U, admin as A where U.login = A.login and U.login = ?")) {
 			statement.setString(1, user.getLOGIN());
 			try (ResultSet result = statement.executeQuery()) {
 				if (result.next()) {
 					if (result != null) {
 						// ajout dans l'objet adherent
-						unAdministrateur = new administrateur(result.getString(1), result.getString(2), result.getString(3), result.getString(4), result.getString(5), result.getString(6), result.getString(7), result.getString(8));
+						unAdministrateur = new Administrateur(result.getString(2), result.getString(3), result.getString(4), result.getString(5), result.getString(6), result.getString(7), result.getString(8));
 
 					}
 				}

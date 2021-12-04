@@ -4,14 +4,13 @@ import fr.ap.apjavafx.Main;
 import fr.ap.apjavafx.model.DTO.Adherent;
 import fr.ap.apjavafx.model.DTO.Commercial;
 import fr.ap.apjavafx.model.DTO.Utilisateur;
-import fr.ap.apjavafx.model.DTO.administrateur;
+import fr.ap.apjavafx.model.DTO.Administrateur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
@@ -19,9 +18,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ResourceBundle;
 
 import static fr.ap.apjavafx.model.DAO.UtilisateurDAO.*;
@@ -39,7 +36,7 @@ public class controllerConnexion implements Initializable {
     @FXML	protected void onClickValide(ActionEvent e) throws IOException, SQLException {
         System.out.println("teste");
         Adherent unAdherent =null;
-        administrateur unAdmin =null;
+        Administrateur unAdmin =null;
         Commercial unCommercial = null;
         if(inputLogin.getText() == null || inputPassword.getText() == null){
             System.out.println("null");
@@ -68,7 +65,7 @@ public class controllerConnexion implements Initializable {
 
             System.out.println(unUtilisateur.getStatut());
             FXMLLoader loader1 = new FXMLLoader();
-            loader1.setLocation(Main.class.getResource("/fxml/view-AffichageSalle.fxml"));
+            loader1.setLocation(Main.class.getResource("/fxml/view-AffichageLieux.fxml"));
             Pane ConnexionLayout = (Pane) loader1.load();
             Stage ConnexionStage = new Stage();
             Scene ConnectScene = new Scene(ConnexionLayout);

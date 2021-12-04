@@ -1,5 +1,5 @@
 package fr.ap.apjavafx.model.DTO;
-
+//pense a ajouter l'attribut loueur et a l'ajouter dans le DAOloueur de la requete+ a l'afficher dans la comboBox
 public class LieuDTO {
     private int idLieu;
     private String ville;
@@ -10,6 +10,7 @@ public class LieuDTO {
     private String annulationGratuite;
     private int nbEtoile;
     private String descriptif;
+    private String Loueur;
 
     public LieuDTO(int idLieu, String ville, String libelleLieu, String adresseLieu, int coordX, int coordY, String annulationGratuite, int nbEtoile, String descriptif) {
         this.idLieu = idLieu;
