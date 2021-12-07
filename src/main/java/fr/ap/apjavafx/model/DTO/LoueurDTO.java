@@ -1,7 +1,7 @@
 package fr.ap.apjavafx.model.DTO;
 
 public class LoueurDTO {
-    private int idLoeur;
+    private int idLoueur;
     private String Nom;
     private String Prenom;
     private String ContactO_N;
@@ -16,7 +16,7 @@ public class LoueurDTO {
     private String mailLoeur;
 
     public LoueurDTO(int idLoeur, String nom, String prenom, String contactO_N, String typeInscription, String mailContact, String telContact, String nomLoeur, String adresseLoeur, String telLoeur, String mailLoeur) {
-        this.idLoeur = idLoeur;
+        this.idLoueur = idLoeur;
         Nom = nom;
         Prenom = prenom;
         ContactO_N = contactO_N;
@@ -29,12 +29,12 @@ public class LoueurDTO {
         this.mailLoeur = mailLoeur;
     }
 
-    public int getIdLoeur() {
-        return idLoeur;
+    public int getIdLoueur() {
+        return idLoueur;
     }
 
-    public void setIdLoeur(int idLoeur) {
-        this.idLoeur = idLoeur;
+    public void setIdLoueur(int idLoueur) {
+        this.idLoueur = idLoueur;
     }
 
     public String getNom() {

@@ -18,7 +18,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import static fr.ap.apjavafx.model.DAO.LieuDAO.SelectLieux;
 
@@ -35,6 +37,7 @@ public class controllerAfficherLieu {
     @FXML private TableColumn <LieuDTO,Integer> CoordonneXCol;
     @FXML private TableColumn <LieuDTO,Integer> CoordonneYCol;
     @FXML private TableColumn <LieuDTO,Integer> VilleCol;
+    @FXML private TableColumn <LieuDTO,String> nomLoueurCol;
 
     @FXML private Button buttonAdd;
     @FXML private Button ButtonSupp;
@@ -46,31 +49,35 @@ public class controllerAfficherLieu {
     public void clickSupp(ActionEvent actionEvent) {
 
     }
-    private void remplirTableau(){
-        System.out.println("teste");
+
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
         ObservableList<LieuDTO> data = FXCollections.observableArrayList();
+        System.out.println("vv");
 
         ArrayList <LieuDTO> desLieux =   SelectLieux();
+        System.out.println("eee");
 
         for(LieuDTO unLieu : desLieux ){
             data.add(unLieu);
-            System.out.println(unLieu.getAdresseLieu());
+            //System.out.println(unLieu.getAdresseLieu());
         }
+
         idLieuCol.setCellValueFactory(new PropertyValueFactory<LieuDTO,Integer>("idLieu"));
         NomLieuCol.setCellValueFactory(new PropertyValueFactory<LieuDTO,String>("libelleLieu"));
         AdresseCol.setCellValueFactory(new PropertyValueFactory<LieuDTO,String>("adresseLieu"));
         AnnulationCol.setCellValueFactory(new PropertyValueFactory<LieuDTO,String>("annulationGratuite"));
-        NbEtoileCol.setCellValueFactory(new PropertyValueFactory<LieuDTO,Integer>("nbEtoile"));
+        NbEtoileCol.setCellValueFactory(new PropertyValueFactory<>("nbEtoile"));
         DescriptifCol.setCellValueFactory(new PropertyValueFactory<LieuDTO,String>("descriptif"));
         CoordonneXCol.setCellValueFactory(new PropertyValueFactory<LieuDTO,Integer>("coordX"));
         CoordonneYCol.setCellValueFactory(new PropertyValueFactory<LieuDTO,Integer>("coordY"));
         VilleCol.setCellValueFactory(new PropertyValueFactory<LieuDTO,Integer>("ville"));
+        nomLoueurCol.setCellValueFactory(new PropertyValueFactory<LieuDTO,String>("loueur"));
 
         TableAffichageLieux.setItems(data);
-    }
 
-    public void initialize() {
-        remplirTableau();
     }
 
 

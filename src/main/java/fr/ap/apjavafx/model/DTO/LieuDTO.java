@@ -10,9 +10,9 @@ public class LieuDTO {
     private String annulationGratuite;
     private int nbEtoile;
     private String descriptif;
-    private String Loueur;
+    private String loueur;
 
-    public LieuDTO(int idLieu, String ville, String libelleLieu, String adresseLieu, int coordX, int coordY, String annulationGratuite, int nbEtoile, String descriptif) {
+    public LieuDTO(int idLieu, String ville, String libelleLieu, String adresseLieu, int coordX, int coordY, String annulationGratuite, int nbEtoile, String descriptif, String loueur) {
         this.idLieu = idLieu;
         this.ville = ville;
         this.libelleLieu = libelleLieu;
@@ -22,7 +22,20 @@ public class LieuDTO {
         this.annulationGratuite = annulationGratuite;
         this.nbEtoile = nbEtoile;
         this.descriptif = descriptif;
+        this.loueur = loueur;
     }
+
+    public String getLoueur() {
+        return loueur;
+    }
+
+    public void setLoueur(String loueur) {
+        this.loueur = loueur;
+    }
+
+
+
+
 
     public int getIdLieu() {
         return idLieu;
