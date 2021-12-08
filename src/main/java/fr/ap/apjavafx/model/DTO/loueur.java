@@ -30,6 +30,15 @@ public class loueur {
         this.telContact = telContact;
     }
 
+    public loueur(String login, String nom, Boolean contacter, String typeInscription, String mailContact, String telContact){
+        this.login = login;
+        this.nom = nom;
+        this.contacter = contacter;
+        this.typeInscription = typeInscription;
+        this.telContact = telContact;
+        this.mailContact = mailContact;
+    }
+
     public String getLogin() {
         return login;
     }

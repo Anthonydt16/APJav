@@ -10,20 +10,18 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class LoueurDAO {
-    public static ArrayList<loueur> getAllLoueur() {
-        try (PreparedStatement statement = DBConnex.getConnexion().prepareStatement("SELECT * FROM `loueur`")) {
-            ArrayList<loueur> lesLoueurs;
+    public static ArrayList<String> getAllLoueur() {
+        try (PreparedStatement statement = DBConnex.getConnexion().prepareStatement("SELECT LOGIN,NOM,CONTACTEO_N,TYPEINSCRIPTION,MAILCONTACT,TELCONTACT FROM `loueur`")) {
+            ArrayList<String> lesLoueurs = null;
             try (ResultSet result = statement.executeQuery()) {
 
 
                 if (result.next()) {
-                    if (//test) {
-                        //connexion reussi
-                       lesLoueurs = new ArrayList<loueur>(result.getString(1), result.getString(2), result.getString(3), result.getString(4), result.getString(5), result.getString(6), result.getString(7));
-                    } else {
-                        //en cas d'echec de connexion
-                        lesLoueurs = null;
-                    }
+                    lesLoueurs.add(result.getString(1));
+                } else {
+                    //en cas d'echec de connexion
+                    lesLoueurs = null;
+                }
                     return lesLoueurs;
                 }
 
@@ -36,3 +34,15 @@ public class LoueurDAO {
         return null;
     }
 }
+
+//    SELECT e.NOMENT, e.ADRESSEENT, v.NOMVILLE, p.NOMPAYS, e.TELENT
+//        FROM loueur as l, entreprise as e, ville as v, pays as p
+//        WHERE l.IDENT = e.IDENT
+//        AND e.IDVILLE = v.IDVILLE
+//        AND v.IDPAYS = p.IDPAYS
+//        AND v.NOMVILLE IN (SELECT NOMVILLE
+//        FROM ville
+//       WHERE e.IDVILLE = v.IDVILLE)
+//      AND p.NOMPAYS IN (SELECT NOMPAYS
+//      FROM pays
+//     WHERE v.IDPAYS = p.IDPAYS);
