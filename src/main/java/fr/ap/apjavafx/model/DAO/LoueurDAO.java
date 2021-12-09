@@ -11,13 +11,16 @@ import java.util.Objects;
 
 public class LoueurDAO {
     public static ArrayList<String> getAllLoueur() {
-        try (PreparedStatement statement = DBConnex.getConnexion().prepareStatement("SELECT LOGIN,NOM,CONTACTEO_N,TYPEINSCRIPTION,MAILCONTACT,TELCONTACT FROM `loueur`")) {
+        try (PreparedStatement statement = DBConnex.getConnexion().prepareStatement("SELECT e.NOMENT as `nomEntreprise`, e.ADRESSEENT as `adresseEntreprise`, CONCAT(V.NOMVILLE,'/', P.NOMPAYS) as `vilePays`, e.TELENT as `telEntreprise`, e.EMAIL as `emailEntreprise`, CONCAT(l.NOM, ' ', l.PRENOM) AS `nomPrenomContact`, l.MAILCONTACT as `mailContact`, l.TELCONTACT as `telContact`" +
+                "FROM loueur as l JOIN entreprise as e ON l.IDENT = e.IDENT JOIN `ville` AS V ON e.IDVILLE = V.IDVILLE JOIN `pays` AS P ON V.IDPAYS = P.IDPAYS")) {
             ArrayList<String> lesLoueurs = null;
             try (ResultSet result = statement.executeQuery()) {
 
 
                 if (result.next()) {
-                    lesLoueurs.add(result.getString(1));
+                    for(int i = 0; i < 8; i++){
+                        lesLoueurs.add(result.getString(i));
+                    }
                 } else {
                     //en cas d'echec de connexion
                     lesLoueurs = null;
@@ -34,15 +37,3 @@ public class LoueurDAO {
         return null;
     }
 }
-
-//    SELECT e.NOMENT, e.ADRESSEENT, v.NOMVILLE, p.NOMPAYS, e.TELENT
-//        FROM loueur as l, entreprise as e, ville as v, pays as p
-//        WHERE l.IDENT = e.IDENT
-//        AND e.IDVILLE = v.IDVILLE
-//        AND v.IDPAYS = p.IDPAYS
-//        AND v.NOMVILLE IN (SELECT NOMVILLE
-//        FROM ville
-//       WHERE e.IDVILLE = v.IDVILLE)
-//      AND p.NOMPAYS IN (SELECT NOMPAYS
-//      FROM pays
-//     WHERE v.IDPAYS = p.IDPAYS);

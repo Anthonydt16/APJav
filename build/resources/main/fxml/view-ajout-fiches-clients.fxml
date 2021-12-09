@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="SceneAjoutClient" prefHeight="401.0" prefWidth="778.0" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.ap.apjavafx.controller.controllerAjoutFichesClients">
+    <Text layoutX="298.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajout d'un client">
+        <font>
+          <Font size="25.0"/>
+        </font>
+    </Text>
+    <TextField fx:id="inputNom" layoutX="154.0" layoutY="86.0"/>
+    <Text fx:id="textNom" layoutX="41.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="Nom de l'entreprise :"/>
+    <TextField fx:id="inputAdresse" layoutX="154.0" layoutY="130.0"/>
+    <Text fx:id="textAdresse" layoutX="25.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="Adresse de l'entreprise :"/>
+    <TextField fx:id="inputVille" layoutX="153.0" layoutY="173.0"/>
+    <Text fx:id="textVille" layoutX="41.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="Ville de l'entreprise :"/>
+    <TextField fx:id="inputVille1" layoutX="154.0" layoutY="226.0"/>
+    <Text fx:id="textPays" layoutX="42.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="Pays de l'entreprise :"/>
+    <TextField fx:id="inputPays" layoutX="154.0" layoutY="279.0"/>
+    <Text fx:id="textPays1" layoutX="25.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="Numéro de téléphone :"/>
+    <TextField fx:id="inputNom1" layoutX="543.0" layoutY="86.0"/>
+    <Text fx:id="textNomContact" layoutX="372.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="Nom du contact de l'entreprise :"/>
+    <TextField fx:id="inputNom11" layoutX="543.0" layoutY="171.0"/>
+    <Text fx:id="textTelContact" layoutX="359.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="Numéro de téléphone du contact :"/>
+    <TextField fx:id="inputNom111" layoutX="543.0" layoutY="130.0"/>
+    <Text fx:id="textTelContact1" layoutX="359.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="Prénom de téléphone du contact :"/>
+    <TextField fx:id="inputNom112" layoutX="543.0" layoutY="209.0"/>
+    <Text fx:id="textTelContact2" layoutX="408.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="Adresse mail du contact :"/>
+    <Button fx:id="btnEnregistrerClient" layoutX="287.0" layoutY="325.0" mnemonicParsing="false"
+            onAction="#onEnregistrerClients" prefHeight="54.0" prefWidth="170.0" text="Enregistrer">
+        <font>
+          <Font size="20.0"/>
+        </font>
+    </Button>
+</AnchorPane>
