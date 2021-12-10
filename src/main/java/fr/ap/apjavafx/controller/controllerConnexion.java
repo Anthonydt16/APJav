@@ -1,10 +1,7 @@
 package fr.ap.apjavafx.controller;
 
 import fr.ap.apjavafx.Main;
-import fr.ap.apjavafx.model.DTO.Adherent;
-import fr.ap.apjavafx.model.DTO.Commercial;
-import fr.ap.apjavafx.model.DTO.Utilisateur;
-import fr.ap.apjavafx.model.DTO.Administrateur;
+import fr.ap.apjavafx.model.DTO.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,40 +34,48 @@ public class controllerConnexion implements Initializable {
         System.out.println("teste");
         Adherent unAdherent =null;
         Administrateur unAdmin =null;
+        LoueurDTO unLoueur =null;
         Commercial unCommercial = null;
         if(inputLogin.getText() == null || inputPassword.getText() == null){
-            System.out.println("null");
+            System.out.println("null comme connexion");
         }else{
             Utilisateur unUtilisateur = authentification(inputLogin.getText() , inputPassword.getText());
-
-            if(unUtilisateur != null){
+            System.out.println(unUtilisateur.getStatut());
+            FXMLLoader loader1 = new FXMLLoader();
+            loader1.setLocation(Main.class.getResource("/fxml/view-AffichageLieux.fxml"));
+            Pane ConnexionLayout = loader1.load();
+            Stage ConnexionStage = new Stage();
+            controllerAfficherLieu controller = loader1.getController();
+            if(unUtilisateur != null) {
 
                 System.out.println(unUtilisateur.getLOGIN());
                 unAdherent = statutAdherent(unUtilisateur);
                 //si l'user est un adherent
-                if(unAdherent != null){
-                   unUtilisateur.setStatut("Adherent");
+                if (unAdherent != null) {
+                    unUtilisateur.setStatut("Adherent");
+                    controller.setUnAdherent(unAdherent);
+                }
+                unLoueur = statutLoueur(unUtilisateur);
+                if (unLoueur != null) {
+                    unUtilisateur.setStatut("Loueur");
+                    controller.setUnLoueur(unLoueur);
                 }
                 unCommercial = statutCommercial(unUtilisateur);
                 //si le le type d'user est un commercial
-                if(unCommercial != null){
+                if (unCommercial != null) {
                     unUtilisateur.setStatut("Commercial");
+                    controller.setUnCommercial(unCommercial);
                 }
-               unAdmin = statutAdmin(unUtilisateur);
+                unAdmin = statutAdmin(unUtilisateur);
                 //si le le type d'user est un commercial
-                if(unAdmin != null){
+                if (unAdmin != null) {
                     unUtilisateur.setStatut("Admin");
+                    controller.setUnAdmin(unAdmin);
                 }
+                Scene ConnectScene = new Scene(ConnexionLayout);
+                ConnexionStage.setScene(ConnectScene);
             }
-
             System.out.println(unUtilisateur.getStatut());
-            FXMLLoader loader1 = new FXMLLoader();
-            loader1.setLocation(Main.class.getResource("/fxml/view-AffichageLieux.fxml"));
-            Pane ConnexionLayout = (Pane) loader1.load();
-            Stage ConnexionStage = new Stage();
-            Scene ConnectScene = new Scene(ConnexionLayout);
-            ConnexionStage.setScene(ConnectScene);
-
             ConnexionStage.setTitle("Connexion");
             ConnexionStage.initModality(Modality.APPLICATION_MODAL);
             ConnexionStage.show();

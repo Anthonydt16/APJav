@@ -30,6 +30,29 @@ public class LieuDAO {
         }
         return desLieux;
     }
+    public static ArrayList <LieuDTO>  SelectLieuxIdLoueur(int idLoueur) {
+        LieuDTO unLieu;
+        ArrayList<LieuDTO> desLieux = new ArrayList <LieuDTO>();
+        try (PreparedStatement statement = DBConnex.getConnexion().prepareStatement("SELECT IDLIEU,V.NOMVILLE,LIBELLELIEU,ADRESSELIEU,COORDX,COORDY,ANNULATIONGRATUITE,ADRESSELIEU,NBETOILES,DESCRIPTIF,Lo.login FROM `lieu` as l, ville as v,loueur as Lo where v.IDVILLE = l.IDVILLE AND Lo.IDENT = l.IDENT AND l.IDENT = ?;")) {
+            statement.setInt(1, idLoueur);
+
+            try (ResultSet result = statement.executeQuery()) {
+
+                if (result.next()) {
+
+                    unLieu = new LieuDTO(result.getInt("IDLIEU"),result.getString("V.NOMVILLE"),result.getString("LIBELLELIEU"),result.getString("ADRESSELIEU"),result.getInt("COORDX"),result.getInt("COORDY"),result.getString("ANNULATIONGRATUITE"),result.getInt("NBETOILES"),result.getString("DESCRIPTIF"),result.getString("Lo.login"));
+
+                    desLieux.add(unLieu);
+                }
+                return desLieux;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
+        return desLieux;
+    }
 
     public static void modificationLieu(int idLieu, int ville, String libelleLieu, String adresseLieu, int coordX, int coordY, String annulationGratuite, int nbEtoile, String descriptif, int loueur) {
 

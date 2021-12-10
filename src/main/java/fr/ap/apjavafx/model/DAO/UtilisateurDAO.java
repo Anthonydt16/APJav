@@ -1,9 +1,6 @@
 package fr.ap.apjavafx.model.DAO;
 
-import fr.ap.apjavafx.model.DTO.Adherent;
-import fr.ap.apjavafx.model.DTO.Commercial;
-import fr.ap.apjavafx.model.DTO.Utilisateur;
-import fr.ap.apjavafx.model.DTO.Administrateur;
+import fr.ap.apjavafx.model.DTO.*;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -80,7 +77,32 @@ public class UtilisateurDAO {
 		}
 	}
 
+	public static LoueurDTO statutLoueur(Utilisateur user) throws SQLException {
+		LoueurDTO unLoueur = null;
+		try (PreparedStatement statement = DBConnex.getConnexion().prepareStatement("select L.* from utilisateur as U, Loueur as L where U.login = L.login and U.login = ?")) {
+			statement.setString(1, user.getLOGIN());
+			try (ResultSet result = statement.executeQuery()) {
+				if (result.next()) {
+					if (result != null) {
+						// ajout dans l'objet adherent
+						unLoueur = new LoueurDTO(result.getInt(1), result.getString(2), result.getString(3), result.getString(4), result.getString(5), result.getString(6), result.getString(7), result.getString(8), result.getString(9), result.getString(10), result.getString(11));
 
+					}
+				}
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+
+		}
+		if (unLoueur != null){
+			return unLoueur;
+		}
+		else{
+			return unLoueur;
+		}
+	}
 	/**
 	 * Métode permettant de récupérer les informations relatives à un utilisateur
 	 *
@@ -123,7 +145,6 @@ public class UtilisateurDAO {
 					if (result != null) {
 						// ajout dans l'objet adherent
 						unAdministrateur = new Administrateur(result.getString(2), result.getString(3), result.getString(4), result.getString(5), result.getString(6), result.getString(7), result.getString(8));
-
 					}
 				}
 			}

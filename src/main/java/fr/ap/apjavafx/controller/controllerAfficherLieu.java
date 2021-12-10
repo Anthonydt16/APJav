@@ -1,7 +1,7 @@
 package fr.ap.apjavafx.controller;
 
 import fr.ap.apjavafx.Main;
-import fr.ap.apjavafx.model.DTO.LieuDTO;
+import fr.ap.apjavafx.model.DTO.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import static fr.ap.apjavafx.model.DAO.LieuDAO.SelectLieux;
+import static fr.ap.apjavafx.model.DAO.LieuDAO.SelectLieuxIdLoueur;
 
 public class controllerAfficherLieu {
 
@@ -41,6 +42,44 @@ public class controllerAfficherLieu {
 
     @FXML private Button buttonAdd;
     @FXML private Button ButtonSupp;
+    private Adherent unAdherent ;
+    private Administrateur unAdmin ;
+    private LoueurDTO unLoueur ;
+    private Commercial unCommercial;
+
+    public Adherent getUnAdherent() {
+        return unAdherent;
+    }
+
+    public void setUnAdherent(Adherent unAdherent) {
+        this.unAdherent = unAdherent;
+    }
+
+    public Administrateur getUnAdmin() {
+        return this.unAdmin;
+    }
+
+    public void setUnAdmin(Administrateur unAdmin) {
+        this.unAdmin = unAdmin;
+    }
+
+    public LoueurDTO getUnLoueur() {
+        return unLoueur;
+    }
+
+    public void setUnLoueur(LoueurDTO unLoueur) {
+        this.unLoueur = unLoueur;
+    }
+
+    public Commercial getUnCommercial() {
+        return unCommercial;
+    }
+
+    public void setUnCommercial(Commercial unCommercial) {
+        this.unCommercial = unCommercial;
+    }
+
+
 
     public void clickAdd(ActionEvent actionEvent) {
 
@@ -55,10 +94,11 @@ public class controllerAfficherLieu {
     public void initialize(URL location, ResourceBundle resources) {
 
         ObservableList<LieuDTO> data = FXCollections.observableArrayList();
-        System.out.println("vv");
-
+        if(this.unLoueur!=null){
+            ArrayList <LieuDTO> desLieux = SelectLieuxIdLoueur(this.unLoueur.getIdLoueur());
+            System.out.println();
+        }
         ArrayList <LieuDTO> desLieux =   SelectLieux();
-        System.out.println("eee");
 
         for(LieuDTO unLieu : desLieux ){
             data.add(unLieu);
@@ -84,22 +124,25 @@ public class controllerAfficherLieu {
 
     public void clickEnregistrement(MouseEvent mouseEvent) throws IOException {
         if(mouseEvent.getClickCount() == 2){
-            System.out.println(TableAffichageLieux.getSelectionModel().getSelectedItem().getIdLieu());
+            if(this.unAdherent == null){
+                System.out.println(TableAffichageLieux.getSelectionModel().getSelectedItem().getIdLieu());
 
-            FXMLLoader loader3 = new FXMLLoader();
-            loader3.setLocation(Main.class.getResource("/fxml/view-SalleUnLieu.fxml"));
-            Pane SalleLieux = (Pane) loader3.load();
-            controllerSalleUnLieu controller = loader3.getController();
-            controller.setId(TableAffichageLieux.getSelectionModel().getSelectedItem());
-            controller.setup();
+                FXMLLoader loader3 = new FXMLLoader();
+                loader3.setLocation(Main.class.getResource("/fxml/view-SalleUnLieu.fxml"));
+                Pane SalleLieux = loader3.load();
+                controllerSalleUnLieu controller = loader3.getController();
+                controller.setId(TableAffichageLieux.getSelectionModel().getSelectedItem());
+                controller.setup();
 
-            Stage SalleLieuxStage = new Stage();
-            Scene SalleLieuxScene = new Scene(SalleLieux);
-            SalleLieuxStage.setScene(SalleLieuxScene);
+                Stage SalleLieuxStage = new Stage();
+                Scene SalleLieuxScene = new Scene(SalleLieux);
+                SalleLieuxStage.setScene(SalleLieuxScene);
 
-            SalleLieuxStage.setTitle("Salle pour un lieu");
-            SalleLieuxStage.initModality(Modality.APPLICATION_MODAL);
-            SalleLieuxStage.show();
+                SalleLieuxStage.setTitle("Salle pour un lieu");
+                SalleLieuxStage.initModality(Modality.APPLICATION_MODAL);
+                SalleLieuxStage.show();
+            }
+
         }
     }
 

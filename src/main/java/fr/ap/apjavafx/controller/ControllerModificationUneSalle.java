@@ -38,7 +38,8 @@ public class ControllerModificationUneSalle {
     }
     public void btnValider(ActionEvent actionEvent) {
 
-        // bug sur la surface double int
-        modificationSalle(uneSalle.getIdSalle(),inputNomSalle.getText(), Double.valueOf(inputLongueur.getText()) , Double.valueOf(inputLongueur.getText()),Integer.valueOf(inputSurface.getText()),Double.valueOf(inputHauteur.getText()),Double.valueOf(inputCapacite.getText()));
+
+        modificationSalle(uneSalle.getIdSalle(),inputNomSalle.getText(), Double.valueOf(inputLongueur.getText()) , Double.valueOf(inputLongueur.getText()),Double.valueOf(inputSurface.getText()),Double.valueOf(inputHauteur.getText()),Double.valueOf(inputCapacite.getText()));
+        System.out.println("btn envoie clicker");
     }
 }

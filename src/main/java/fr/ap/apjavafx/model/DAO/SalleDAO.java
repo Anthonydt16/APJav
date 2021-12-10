@@ -38,13 +38,13 @@ public class SalleDAO {
         }
         return null;
     }
-    public static void modificationSalle(int idSalle, String NomSalle, double largueur, double longeur, int surface, double hauteur, double capacite) {
+    public static void modificationSalle(int idSalle, String NomSalle, double largueur, double longeur, double surface, double hauteur, double capacite) {
 
         try (PreparedStatement statement = DBConnex.getConnexion().prepareStatement("UPDATE `salle` SET `NOMSALLE` = ?, `LARGEUR` = ?, `LONGUEUR` = ?, `SURFACE` = ?, `HAUTEUR` = ?, `CAPACITE` = ? WHERE `salle`.`IDSALLE` = ?;")) {
             statement.setString(1, NomSalle);
             statement.setDouble(2, largueur);
             statement.setDouble(3,longeur );
-            statement.setInt(4,surface );
+            statement.setDouble(4,surface );
             statement.setDouble(5,hauteur );
             statement.setDouble(6, capacite);
             statement.setInt(7,idSalle );
