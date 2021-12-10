@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="423.0" prefWidth="557.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.ap.apjavafx.controller.controllerConnexion">
-   <AnchorPane prefHeight="439.0" prefWidth="571.0">
+   <AnchorPane prefHeight="439.0" prefWidth="571.0" fx:id="connectionPane">
       <Text id="idPassword" fx:id="textPassword" layoutX="107.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="password" />
       <ImageView fitHeight="37.0" fitWidth="199.0" layoutX="14.0" layoutY="14.0">
          <Image url="@../image/meetingBooking.PNG" />

@@ -13,6 +13,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -48,6 +50,7 @@ public class controllerConnexion implements Initializable {
      * Les variables du fichier FXML associé
      */
 
+    @FXML private AnchorPane connectionPane;
     @FXML private TextField inputLogin;
     @FXML private TextField inputPassword;
     @FXML private Text textIncorrect;
@@ -64,7 +67,6 @@ public class controllerConnexion implements Initializable {
             Utilisateur unUtilisateur = authentification(inputLogin.getText() , MD5(inputPassword.getText()));
 
             if(unUtilisateur != null){
-                System.out.println(unUtilisateur.getLOGIN());
                 unAdherent = statutAdherent(unUtilisateur);
                 //si l'user est un adherent
                 if(unAdherent != null){
@@ -102,7 +104,11 @@ public class controllerConnexion implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        this.connectionPane.setOnKeyPressed(event -> {
+            if(event.getCode() == KeyCode.ENTER){
+                this.btnValider.fire();
+            }
+        });
     }
 
 }
