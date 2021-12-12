@@ -32,6 +32,19 @@ public class PaysDAO {
             e.printStackTrace();
         }
         return Pays;
+    }
 
+    public static int getIdByName(String nom){
+        int idPays = 0;
+        try (PreparedStatement statement = DBConnex.getConnexion().prepareStatement("SELECT IDPAYS as idPays FROM pays WHERE NOMPAYS = ?")){
+            try(ResultSet result = statement.executeQuery()){
+                while(result.next()){
+                    idPays = result.getInt("idPays");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return idPays;
     }
 }

@@ -30,7 +30,7 @@ public class controllerAccueil implements Initializable {
     @FXML private Button inputConnex;
     @FXML private Button inputInscipt;
     private Pane rootLayout;
-    @FXML	protected void clickConnex(ActionEvent e) throws IOException {
+    @FXML protected void clickConnex(ActionEvent e) throws IOException {
         Accueil.setManaged(false);
         FXMLLoader loader1 = new FXMLLoader();
         loader1.setLocation(Main.class.getResource("/fxml/view-Connexion.fxml"));
