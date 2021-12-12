@@ -2,17 +2,28 @@ package fr.ap.apjavafx.model.DTO;
 
 public class Entreprise {
     private int num;
+    private int idVille;
     private String nom;
     private String adresse;
-    private int tel;
+    private String tel;
     private String mail;
 
-    public Entreprise(int num, String nom, String adresse, int tel, String mail) {
+
+
+    public Entreprise(int num,  int idVille, String nom,String adresse, String tel, String mail) {
         this.num = num;
+        this.idVille = idVille;
         this.nom = nom;
         this.adresse = adresse;
         this.tel = tel;
         this.mail = mail;
+    }
+    public int getIdVille() {
+        return idVille;
+    }
+
+    public void setIdVille(int idVille) {
+        this.idVille = idVille;
     }
 
     public int getNum() {
@@ -39,11 +50,11 @@ public class Entreprise {
         this.adresse = adresse;
     }
 
-    public int getTel() {
+    public String getTel() {
         return tel;
     }
 
-    public void setTel(int tel) {
+    public void setTel(String tel) {
         this.tel = tel;
     }
 

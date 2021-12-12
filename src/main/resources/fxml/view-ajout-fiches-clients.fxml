@@ -49,4 +49,5 @@
    <ComboBox fx:id="cbxVille" layoutX="153.0" layoutY="215.0" prefWidth="150.0" />
    <Button fx:id="btnVilleDisplay" layoutX="312.0" layoutY="215.0" mnemonicParsing="false" onAction="#OnVilleDisplay" text="+" />
    <Button fx:id="btnAjoutUneVille" layoutX="308.0" layoutY="215.0" mnemonicParsing="false" onAction="#OnAjoutUneVille" prefHeight="25.0" prefWidth="107.0" text="Ajouter une ville" />
+   <Button fx:id="btnRemovePays" layoutX="311.0" layoutY="171.0" mnemonicParsing="false" onAction="#OnBlankPays" text="-" />
 </AnchorPane>

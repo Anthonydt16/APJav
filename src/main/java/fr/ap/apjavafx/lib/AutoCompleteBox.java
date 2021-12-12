@@ -101,8 +101,9 @@ public class AutoCompleteBox implements fr.ap.apjavafx.lib.newHandlerEvent {
             this.comboBox.getSelectionModel().clearSelection();
         }
 
-        if(event.getCode() == KeyCode.ENTER && comboBox.getSelectionModel().getSelectedIndex()>-1)
+        if(event.getCode() == KeyCode.ENTER && comboBox.getSelectionModel().getSelectedIndex()>-1){
             return;
+        }
 
         setItems();
     }

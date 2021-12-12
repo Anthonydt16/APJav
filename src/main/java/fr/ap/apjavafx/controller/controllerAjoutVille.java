@@ -53,12 +53,18 @@ public class controllerAjoutVille {
 
     @FXML
     public void OnEnregistrer(ActionEvent e){
-        if(inputNomVille.getText() != "" && inputCodePostal.getText() != "" && (String) cbxPays.getValue() != ""){
+        if(inputNomVille.getText() != "" && (String) cbxPays.getValue() != ""){
             if(!VilleDAO.getAllVilleNameByPays((String) cbxPays.getValue()).contains(inputNomVille.getText())) {
                 int lastId = VilleDAO.getLastIdVille() + 1;
                 int PaysId = PaysDAO.getIdByName((String) cbxPays.getValue());
-                VilleDTO uneVille = new VilleDTO(lastId, PaysId, inputNomVille.getText(), (String) inputCodePostal.getText());
-                VilleDAO.insertVille(uneVille);
+                if(inputCodePostal.getText() == ""){
+                    VilleDTO uneVille = new VilleDTO(lastId, PaysId, inputNomVille.getText());
+                    VilleDAO.insertVille(uneVille);
+                }
+                else{
+                    VilleDTO uneVille = new VilleDTO(lastId, PaysId, inputNomVille.getText(), (String) inputCodePostal.getText());
+                    VilleDAO.insertVille(uneVille);
+                }
 
                 if(chxClose.isSelected()){
                     Stage stage = (Stage) btnEnregistrer.getScene().getWindow();

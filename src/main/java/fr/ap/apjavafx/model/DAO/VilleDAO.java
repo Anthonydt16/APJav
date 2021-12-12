@@ -23,6 +23,21 @@ public class VilleDAO {
         return lastIdVille;
     }
 
+    public static int getIdVilleByName(String nom){
+        int idVille = 0;
+        try (PreparedStatement statement = DBConnex.getConnexion().prepareStatement("SELECT IDVILLE as MIdVille FROM ville WHERE NOMVILLE= ?")){
+            statement.setString(1, nom);
+            try(ResultSet result = statement.executeQuery()){
+                if(result.next()){
+                    idVille = result.getInt("MIdVille");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return idVille;
+    }
+
     public static ArrayList<String> getAllVilleNameByPays(String nomPays){
         ArrayList<String> Ville = new ArrayList<>();
         try (PreparedStatement statement = DBConnex.getConnexion().prepareStatement("SELECT NOMVILLE as NomVille FROM ville WHERE IDPAYS IN (SELECT IDPAYS FROM pays WHERE NOMPAYS = ?) ORDER BY NOMVILLE")){

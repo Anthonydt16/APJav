@@ -13,6 +13,12 @@ public class VilleDTO {
         this.codePostal = codePostal;
     }
 
+    public VilleDTO(int id, int idPays, String nomVille) {
+        this.id = id;
+        this.idPays = idPays;
+        this.nomVille = nomVille;
+    }
+
     public int getId() {
         return id;
     }

@@ -2,8 +2,10 @@ package fr.ap.apjavafx.controller;
 
 import fr.ap.apjavafx.Main;
 import fr.ap.apjavafx.lib.AutoCompleteBox;
+import fr.ap.apjavafx.model.DAO.EntrepriseDAO;
 import fr.ap.apjavafx.model.DAO.PaysDAO;
 import fr.ap.apjavafx.model.DAO.VilleDAO;
+import fr.ap.apjavafx.model.DTO.Entreprise;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -38,6 +40,7 @@ public class controllerAjoutFichesClients {
     @FXML private Button btnVilleDisplay;
     @FXML private Button btnAjoutUneVille;
     @FXML private ComboBox cbxPays;
+    @FXML private Button btnRemovePays;
     @FXML private TextField inputTel;
     @FXML private TextField inputEmailEnt;
     @FXML private TextField inputNomContact;
@@ -48,24 +51,37 @@ public class controllerAjoutFichesClients {
     @FXML private ChoiceBox inputDplTypeInscription;
     @FXML private Text TxtErreur;
     ArrayList<String> LesPays = PaysDAO.getAllPaysName();
+    //Je dois instancier la variable "LesVilles" je met France par defaut
+    ArrayList<String> LesVilles = VilleDAO.getAllVilleNameByPays("France");
 
     @FXML
-    protected void onEnregistrerClient(ActionEvent e){
-        //Contrôle de saisie : NOT NULL
-        if(inputNom.getText() != "" || inputAdresse.getText() != "" || cbxVille.getValue() != "" || inputTel.getText() != "" || inputEmailEnt.getText() != "" || inputNomContact.getText() != ""
-                || inputPrenomContact.getText() != "" || inputTelContact.getText() != "" || inputEmailContact.getText() != ""){
-            //Contrôle de saisie : EXIST
-            if(LesPays.contains((String) cbxPays.getValue())){
-                
-            }
-            else{
-                TxtErreur.setText("Erreur : le pays sélectionner n'existe pas");
-                TxtErreur.setVisible(true);
-            }
+    public void initialize() throws IOException {
+        //On met affiche pas les villes tant que l'utilisateur n'a pas choisi le pays
+        btnRemovePays.setVisible(false);
+        cbxVille.setVisible(false);
+        btnAjoutUneVille.setVisible(false);
+        //On créer une comboBox custom pour faire des recherches parmis tout les pays
+        new AutoCompleteBox(cbxPays);
+
+        //On rempli la combobox avec le noms de tout les pays
+        ObservableList<String> listPays = FXCollections.observableArrayList();
+        for(String unPays: LesPays){
+            listPays.add(unPays);
         }
-        else{
-            TxtErreur.setVisible(true);
-        }
+        cbxPays.setItems(listPays);
+        TxtErreur.setVisible(false);
+        btnEnregistrerClient.setOnAction(this::onEnregistrerClient);
+        btnVilleDisplay.setOnAction(this::OnVilleDisplay);
+        btnRemovePays.setOnAction(this::OnBlankPays);
+    }
+
+    @FXML
+    private void OnBlankPays(ActionEvent e) {
+        cbxVille.setVisible(false);
+        btnAjoutUneVille.setVisible(false);
+        cbxPays.setDisable(false);
+        btnRemovePays.setVisible(false);
+        btnVilleDisplay.setVisible(true);
     }
 
     @FXML
@@ -88,31 +104,46 @@ public class controllerAjoutFichesClients {
             TxtErreur.setVisible(true);
             TxtErreur.setText("Erreur: vous n'avez pas sélectionner un\n pays valide");
         }
-
     }
 
     @FXML
-    public void initialize() throws IOException {
-        //On met affiche pas les villes tant que l'utilisateur n'a pas choisi le pays
-        cbxVille.setVisible(false);
-        btnAjoutUneVille.setVisible(false);
-        //On créer une comboBox custom pour faire des recherches parmis tout les pays
-        new AutoCompleteBox(cbxPays);
-
-        //On rempli la combobox avec le noms de tout les pays
-        ObservableList<String> listPays = FXCollections.observableArrayList();
-        for(String unPays: LesPays){
-            listPays.add(unPays);
+    protected void onEnregistrerClient(ActionEvent e){
+        //Contrôle de saisie : NOT NULL
+        if(inputNom.getText() != "" || inputAdresse.getText() != "" || cbxVille.getValue() != "" || inputTel.getText() != "" || inputEmailEnt.getText() != "" || inputNomContact.getText() != ""
+                || inputPrenomContact.getText() != "" || inputTelContact.getText() != "" || inputEmailContact.getText() != ""){
+            //Contrôle de saisie : EXIST
+            if(LesPays.contains((String) cbxPays.getValue())){
+                if(LesVilles.contains((String) cbxVille.getValue())){
+                    if(EntrepriseDAO.getEntExist(inputNom.getText())){
+                        int lastIdEnt = EntrepriseDAO.getLastIdEnt() +1;
+                        int idVille = VilleDAO.getIdVilleByName((String) cbxVille.getValue());
+                        Entreprise uneEntreprise = new Entreprise(lastIdEnt, idVille, (String) inputNom.getText(), (String) inputAdresse.getText(), (String) inputTel.getText(), (String) inputEmailEnt.getText());
+                        //TODO créer les objets puis faire la requête pour insérer le loueur
+                        inputChxContacter.isSelected();
+                    }
+                    else{
+                        TxtErreur.setText("Erreur : l'entreprise existe déjà \n veuillez modifier la fiche");
+                        TxtErreur.setVisible(true);
+                    }
+                }
+                else{
+                    TxtErreur.setText("Erreur : la ville sélectionner n'existe pas");
+                    TxtErreur.setVisible(true);
+                }
+            }
+            else{
+                TxtErreur.setText("Erreur : le pays sélectionner n'existe pas");
+                TxtErreur.setVisible(true);
+            }
         }
-        cbxPays.setItems(listPays);
-
-        TxtErreur.setVisible(false);
-        btnEnregistrerClient.setOnAction(this::onEnregistrerClient);
-        btnVilleDisplay.setOnAction(this::OnVilleDisplay);
+        else{
+            TxtErreur.setVisible(true);
+        }
     }
 
     @FXML
     private void OnAjoutUneVille(ActionEvent e) throws IOException {
+        btnRemovePays.setVisible(true);
         FXMLLoader loader1 = new FXMLLoader();
         loader1.setLocation(Main.class.getResource("/fxml/view-ajout-ville.fxml"));
         Pane AjoutVilleLayout = (Pane) loader1.load();
