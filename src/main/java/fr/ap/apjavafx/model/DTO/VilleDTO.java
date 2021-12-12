@@ -4,7 +4,7 @@ public class VilleDTO {
     private int id;
     private int idPays;
     private String nomVille;
-    private int codePostal;
+    private String codePostal;
 
     public VilleDTO(int id, int idPays, String nomVille, String codePostal) {
         this.id = id;
@@ -37,11 +37,11 @@ public class VilleDTO {
         this.nomVille = nomVille;
     }
 
-    public int getCodePostal() {
+    public String getCodePostal() {
         return codePostal;
     }
 
-    public void setCodePostal(int codePostal) {
+    public void setCodePostal(String codePostal) {
         this.codePostal = codePostal;
     }
 }

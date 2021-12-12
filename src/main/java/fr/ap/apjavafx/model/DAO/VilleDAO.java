@@ -1,6 +1,7 @@
 package fr.ap.apjavafx.model.DAO;
 
 import fr.ap.apjavafx.model.DTO.FicheClient;
+import fr.ap.apjavafx.model.DTO.VilleDTO;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -53,5 +54,16 @@ public class VilleDAO {
         return villeExist;
     }
 
+    public static void insertVille(VilleDTO ville){
+        try(PreparedStatement statement = DBConnex.getConnexion().prepareStatement("INSERT INTO ville VALUES(?, ?, ?, ?)")){
+            statement.setInt(1, ville.getId());
+            statement.setInt(2, ville.getIdPays());
+            statement.setString(3, ville.getNomVille());
+            statement.setString(4, ville.getCodePostal());
+            statement.executeUpdate();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

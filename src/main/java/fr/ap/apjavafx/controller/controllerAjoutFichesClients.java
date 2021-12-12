@@ -21,7 +21,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -54,7 +56,7 @@ public class controllerAjoutFichesClients {
                 || inputPrenomContact.getText() != "" || inputTelContact.getText() != "" || inputEmailContact.getText() != ""){
             //Contrôle de saisie : EXIST
             if(LesPays.contains((String) cbxPays.getValue())){
-
+                
             }
             else{
                 TxtErreur.setText("Erreur : le pays sélectionner n'existe pas");
@@ -68,18 +70,25 @@ public class controllerAjoutFichesClients {
 
     @FXML
     protected void OnVilleDisplay(ActionEvent e){
-        cbxVille.setVisible(true);
-        cbxPays.setDisable(true);
-        btnVilleDisplay.setVisible(false);
-        btnAjoutUneVille.setVisible(true);
-        new AutoCompleteBox(cbxVille);
-        ArrayList<String> LesVilles = VilleDAO.getAllVilleNameByPays((String) cbxPays.getValue());
-        ObservableList<String> listVille = FXCollections.observableArrayList();
-        for(String uneVille: LesVilles){
-            listVille.add(uneVille);
-            System.out.println(uneVille);
+        if((String)cbxPays.getValue() != null){
+            System.out.println("hello world !");
+            cbxVille.setVisible(true);
+            cbxPays.setDisable(true);
+            btnVilleDisplay.setVisible(false);
+            btnAjoutUneVille.setVisible(true);
+            new AutoCompleteBox(cbxVille);
+            ArrayList<String> LesVilles = VilleDAO.getAllVilleNameByPays((String) cbxPays.getValue());
+            ObservableList<String> listVille = FXCollections.observableArrayList();
+            for(String uneVille: LesVilles){
+                listVille.add(uneVille);
+            }
+            cbxVille.setItems(listVille);
         }
-        cbxVille.setItems(listVille);
+        else{
+            TxtErreur.setVisible(true);
+            TxtErreur.setText("Erreur: vous n'avez pas sélectionner un\n pays valide");
+        }
+
     }
 
     @FXML
@@ -94,7 +103,6 @@ public class controllerAjoutFichesClients {
         ObservableList<String> listPays = FXCollections.observableArrayList();
         for(String unPays: LesPays){
             listPays.add(unPays);
-            System.out.println(unPays);
         }
         cbxPays.setItems(listPays);
 

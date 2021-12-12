@@ -37,6 +37,7 @@ public class PaysDAO {
     public static int getIdByName(String nom){
         int idPays = 0;
         try (PreparedStatement statement = DBConnex.getConnexion().prepareStatement("SELECT IDPAYS as idPays FROM pays WHERE NOMPAYS = ?")){
+            statement.setString(1, nom);
             try(ResultSet result = statement.executeQuery()){
                 while(result.next()){
                     idPays = result.getInt("idPays");
