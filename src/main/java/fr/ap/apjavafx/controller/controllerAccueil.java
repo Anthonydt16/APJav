@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -23,12 +24,14 @@ public class controllerAccueil implements Initializable {
     /**
      * Les variables du fichier FXML associ�
      */
+    @FXML private AnchorPane Accueil;
     @FXML
     private Label textTitre;
     @FXML private Button inputConnex;
     @FXML private Button inputInscipt;
     private Pane rootLayout;
     @FXML	protected void clickConnex(ActionEvent e) throws IOException {
+        Accueil.setManaged(false);
         FXMLLoader loader1 = new FXMLLoader();
         loader1.setLocation(Main.class.getResource("/fxml/view-Connexion.fxml"));
         Pane ConnexionLayout = (Pane) loader1.load();

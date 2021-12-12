@@ -2,10 +2,7 @@ package fr.ap.apjavafx.controller;
 
 import fr.ap.apjavafx.Main;
 import fr.ap.apjavafx.model.DAO.FicheClientDAO;
-import fr.ap.apjavafx.model.DAO.LoueurDAO;
 import fr.ap.apjavafx.model.DTO.FicheClient;
-import fr.ap.apjavafx.model.DTO.loueur;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,48 +18,55 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 public class controllerFichesClients {
 
     @FXML private Button btnQuitter;
     @FXML private  Button btnAjouter;
 
-    @FXML private TableView<String> tableListeLoueur;
-    @FXML private TableColumn<FicheClient, String> LoginLoueur;
-    @FXML private TableColumn<FicheClient, String> nomLoueur;
-    @FXML private TableColumn<FicheClient, String> contacterLoueur;
-    @FXML private TableColumn<FicheClient, String> typeInscriptionLoueur;
-    @FXML private TableColumn<FicheClient, String> mailLoueur;
-    @FXML private TableColumn<FicheClient, String> telLoueur;
+    @FXML private TableView<FicheClient> tableListeClient;
+    @FXML private TableColumn<FicheClient, String> collNomEnt;
+    @FXML private TableColumn<FicheClient, String> collAdEnt;
+    @FXML private TableColumn<FicheClient, String> colVillePays;
+    @FXML private TableColumn<FicheClient, String> collTel;
+    @FXML private TableColumn<FicheClient, String> colEmail;
+    @FXML private TableColumn<FicheClient, String> colPrenomNom;
+    @FXML private TableColumn<FicheClient, String> colMailContact;
+    @FXML private TableColumn<FicheClient, String> colTelContact;
+
 
     private void remplirTableau() throws SQLException {
 
         ObservableList<FicheClient> data = FXCollections.observableArrayList();
-        //TODO FAIRE SUPP CA ET CONTINUER
 
         ArrayList<FicheClient> LesClients = FicheClientDAO.getAllLoueur();
 
-        while (LesClients.next()) {
-            FicheClient UneFicheClient = new FicheClient(LesClients.getString(1) , LesClients.getString(2) ,
-                    LesClients.getString(3) ,LesClients.getString(4)  ,
-                    LesClients.getString(5)  ,LesClients.getString(6)  ,
-                    LesClients.getString(7) , LesClients.getString(8));
-            data.add(UneFicheClient);
-
+        for(FicheClient unClients: LesClients){
+            data.add(unClients);
+            System.out.println(unClients.getAdresseEnt());
         }
+
+        collNomEnt.setCellValueFactory(new PropertyValueFactory<FicheClient,String>("nomEnt"));
+        collAdEnt.setCellValueFactory(new PropertyValueFactory<FicheClient, String>("adresseEnt"));
+        colVillePays.setCellValueFactory(new PropertyValueFactory<FicheClient, String>("VillePays"));
+        collTel.setCellValueFactory(new PropertyValueFactory<FicheClient, String>("telEnt"));
+        colEmail.setCellValueFactory(new PropertyValueFactory<FicheClient, String>("emailEnt"));
+        colPrenomNom.setCellValueFactory(new PropertyValueFactory<FicheClient, String>("nomPrenomContact"));
+        colMailContact.setCellValueFactory(new PropertyValueFactory<FicheClient, String>("mailContact"));
+        colTelContact.setCellValueFactory(new PropertyValueFactory<FicheClient, String>("telContact"));
+
+
+        tableListeClient.setItems(data);
+
     }
 
     @FXML
     public void initialize() throws SQLException {
+        System.out.println("Start - Initialize");
         remplirTableau();
     }
-
-
 
     public void buttonCloseListeFichesComptableClick(ActionEvent e) {
         Stage stage = (Stage) btnQuitter.getScene().getWindow();

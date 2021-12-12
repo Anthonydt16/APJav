@@ -83,6 +83,7 @@ public class Utilisateur {
     public void setMAIL(String MAIL) {
         this.MAIL = MAIL;
     }
+
     public String getStatut() {
         return Statut;
     }

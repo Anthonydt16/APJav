@@ -15,19 +15,26 @@
             <Font size="25.0" />
         </font>
     </Button>
-    <TableView fx:id="tableListeFichesComptable" layoutX="29.0" layoutY="65.0" prefHeight="400.0" prefWidth="927.0">
+    <TableView fx:id="tableListeClient" layoutX="29.0" layoutY="65.0" prefHeight="400.0" prefWidth="927.0">
         <columns>
-            <TableColumn fx:id="collLogin" prefWidth="75.0" text="Login" />
-            <TableColumn fx:id="colNom" prefWidth="111.0" text="Nom" />
-            <TableColumn fx:id="colPrenom" editable="false" prefWidth="119.0" sortable="false" text="Prenom" />
-            <TableColumn fx:id="colContacter" prefWidth="163.0" text="Contacter" />
-         <TableColumn fx:id="colTypeInscription" editable="false" prefWidth="104.0" sortable="false" text="Type inscription" />
-         <TableColumn fx:id="colMail" editable="false" prefWidth="189.0" sortable="false" text="Mail" />
-         <TableColumn fx:id="colTelephone" editable="false" prefWidth="164.0" sortable="false" text="Téléphone" />
+            <TableColumn fx:id="collNomEnt" prefWidth="130.0" text="Nom de l'entreprise" />
+            <TableColumn fx:id="collAdEnt" prefWidth="141.0" text="Adresse de l'entreprise" />
+            <TableColumn fx:id="colVillePays" editable="false" prefWidth="87.0" sortable="false" text="Lieu" />
+            <TableColumn fx:id="collTel" prefWidth="110.0" text="N° de téléphone" />
+         <TableColumn fx:id="colEmail" editable="false" prefWidth="104.0" sortable="false" text="Email" />
+         <TableColumn fx:id="colPrenomNom" editable="false" prefWidth="114.0" sortable="false" text="Nom Prénom du contact" />
+         <TableColumn fx:id="colMailContact" editable="false" prefWidth="118.0" sortable="false" text="Mail du contact" />
+         <TableColumn fx:id="colTelContact" editable="false" prefWidth="122.0" sortable="false" text="N° de téléphone du contact" />
         </columns>
     </TableView>
-   <Button id="btnAjouter" fx:id="btnAjouter" layoutX="59.0" layoutY="479.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="222.0" text="Ajouter" onAction="#buttonAjouterClients"/>
-   <Button fx:id="btnModifier" layoutX="382.0" layoutY="479.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="222.0" text="Modifier" />
+   <Button id="btnAjouter" fx:id="btnAjouter" layoutX="59.0" layoutY="479.0" mnemonicParsing="false" onAction="#buttonAjouterClients" prefHeight="45.0" prefWidth="222.0" text="Ajouter">
+      <font>
+         <Font size="25.0" />
+      </font></Button>
+   <Button fx:id="btnModifier" layoutX="382.0" layoutY="479.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="222.0" text="Modifier">
+      <font>
+         <Font size="25.0" />
+      </font></Button>
    <Text fx:id="textTitre" layoutX="354.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion des loueurs">
       <font>
          <Font size="32.0" />

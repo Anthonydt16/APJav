@@ -1,47 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="SceneAjoutClient" prefHeight="401.0" prefWidth="778.0" xmlns="http://javafx.com/javafx/11.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.ap.apjavafx.controller.controllerAjoutFichesClients">
+<AnchorPane fx:id="SceneAjoutClient" prefHeight="401.0" prefWidth="778.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.ap.apjavafx.controller.controllerAjoutFichesClients">
     <Text layoutX="298.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajout d'un client">
         <font>
-          <Font size="25.0"/>
+          <Font size="25.0" />
         </font>
     </Text>
-    <TextField fx:id="inputNom" layoutX="154.0" layoutY="86.0"/>
-    <Text fx:id="textNom" layoutX="41.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0"
-          text="Nom de l'entreprise :"/>
-    <TextField fx:id="inputAdresse" layoutX="154.0" layoutY="130.0"/>
-    <Text fx:id="textAdresse" layoutX="25.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0"
-          text="Adresse de l'entreprise :"/>
-    <TextField fx:id="inputVille" layoutX="153.0" layoutY="173.0"/>
-    <Text fx:id="textVille" layoutX="41.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0"
-          text="Ville de l'entreprise :"/>
-    <TextField fx:id="inputVille1" layoutX="154.0" layoutY="226.0"/>
-    <Text fx:id="textPays" layoutX="42.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0"
-          text="Pays de l'entreprise :"/>
-    <TextField fx:id="inputPays" layoutX="154.0" layoutY="279.0"/>
-    <Text fx:id="textPays1" layoutX="25.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0"
-          text="Numéro de téléphone :"/>
-    <TextField fx:id="inputNom1" layoutX="543.0" layoutY="86.0"/>
-    <Text fx:id="textNomContact" layoutX="372.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0"
-          text="Nom du contact de l'entreprise :"/>
-    <TextField fx:id="inputNom11" layoutX="543.0" layoutY="171.0"/>
-    <Text fx:id="textTelContact" layoutX="359.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0"
-          text="Numéro de téléphone du contact :"/>
-    <TextField fx:id="inputNom111" layoutX="543.0" layoutY="130.0"/>
-    <Text fx:id="textTelContact1" layoutX="359.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0"
-          text="Prénom de téléphone du contact :"/>
-    <TextField fx:id="inputNom112" layoutX="543.0" layoutY="209.0"/>
-    <Text fx:id="textTelContact2" layoutX="408.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0"
-          text="Adresse mail du contact :"/>
-    <Button fx:id="btnEnregistrerClient" layoutX="287.0" layoutY="325.0" mnemonicParsing="false"
-            onAction="#onEnregistrerClients" prefHeight="54.0" prefWidth="170.0" text="Enregistrer">
+    <TextField fx:id="inputNom" layoutX="154.0" layoutY="86.0" />
+    <Text fx:id="textNom" layoutX="41.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom de l'entreprise :" />
+    <TextField fx:id="inputAdresse" layoutX="154.0" layoutY="130.0" />
+    <Text fx:id="textAdresse" layoutX="25.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse de l'entreprise :" />
+    <TextField fx:id="inputVille" layoutX="153.0" layoutY="173.0" />
+    <Text fx:id="textVille" layoutX="41.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ville de l'entreprise :" />
+    <Text fx:id="textPays" layoutX="42.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pays de l'entreprise :" />
+    <TextField fx:id="inputTel" layoutX="154.0" layoutY="263.0" />
+    <Text fx:id="textPays1" layoutX="25.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numéro de téléphone :" />
+    <TextField fx:id="inputNomContact" layoutX="543.0" layoutY="86.0" />
+    <Text fx:id="textNomContact" layoutX="372.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom du contact de l'entreprise :" />
+    <TextField fx:id="inputTelContact" layoutX="543.0" layoutY="171.0" />
+    <Text fx:id="textTelContact" layoutX="359.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numéro de téléphone du contact :" />
+    <TextField fx:id="inputPrenomContact" layoutX="543.0" layoutY="130.0" />
+    <Text fx:id="textTelContact1" layoutX="359.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prénom de téléphone du contact :" />
+    <TextField fx:id="inputEmailContact" layoutX="543.0" layoutY="209.0" />
+    <Text fx:id="textTelContact2" layoutX="408.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse mail du contact :" />
+    <Button fx:id="btnEnregistrerClient" layoutX="564.0" layoutY="325.0" mnemonicParsing="false" onAction="#onEnregistrerClient" prefHeight="54.0" prefWidth="170.0" text="Enregistrer">
         <font>
-          <Font size="20.0"/>
+          <Font size="20.0" />
         </font>
     </Button>
+   <TextField fx:id="inputEmailEnt" layoutX="154.0" layoutY="304.0" />
+   <Text fx:id="textPays11" layoutX="25.0" layoutY="321.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email de l'entreprise :" />
+   <CheckBox fx:id="ChxContacter" layoutX="543.0" layoutY="244.0" mnemonicParsing="false" text="Contacter" />
+   <ChoiceBox fx:id="DplTypeInscription" layoutX="541.0" layoutY="276.0" prefWidth="150.0" />
+   <Text fx:id="TxtErreur" fill="RED" layoutX="286.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Erreur: veuillez remplir tout les champs">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Text>
+   <ComboBox fx:id="cbxPays" layoutX="154.0" layoutY="222.0" prefWidth="150.0" />
 </AnchorPane>

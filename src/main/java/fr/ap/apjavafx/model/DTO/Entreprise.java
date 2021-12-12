@@ -7,6 +7,14 @@ public class Entreprise {
     private int tel;
     private String mail;
 
+    public Entreprise(int num, String nom, String adresse, int tel, String mail) {
+        this.num = num;
+        this.nom = nom;
+        this.adresse = adresse;
+        this.tel = tel;
+        this.mail = mail;
+    }
+
     public int getNum() {
         return num;
     }
