@@ -21,11 +21,11 @@ public class UtilisateurDAO {
 			try (ResultSet result = statement.executeQuery()) {
 
 
-				if (result.next()) {
+				if(result.next()) {
 					if (Objects.equals(result.getString(1), login) && Objects.equals(result.getString(2), mdp)) {
 						//connexion reussi
-						System.out.println("teste id");
 						unUser = new Utilisateur(result.getString(1), result.getString(2), result.getString(3), result.getString(4), result.getString(5), result.getString(6), result.getString(7));
+						System.out.println("teste login id"+unUser.getLOGIN());
 					} else {
 						//en cas d'echec de connexion
 						unUser = null;

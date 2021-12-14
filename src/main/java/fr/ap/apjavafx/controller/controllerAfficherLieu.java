@@ -80,29 +80,79 @@ public class controllerAfficherLieu {
     }
 
 
+    @FXML
+    public void clickAdd(ActionEvent actionEvent) throws IOException {
 
-    public void clickAdd(ActionEvent actionEvent) {
+        //ajout lieux
+
+        FXMLLoader loader3 = new FXMLLoader();
+        loader3.setLocation(Main.class.getResource("/fxml/view-SalleUnLieu.fxml"));
+        Pane SalleLieux = loader3.load();
+        controllerSalleUnLieu controller = loader3.getController();
+        controller.setId(TableAffichageLieux.getSelectionModel().getSelectedItem());
+        controller.setButtonindice("Add");
+        controller.setup();
+
+        Stage SalleLieuxStage = new Stage();
+        Scene SalleLieuxScene = new Scene(SalleLieux);
+
+        SalleLieuxStage.setScene(SalleLieuxScene);
+
+        SalleLieuxStage.setTitle("Salle pour un lieu Add");
+        SalleLieuxStage.initModality(Modality.APPLICATION_MODAL);
+        SalleLieuxStage.show();
 
     }
+    @FXML public void clickSupp(ActionEvent actionEvent) throws IOException {
 
-    public void clickSupp(ActionEvent actionEvent) {
+        FXMLLoader loader3 = new FXMLLoader();
+        loader3.setLocation(Main.class.getResource("/fxml/view-ConfirmeSuppression.fxml"));
+        Pane SalleLieux = loader3.load();
+        controllerSuppression controller = loader3.getController();
 
+        controller.setup();
+
+        Stage SalleLieuxStage = new Stage();
+        Scene SalleLieuxScene = new Scene(SalleLieux);
+        SalleLieuxStage.setScene(SalleLieuxScene);
+
+        SalleLieuxStage.setTitle("Salle pour un lieu Add");
+        SalleLieuxStage.initModality(Modality.APPLICATION_MODAL);
+        SalleLieuxStage.show();
     }
 
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
+    public void setup() {
+        //on les reaffiche au cas ou
+        buttonAdd.setVisible(true);
+        ButtonSupp.setVisible(true);
         ObservableList<LieuDTO> data = FXCollections.observableArrayList();
-        if(this.unLoueur!=null){
-            ArrayList <LieuDTO> desLieux = SelectLieuxIdLoueur(this.unLoueur.getIdLoueur());
-            System.out.println();
+        ArrayList <LieuDTO> desLieux = new ArrayList<>();
+        if(this.unLoueur != null){
+            System.out.println("un loueur");
+             desLieux = SelectLieuxIdLoueur(this.unLoueur.getIdLoueur());
         }
-        ArrayList <LieuDTO> desLieux =   SelectLieux();
+        else{
+
+            //savoir si c'est un adherent est log pour eviter qu'il est les droit de modification juste de voir les lieux
+            if(this.unAdherent != null){
+                buttonAdd.setVisible(false);
+                ButtonSupp.setVisible(false);
+                desLieux =   SelectLieux();
+
+            }
+            else{
+                System.out.println("un visiteur/admin");
+                desLieux =   SelectLieux();
+                buttonAdd.setVisible(true);
+                ButtonSupp.setVisible(true);
+            }
+
+        }
+
 
         for(LieuDTO unLieu : desLieux ){
             data.add(unLieu);
-            //System.out.println(unLieu.getAdresseLieu());
+            System.out.println(unLieu.getAdresseLieu());
         }
 
         idLieuCol.setCellValueFactory(new PropertyValueFactory<LieuDTO,Integer>("idLieu"));
@@ -124,6 +174,7 @@ public class controllerAfficherLieu {
 
     public void clickEnregistrement(MouseEvent mouseEvent) throws IOException {
         if(mouseEvent.getClickCount() == 2){
+            //permet de verifié si l'user est un inscrit ou pas car seul les loueur, admin et commercial peuvent voir les salle
             if(this.unAdherent == null){
                 System.out.println(TableAffichageLieux.getSelectionModel().getSelectedItem().getIdLieu());
 
@@ -132,6 +183,7 @@ public class controllerAfficherLieu {
                 Pane SalleLieux = loader3.load();
                 controllerSalleUnLieu controller = loader3.getController();
                 controller.setId(TableAffichageLieux.getSelectionModel().getSelectedItem());
+                controller.setButtonindice("modif");
                 controller.setup();
 
                 Stage SalleLieuxStage = new Stage();

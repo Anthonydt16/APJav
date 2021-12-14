@@ -18,7 +18,7 @@ public class VilleDAO {
             try (ResultSet result = statement.executeQuery()) {
 
 
-                if (result.next()) {
+                while (result.next()) {
 
                     uneVille = new VilleDTO(result.getInt(1),result.getInt(2),result.getString(3),result.getInt(4));
                     desVilles.add(uneVille);

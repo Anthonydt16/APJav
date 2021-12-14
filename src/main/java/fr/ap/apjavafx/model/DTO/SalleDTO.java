@@ -9,8 +9,9 @@ public class SalleDTO {
     private float surface;
     private float hauteur;
     private int capacite;
+    private float prixDemiJournee;
 
-    public SalleDTO(int idSalle, String nomLieu, String nomSalle, float largeur, float longueur, float surface, float hauteur, int capacite) {
+    public SalleDTO(int idSalle, String nomLieu, String nomSalle, float largeur, float longueur, float surface, float hauteur, int capacite,float prixDemiJournee) {
         this.idSalle = idSalle;
         this.nomLieu = nomLieu;
         this.nomSalle = nomSalle;
@@ -19,6 +20,7 @@ public class SalleDTO {
         this.surface = surface;
         this.hauteur = hauteur;
         this.capacite = capacite;
+        this.prixDemiJournee = prixDemiJournee;
     }
 
     public int getIdSalle() {
@@ -84,4 +86,16 @@ public class SalleDTO {
     public void setCapacite(int capacite) {
         this.capacite = capacite;
     }
+    public float getPrixDemiJournee() {
+        return prixDemiJournee;
+    }
+
+    public void setPrixDemiJournee(float prixDemiJournee) {
+        this.prixDemiJournee = prixDemiJournee;
+    }
+    @Override
+    public String toString() {
+        return   this.idSalle + " " +this.nomSalle;
+    }
+
 }

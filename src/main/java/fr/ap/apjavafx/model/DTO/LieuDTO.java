@@ -12,6 +12,11 @@ public class LieuDTO {
     private String descriptif;
     private String loueur;
 
+    @Override
+    public String toString() {
+        return String.valueOf(this.idLieu +" "+this.getLibelleLieu());
+    }
+
     public LieuDTO(int idLieu, String ville, String libelleLieu, String adresseLieu, int coordX, int coordY, String annulationGratuite, int nbEtoile, String descriptif, String loueur) {
         this.idLieu = idLieu;
         this.ville = ville;
