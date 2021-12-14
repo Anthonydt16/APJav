@@ -1,12 +1,13 @@
 package fr.ap.apjavafx.model.DTO;
 
-public class loueur {
-    private String idEnt;
+public class LoueurDTO {
+    private int idEnt;
     private String login;
     private String nom;
     private String adresse;
     private String ville;
     private String pays;
+    private String mail;
     private String tel;
     private Boolean contacter;
     private String typeInscription;
@@ -17,14 +18,15 @@ public class loueur {
 
 
 
-    public loueur(String idEnt, String login, String nom, String adresse, String ville, String pays,
-                  String tel, Boolean contacter, String typeInscription, String prenomContact, String nomContact, String mailContact, String telContact) {
+    public LoueurDTO(int idEnt, String login, String nom, String adresse, String ville, String pays, String email,
+                     String tel, Boolean contacter, String typeInscription, String prenomContact, String nomContact, String mailContact, String telContact) {
         this.idEnt = idEnt;
         this.login = login;
         this.nom = nom;
         this.adresse = adresse;
         this.ville = ville;
         this.pays = pays;
+        this.mail = email;
         this.tel = tel;
         this.contacter = contacter;
         this.typeInscription = typeInscription;
@@ -34,7 +36,7 @@ public class loueur {
         this.telContact = telContact;
     }
 
-    public loueur(String login, String nom, Boolean contacter, String typeInscription, String mailContact, String telContact){
+    public LoueurDTO(String login, String nom, Boolean contacter, String typeInscription, String mailContact, String telContact){
         this.login = login;
         this.nom = nom;
         this.contacter = contacter;
@@ -43,11 +45,19 @@ public class loueur {
         this.mailContact = mailContact;
     }
 
-    public String getIdEnt() {
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public int getIdEnt() {
         return idEnt;
     }
 
-    public void setIdEnt(String idEnt) {
+    public void setIdEnt(int idEnt) {
         this.idEnt = idEnt;
     }
 

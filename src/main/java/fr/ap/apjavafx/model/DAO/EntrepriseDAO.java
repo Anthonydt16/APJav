@@ -1,11 +1,10 @@
 package fr.ap.apjavafx.model.DAO;
 
-import fr.ap.apjavafx.model.DTO.loueur;
+import fr.ap.apjavafx.model.DTO.Entreprise;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class EntrepriseDAO {
     public static int getLastIdEnt() {
@@ -27,7 +26,7 @@ public class EntrepriseDAO {
         try (PreparedStatement statement = DBConnex.getConnexion().prepareStatement("SELECT IDENT FROM entreprise WHERE NOMENT = ?")){
             statement.setString(1, nom);
             try(ResultSet result = statement.executeQuery()){
-                if(result.next()){
+                if(!result.isBeforeFirst()){
                     entExist = true;
                 }
             }
@@ -35,6 +34,20 @@ public class EntrepriseDAO {
             e.printStackTrace();
         }
         return entExist;
+    }
+
+    public static void insertEnt(Entreprise unEntreprise){
+        try(PreparedStatement statement = DBConnex.getConnexion().prepareStatement("INSERT INTO entreprise VALUES(?, ?, ?, ?, ?, ?)")){
+            statement.setInt(1, unEntreprise.getNum());
+            statement.setInt(2, unEntreprise.getIdVille());
+            statement.setString(3, unEntreprise.getNom());
+            statement.setString(4, unEntreprise.getAdresse());
+            statement.setString(5, unEntreprise.getTel());
+            statement.setString(6, unEntreprise.getMail());
+            statement.executeUpdate();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
 

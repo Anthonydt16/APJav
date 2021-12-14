@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="552.0" prefWidth="985.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.ap.apjavafx.controller.controllerFichesClients">
+<AnchorPane fx:id="fichesClientsPane" prefHeight="552.0" prefWidth="985.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.ap.apjavafx.controller.controllerFichesClients">
     <Pane layoutX="-30.0" layoutY="-83.0" prefHeight="200.0" prefWidth="200.0" />
     <Button id="closeButtonListeFichesComptable" fx:id="btnQuitter" layoutX="716.0" layoutY="479.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#buttonCloseListeFichesComptableClick" prefHeight="45.0" prefWidth="222.0" text="Quitter" textAlignment="CENTER">
         <font>

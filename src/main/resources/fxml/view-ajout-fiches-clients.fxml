@@ -24,11 +24,11 @@
     <TextField fx:id="inputTel" layoutX="154.0" layoutY="263.0" />
     <Text fx:id="textPays1" layoutX="25.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numéro de téléphone :" />
     <TextField fx:id="inputNomContact" layoutX="566.0" layoutY="86.0" />
-    <Text fx:id="textNomContact" layoutX="395.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom du contact de l'entreprise :" />
+    <Text fx:id="textNomContact" layoutX="473.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom du contact :" />
     <TextField fx:id="inputTelContact" layoutX="566.0" layoutY="171.0" />
     <Text fx:id="textTelContact" layoutX="382.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numéro de téléphone du contact :" />
     <TextField fx:id="inputPrenomContact" layoutX="566.0" layoutY="130.0" />
-    <Text fx:id="textTelContact1" layoutX="382.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prénom de téléphone du contact :" />
+    <Text fx:id="textTelContact1" layoutX="457.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prénom du contact :" />
     <TextField fx:id="inputEmailContact" layoutX="566.0" layoutY="209.0" />
     <Text fx:id="textTelContact2" layoutX="431.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse mail du contact :" />
     <Button fx:id="btnEnregistrerClient" layoutX="564.0" layoutY="325.0" mnemonicParsing="false" onAction="#onEnregistrerClient" prefHeight="54.0" prefWidth="170.0" text="Enregistrer">

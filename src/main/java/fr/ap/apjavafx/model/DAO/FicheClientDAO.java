@@ -1,15 +1,11 @@
 package fr.ap.apjavafx.model.DAO;
 
 import fr.ap.apjavafx.model.DTO.FicheClient;
-import fr.ap.apjavafx.model.DTO.Utilisateur;
-import fr.ap.apjavafx.model.DTO.loueur;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class FicheClientDAO {
     public static ArrayList <FicheClient> getAllLoueur() {
@@ -19,7 +15,7 @@ public class FicheClientDAO {
         try (PreparedStatement statement = DBConnex.getConnexion().prepareStatement("SELECT e.NOMENT as `nomEntreprise`, e.ADRESSEENT as `adresseEntreprise`, CONCAT(V.NOMVILLE,'/', P.NOMPAYS) as `villePays`, e.TELENT as `telEntreprise`, e.EMAIL as `emailEntreprise`, CONCAT(l.NOM, ' ', l.PRENOM) AS `nomPrenomContact`, l.MAILCONTACT as `mailContact`, l.TELCONTACT as `telContact`" +
                 "FROM loueur as l JOIN entreprise as e ON l.IDENT = e.IDENT JOIN `ville` AS V ON e.IDVILLE = V.IDVILLE JOIN `pays` AS P ON V.IDPAYS = P.IDPAYS")) {
             try (ResultSet result = statement.executeQuery()) {
-                if (result.next()) {
+                while (result.next()) {
                     uneFicheClient = new FicheClient(result.getString("nomEntreprise"),result.getString("adresseEntreprise"),result.getString("villePays"),result.getString("telEntreprise"),result.getString("emailEntreprise"),result.getString("nomPrenomContact"),result.getString("mailContact"),result.getString("telContact"));
                     lesFichesClient.add(uneFicheClient);
                 }

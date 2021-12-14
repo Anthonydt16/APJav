@@ -3,9 +3,11 @@ package fr.ap.apjavafx.controller;
 import fr.ap.apjavafx.Main;
 import fr.ap.apjavafx.lib.AutoCompleteBox;
 import fr.ap.apjavafx.model.DAO.EntrepriseDAO;
+import fr.ap.apjavafx.model.DAO.LoueurDAO;
 import fr.ap.apjavafx.model.DAO.PaysDAO;
 import fr.ap.apjavafx.model.DAO.VilleDAO;
 import fr.ap.apjavafx.model.DTO.Entreprise;
+import fr.ap.apjavafx.model.DTO.LoueurDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -47,8 +49,8 @@ public class controllerAjoutFichesClients {
     @FXML private TextField inputPrenomContact;
     @FXML private TextField inputTelContact;
     @FXML private TextField inputEmailContact;
-    @FXML private CheckBox inputChxContacter;
-    @FXML private ChoiceBox inputDplTypeInscription;
+    @FXML private CheckBox ChxContacter;
+    @FXML private ChoiceBox DplTypeInscription;
     @FXML private Text TxtErreur;
     ArrayList<String> LesPays = PaysDAO.getAllPaysName();
     //Je dois instancier la variable "LesVilles" je met France par defaut
@@ -69,14 +71,30 @@ public class controllerAjoutFichesClients {
             listPays.add(unPays);
         }
         cbxPays.setItems(listPays);
+
+        ObservableList<String> listChoix = FXCollections.observableArrayList();
+        listChoix.add("Site");
+        listChoix.add("Commercial");
+        DplTypeInscription.setItems(listChoix);
+
         TxtErreur.setVisible(false);
         btnEnregistrerClient.setOnAction(this::onEnregistrerClient);
         btnVilleDisplay.setOnAction(this::OnVilleDisplay);
         btnRemovePays.setOnAction(this::OnBlankPays);
     }
 
+    private void setListVille(){
+        ArrayList<String> LesVilles = VilleDAO.getAllVilleNameByPays((String) cbxPays.getValue());
+        ObservableList<String> listVille = FXCollections.observableArrayList();
+        for(String uneVille: LesVilles){
+            listVille.add(uneVille);
+        }
+        cbxVille.setItems(listVille);
+    }
+
     @FXML
     private void OnBlankPays(ActionEvent e) {
+        setListVille();
         cbxVille.setVisible(false);
         btnAjoutUneVille.setVisible(false);
         cbxPays.setDisable(false);
@@ -87,18 +105,12 @@ public class controllerAjoutFichesClients {
     @FXML
     protected void OnVilleDisplay(ActionEvent e){
         if((String)cbxPays.getValue() != null){
-            System.out.println("hello world !");
             cbxVille.setVisible(true);
             cbxPays.setDisable(true);
             btnVilleDisplay.setVisible(false);
             btnAjoutUneVille.setVisible(true);
             new AutoCompleteBox(cbxVille);
-            ArrayList<String> LesVilles = VilleDAO.getAllVilleNameByPays((String) cbxPays.getValue());
-            ObservableList<String> listVille = FXCollections.observableArrayList();
-            for(String uneVille: LesVilles){
-                listVille.add(uneVille);
-            }
-            cbxVille.setItems(listVille);
+            setListVille();
         }
         else{
             TxtErreur.setVisible(true);
@@ -113,13 +125,35 @@ public class controllerAjoutFichesClients {
                 || inputPrenomContact.getText() != "" || inputTelContact.getText() != "" || inputEmailContact.getText() != ""){
             //Contrôle de saisie : EXIST
             if(LesPays.contains((String) cbxPays.getValue())){
-                if(LesVilles.contains((String) cbxVille.getValue())){
+                if(VilleDAO.getVilleExist((String) cbxVille.getValue())){
                     if(EntrepriseDAO.getEntExist(inputNom.getText())){
-                        int lastIdEnt = EntrepriseDAO.getLastIdEnt() +1;
-                        int idVille = VilleDAO.getIdVilleByName((String) cbxVille.getValue());
-                        Entreprise uneEntreprise = new Entreprise(lastIdEnt, idVille, (String) inputNom.getText(), (String) inputAdresse.getText(), (String) inputTel.getText(), (String) inputEmailEnt.getText());
-                        //TODO créer les objets puis faire la requête pour insérer le loueur
-                        inputChxContacter.isSelected();
+                        //On vérifie si c'est bien un numéro de téléphone
+                        if(inputTel.getText().matches("^[0-9]*$") || inputTelContact.getText().matches("^[0-9]*$")){
+                            //On vérifie si c'est bien un mail
+                            if(inputEmailEnt.getText().matches("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?") || inputEmailContact .getText().matches("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")){
+                                int lastIdEnt = EntrepriseDAO.getLastIdEnt() +1;
+                                int idVille = VilleDAO.getIdVilleByName((String) cbxVille.getValue());
+                                Entreprise uneEntreprise = new Entreprise(lastIdEnt, idVille, (String) inputNom.getText(), (String) inputAdresse.getText(), (String) inputTel.getText(), (String) inputEmailEnt.getText());
+                                EntrepriseDAO.insertEnt(uneEntreprise);
+                                LoueurDTO unLoueur = new LoueurDTO(uneEntreprise.getNum(), uneEntreprise.getNom(), uneEntreprise.getNom(), uneEntreprise.getAdresse(),
+                                        (String) cbxVille.getValue(), (String) cbxPays.getValue(), uneEntreprise.getMail(), uneEntreprise.getTel(),
+                                        ChxContacter.isSelected(),(String) DplTypeInscription.getValue(),
+                                        inputPrenomContact.getText(), inputNomContact.getText(), inputEmailContact.getText(), inputTelContact.getText());
+                                LoueurDAO.insertLoueur(unLoueur);
+                                //Todo le
+                                Stage stage = (Stage) btnEnregistrerClient.getScene().getWindow();
+                                stage.close();
+
+                            }
+                            else{
+                                TxtErreur.setText("Erreur : veuillez entrer une adresse mail valide");
+                                TxtErreur.setVisible(true);
+                            }
+                        }
+                        else{
+                            TxtErreur.setText("Erreur : veuillez entrer un numéro de téléphone valide");
+                            TxtErreur.setVisible(true);
+                        }
                     }
                     else{
                         TxtErreur.setText("Erreur : l'entreprise existe déjà \n veuillez modifier la fiche");

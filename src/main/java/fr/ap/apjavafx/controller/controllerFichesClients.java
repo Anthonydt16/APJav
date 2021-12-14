@@ -26,18 +26,18 @@ public class controllerFichesClients {
     @FXML private Button btnQuitter;
     @FXML private  Button btnAjouter;
 
-    @FXML private TableView<FicheClient> tableListeClient;
-    @FXML private TableColumn<FicheClient, String> collNomEnt;
-    @FXML private TableColumn<FicheClient, String> collAdEnt;
-    @FXML private TableColumn<FicheClient, String> colVillePays;
-    @FXML private TableColumn<FicheClient, String> collTel;
-    @FXML private TableColumn<FicheClient, String> colEmail;
-    @FXML private TableColumn<FicheClient, String> colPrenomNom;
-    @FXML private TableColumn<FicheClient, String> colMailContact;
-    @FXML private TableColumn<FicheClient, String> colTelContact;
+    @FXML private  TableView<FicheClient> tableListeClient;
+    @FXML private  TableColumn<FicheClient, String> collNomEnt;
+    @FXML private  TableColumn<FicheClient, String> collAdEnt;
+    @FXML private  TableColumn<FicheClient, String> colVillePays;
+    @FXML private  TableColumn<FicheClient, String> collTel;
+    @FXML private  TableColumn<FicheClient, String> colEmail;
+    @FXML private  TableColumn<FicheClient, String> colPrenomNom;
+    @FXML private  TableColumn<FicheClient, String> colMailContact;
+    @FXML private  TableColumn<FicheClient, String> colTelContact;
 
 
-    private void remplirTableau() throws SQLException {
+    public void remplirTableau() {
 
         ObservableList<FicheClient> data = FXCollections.observableArrayList();
 
@@ -59,7 +59,6 @@ public class controllerFichesClients {
 
 
         tableListeClient.setItems(data);
-
     }
 
     @FXML
