@@ -96,6 +96,7 @@ public class controllerFichesClients {
         int numEnt = (int) FicheClientDAO.getIdEnt(unFicheClient);
         LoueurDAO.deleteLoueur(numEnt);
         EntrepriseDAO.deleteEnt(numEnt);
+        //TODO Supprimer de la table "contacter"
         remplirTableau();
     }
 }
