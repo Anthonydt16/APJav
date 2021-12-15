@@ -26,4 +26,14 @@ public class LoueurDAO {
             e.printStackTrace();
         }
     }
+
+    public static void deleteLoueur(int idLoueur) {
+        try (PreparedStatement statement = DBConnex.getConnexion().prepareStatement("DELETE FROM loueur WHERE IDENT = ?")) {
+            statement.setInt(1, idLoueur);
+            statement.executeUpdate();
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
 }

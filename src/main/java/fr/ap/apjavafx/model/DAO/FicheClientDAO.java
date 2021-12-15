@@ -1,6 +1,7 @@
 package fr.ap.apjavafx.model.DAO;
 
 import fr.ap.apjavafx.model.DTO.FicheClient;
+import fr.ap.apjavafx.model.DTO.LoueurDTO;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,5 +28,22 @@ public class FicheClientDAO {
             System.out.println(e.getMessage());
         }
         return null;
+    }
+
+    public static int getIdEnt(FicheClient uneFicheClient){
+        int idEnt = 0;
+        try(PreparedStatement statement = DBConnex.getConnexion().prepareStatement("SELECT IDENT AS ident FROM loueur where LOGIN = ?")){
+            statement.setString(1, uneFicheClient.getNomEnt());
+            try(ResultSet result = statement.executeQuery()){
+                if(result.next()){
+                    idEnt = result.getInt("ident");
+                }
+            }
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
+        return idEnt;
     }
 }

@@ -49,5 +49,14 @@ public class EntrepriseDAO {
             e.printStackTrace();
         }
     }
+
+    public static void deleteEnt(int idEnt){
+        try(PreparedStatement statement = DBConnex.getConnexion().prepareStatement("DELETE FROM entreprise WHERE IDENT = ?")){
+            statement.setInt(1, idEnt);
+            statement.executeUpdate();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
 

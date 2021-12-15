@@ -78,7 +78,7 @@ public class controllerAjoutFichesClients {
         DplTypeInscription.setItems(listChoix);
 
         TxtErreur.setVisible(false);
-        btnEnregistrerClient.setOnAction(this::onEnregistrerClient);
+        //btnEnregistrerClient.setOnAction(this::onEnregistrerClient);
         btnVilleDisplay.setOnAction(this::OnVilleDisplay);
         btnRemovePays.setOnAction(this::OnBlankPays);
     }
@@ -119,7 +119,7 @@ public class controllerAjoutFichesClients {
     }
 
     @FXML
-    protected void onEnregistrerClient(ActionEvent e){
+    protected void onEnregistrerClient(ActionEvent e) throws IOException {
         //Contrôle de saisie : NOT NULL
         if(inputNom.getText() != "" || inputAdresse.getText() != "" || cbxVille.getValue() != "" || inputTel.getText() != "" || inputEmailEnt.getText() != "" || inputNomContact.getText() != ""
                 || inputPrenomContact.getText() != "" || inputTelContact.getText() != "" || inputEmailContact.getText() != ""){
@@ -140,9 +140,20 @@ public class controllerAjoutFichesClients {
                                         ChxContacter.isSelected(),(String) DplTypeInscription.getValue(),
                                         inputPrenomContact.getText(), inputNomContact.getText(), inputEmailContact.getText(), inputTelContact.getText());
                                 LoueurDAO.insertLoueur(unLoueur);
-                                //Todo le
+                                //Todo Le changement de scene
+                                FXMLLoader loader1 = new FXMLLoader();
+                                loader1.setLocation(Main.class.getResource("/fxml/view-commerciaux-fiches-clients.fxml"));
+                                Pane ConnexionLayout = (Pane) loader1.load();
+                                Stage ConnexionStage = new Stage();
+                                Scene ConnectScene = new Scene(ConnexionLayout);
+                                ConnexionStage.setScene(ConnectScene);
+
                                 Stage stage = (Stage) btnEnregistrerClient.getScene().getWindow();
                                 stage.close();
+
+                                ConnexionStage.setTitle("Commerciaux - fiches clients");
+                                ConnexionStage.initModality(Modality.APPLICATION_MODAL);
+                                ConnexionStage.show();
 
                             }
                             else{

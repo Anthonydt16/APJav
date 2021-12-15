@@ -95,6 +95,9 @@ public class controllerConnexion implements Initializable {
                 Scene ConnectScene = new Scene(ConnexionLayout);
                 ConnexionStage.setScene(ConnectScene);
 
+                Stage stage = (Stage) btnValider.getScene().getWindow();
+                stage.close();
+
                 ConnexionStage.setTitle("Commerciaux - fiches clients");
                 ConnexionStage.initModality(Modality.APPLICATION_MODAL);
                 ConnexionStage.show();

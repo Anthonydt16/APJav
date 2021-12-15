@@ -1,7 +1,9 @@
 package fr.ap.apjavafx.controller;
 
 import fr.ap.apjavafx.Main;
+import fr.ap.apjavafx.model.DAO.EntrepriseDAO;
 import fr.ap.apjavafx.model.DAO.FicheClientDAO;
+import fr.ap.apjavafx.model.DAO.LoueurDAO;
 import fr.ap.apjavafx.model.DTO.FicheClient;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
@@ -25,6 +28,7 @@ public class controllerFichesClients {
 
     @FXML private Button btnQuitter;
     @FXML private  Button btnAjouter;
+    @FXML private Button btnSupprimer;
 
     @FXML private  TableView<FicheClient> tableListeClient;
     @FXML private  TableColumn<FicheClient, String> collNomEnt;
@@ -45,7 +49,6 @@ public class controllerFichesClients {
 
         for(FicheClient unClients: LesClients){
             data.add(unClients);
-            System.out.println(unClients.getAdresseEnt());
         }
 
         collNomEnt.setCellValueFactory(new PropertyValueFactory<FicheClient,String>("nomEnt"));
@@ -62,8 +65,7 @@ public class controllerFichesClients {
     }
 
     @FXML
-    public void initialize() throws SQLException {
-        System.out.println("Start - Initialize");
+    public void initialize(){
         remplirTableau();
     }
 
@@ -80,11 +82,20 @@ public class controllerFichesClients {
         Scene ConnectScene = new Scene(ConnexionLayout);
         ConnexionStage.setScene(ConnectScene);
 
+        Stage thisOne = (Stage) btnAjouter.getScene().getWindow();
+        thisOne.close();
+
         ConnexionStage.setTitle("Commerciaux - fiches clients");
         ConnexionStage.initModality(Modality.APPLICATION_MODAL);
         ConnexionStage.show();
     }
 
-
-
+    @FXML
+    private void OnRemoveItems(ActionEvent e) throws IOException {
+        FicheClient unFicheClient = tableListeClient.getSelectionModel().getSelectedItem();
+        int numEnt = (int) FicheClientDAO.getIdEnt(unFicheClient);
+        LoueurDAO.deleteLoueur(numEnt);
+        EntrepriseDAO.deleteEnt(numEnt);
+        remplirTableau();
+    }
 }

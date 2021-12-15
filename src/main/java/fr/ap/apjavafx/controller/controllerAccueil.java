@@ -35,10 +35,12 @@ public class controllerAccueil implements Initializable {
         FXMLLoader loader1 = new FXMLLoader();
         loader1.setLocation(Main.class.getResource("/fxml/view-Connexion.fxml"));
         Pane ConnexionLayout = (Pane) loader1.load();
+
         Stage ConnexionStage = new Stage();
         Scene ConnectScene = new Scene(ConnexionLayout);
         ConnexionStage.setScene(ConnectScene);
-
+        Stage AccueilStage = (Stage) inputConnex.getScene().getWindow();
+        AccueilStage.close();
         ConnexionStage.setTitle("Connexion");
         ConnexionStage.initModality(Modality.APPLICATION_MODAL);
         ConnexionStage.show();
