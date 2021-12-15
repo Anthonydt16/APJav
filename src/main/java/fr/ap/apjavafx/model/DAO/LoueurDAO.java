@@ -1,9 +1,12 @@
 package fr.ap.apjavafx.model.DAO;
 
+import fr.ap.apjavafx.model.DTO.FicheClient;
 import fr.ap.apjavafx.model.DTO.LoueurDTO;
 import fr.ap.apjavafx.model.DTO.VilleDTO;
 
 import java.sql.PreparedStatement;
+import java.sql.PseudoColumnUsage;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class LoueurDAO {
@@ -35,5 +38,21 @@ public class LoueurDAO {
         catch (SQLException e){
             e.printStackTrace();
         }
+    }
+
+    public static LoueurDTO loueurByFicheClient(FicheClient uneFiche) throws SQLException {
+        LoueurDTO leLoueur = null;
+        try(PreparedStatement statement = DBConnex.getConnexion().prepareStatement("SELECT loueur.IDENT, loueur.LOGIN,NOM,PRENOM,CONTACTEO_N,TYPEINSCRIPTION,MAILCONTACT,TELCONTACT,loueur.NOMENT, loueur.ADRESSEENT, loueur.TELENT, loueur.EMAIL, NOMVILLE, NOMPAYS FROM loueur, ville, pays, entreprise WHERE loueur.LOGIN = ? AND loueur.IDENT = entreprise.IDENT AND entreprise.IDVILLE = ville.IDVILLE AND ville.IDPAYS = pays.IDPAYS")){
+            statement.setString(1, uneFiche.getNomEnt());
+            try (ResultSet result = statement.executeQuery()) {
+                if (result.next()) {
+                    leLoueur = new LoueurDTO(result.getInt("IDENT"), result.getString("LOGIN"), result.getString("NOMENT"), result.getString("ADRESSEENT"), result.getString("NOMVILLE"), result.getString("NOMPAYS"), result.getString("EMAIL"), result.getString("TELENT"), result.getBoolean("CONTACTEO_N"), result.getString("TYPEINSCRIPTION"), result.getString("PRENOM"), result.getString("NOM"), result.getString("MAILCONTACT"), result.getString("TELCONTACT"));
+                }
+            }
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+        return leLoueur;
     }
 }

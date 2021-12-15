@@ -4,12 +4,14 @@ import fr.ap.apjavafx.Main;
 import fr.ap.apjavafx.model.DAO.EntrepriseDAO;
 import fr.ap.apjavafx.model.DAO.FicheClientDAO;
 import fr.ap.apjavafx.model.DAO.LoueurDAO;
+import fr.ap.apjavafx.model.DTO.Entreprise;
 import fr.ap.apjavafx.model.DTO.FicheClient;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -84,7 +86,6 @@ public class controllerFichesClients {
 
         Stage thisOne = (Stage) btnAjouter.getScene().getWindow();
         thisOne.close();
-
         ConnexionStage.setTitle("Commerciaux - fiches clients");
         ConnexionStage.initModality(Modality.APPLICATION_MODAL);
         ConnexionStage.show();
@@ -96,7 +97,31 @@ public class controllerFichesClients {
         int numEnt = (int) FicheClientDAO.getIdEnt(unFicheClient);
         LoueurDAO.deleteLoueur(numEnt);
         EntrepriseDAO.deleteEnt(numEnt);
-        //TODO Supprimer de la table "contacter"
+        //TODO Supprimer de la table "contacter" + Afficher un message
         remplirTableau();
     }
+
+    @FXML
+    private void OnModifClient(ActionEvent e) throws IOException, SQLException {
+        FicheClient unFicheClient = tableListeClient.getSelectionModel().getSelectedItem();
+        FXMLLoader loader1 = new FXMLLoader();
+        loader1.setLocation(Main.class.getResource("/fxml/view-modifier-fiche-client.fxml"));
+        Pane ConnexionLayout = (Pane) loader1.load();
+        Stage ConnexionStage = new Stage();
+        Scene ConnectScene = new Scene(ConnexionLayout);
+        ConnexionStage.setScene(ConnectScene);
+
+        Stage thisOne = (Stage) btnAjouter.getScene().getWindow();
+        thisOne.close();
+
+        controllerModifFicheClient controller = new controllerModifFicheClient();
+        controller.setUser(unFicheClient);
+        loader1.setController(controller);
+
+        ConnexionStage.setUserData(unFicheClient);
+        ConnexionStage.setTitle("Commerciaux - fiches clients");
+        ConnexionStage.initModality(Modality.APPLICATION_MODAL);
+        ConnexionStage.show();
+    }
+
 }
