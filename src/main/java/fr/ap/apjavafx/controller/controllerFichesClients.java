@@ -6,6 +6,7 @@ import fr.ap.apjavafx.model.DAO.FicheClientDAO;
 import fr.ap.apjavafx.model.DAO.LoueurDAO;
 import fr.ap.apjavafx.model.DTO.Entreprise;
 import fr.ap.apjavafx.model.DTO.FicheClient;
+import fr.ap.apjavafx.model.DTO.LoueurDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,25 +14,26 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TablePosition;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import static fr.ap.apjavafx.model.DAO.LoueurDAO.loueurByFicheClient;
 
 public class controllerFichesClients {
 
     @FXML private Button btnQuitter;
     @FXML private  Button btnAjouter;
     @FXML private Button btnSupprimer;
-
+    @FXML private Text txtErreur;
     @FXML private  TableView<FicheClient> tableListeClient;
     @FXML private  TableColumn<FicheClient, String> collNomEnt;
     @FXML private  TableColumn<FicheClient, String> collAdEnt;
@@ -41,7 +43,7 @@ public class controllerFichesClients {
     @FXML private  TableColumn<FicheClient, String> colPrenomNom;
     @FXML private  TableColumn<FicheClient, String> colMailContact;
     @FXML private  TableColumn<FicheClient, String> colTelContact;
-
+    private static LoueurDTO unLoueur;
 
     public void remplirTableau() {
 
@@ -68,6 +70,7 @@ public class controllerFichesClients {
 
     @FXML
     public void initialize(){
+        txtErreur.setVisible(false);
         remplirTableau();
     }
 
@@ -100,28 +103,37 @@ public class controllerFichesClients {
         //TODO Supprimer de la table "contacter" + Afficher un message
         remplirTableau();
     }
-
     @FXML
     private void OnModifClient(ActionEvent e) throws IOException, SQLException {
         FicheClient unFicheClient = tableListeClient.getSelectionModel().getSelectedItem();
-        FXMLLoader loader1 = new FXMLLoader();
-        loader1.setLocation(Main.class.getResource("/fxml/view-modifier-fiche-client.fxml"));
-        Pane ConnexionLayout = (Pane) loader1.load();
-        Stage ConnexionStage = new Stage();
-        Scene ConnectScene = new Scene(ConnexionLayout);
-        ConnexionStage.setScene(ConnectScene);
+        unLoueur = LoueurDAO.loueurByFicheClient(unFicheClient);
+        if(unFicheClient != null){
+            FXMLLoader loader1 = new FXMLLoader();
+            loader1.setLocation(Main.class.getResource("/fxml/view-modifier-fiche-client.fxml"));
+            Pane ConnexionLayout = (Pane) loader1.load();
+            Stage ConnexionStage = new Stage();
+            Scene ConnectScene = new Scene(ConnexionLayout);
+            ConnexionStage.setScene(ConnectScene);
 
-        Stage thisOne = (Stage) btnAjouter.getScene().getWindow();
-        thisOne.close();
+            Stage thisOne = (Stage) btnAjouter.getScene().getWindow();
+            thisOne.close();
 
-        controllerModifFicheClient controller = new controllerModifFicheClient();
-        controller.setUser(unFicheClient);
-        loader1.setController(controller);
+            controllerModifFicheClient controller = new controllerModifFicheClient();
+            controller.setLoueur(unFicheClient);
+            loader1.setController(controller);
 
-        ConnexionStage.setUserData(unFicheClient);
-        ConnexionStage.setTitle("Commerciaux - fiches clients");
-        ConnexionStage.initModality(Modality.APPLICATION_MODAL);
-        ConnexionStage.show();
+            ConnexionStage.setUserData(unFicheClient);
+            ConnexionStage.setTitle("Commerciaux - fiches clients");
+            ConnexionStage.initModality(Modality.APPLICATION_MODAL);
+            ConnexionStage.show();
+        }
+        else{
+            txtErreur.setVisible(true);
+        }
+    }
+
+    public static LoueurDTO test(){
+        return unLoueur;
     }
 
 }

@@ -40,7 +40,7 @@
     <Text fx:id="textMailEnt" layoutX="25.0" layoutY="321.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email de l'entreprise :" />
     <CheckBox fx:id="ChxContacter" layoutX="566.0" layoutY="244.0" mnemonicParsing="false" text="Contacter" />
     <ChoiceBox fx:id="DplTypeInscription" layoutX="564.0" layoutY="276.0" prefWidth="150.0" />
-    <Text fx:id="TxtErreur" fill="RED" layoutX="286.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Erreur: veuillez remplir tout les champs">
+    <Text fx:id="txtErreur" fill="RED" layoutX="286.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Erreur: veuillez remplir tout les champs">
         <font>
             <Font size="15.0" />
         </font>

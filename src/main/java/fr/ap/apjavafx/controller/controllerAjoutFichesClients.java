@@ -36,6 +36,7 @@ public class controllerAjoutFichesClients {
 
     @FXML
     private Button btnEnregistrerClient;
+    @FXML private Button btnQuitter;
     @FXML private TextField inputNom;
     @FXML private TextField inputAdresse;
     @FXML private ComboBox cbxVille;
@@ -151,7 +152,7 @@ public class controllerAjoutFichesClients {
                                 Stage stage = (Stage) btnEnregistrerClient.getScene().getWindow();
                                 stage.close();
 
-                                ConnexionStage.setTitle("Commerciaux - fiches clients");
+                                ConnexionStage.setTitle("Commerciaux - modifiez fiches clients");
                                 ConnexionStage.initModality(Modality.APPLICATION_MODAL);
                                 ConnexionStage.show();
 
@@ -196,8 +197,29 @@ public class controllerAjoutFichesClients {
         Scene ConnectScene = new Scene(AjoutVilleLayout);
         AjoutVilleStage.setScene(ConnectScene);
 
+        Stage stage = (Stage) btnQuitter.getScene().getWindow();
+        stage.close();
+
         AjoutVilleStage.setTitle("Commerciaux - Ajout ville");
         AjoutVilleStage.initModality(Modality.APPLICATION_MODAL);
         AjoutVilleStage.show();
     }
+
+    @FXML
+    private void OnQuitter() throws IOException{
+        FXMLLoader loader1 = new FXMLLoader();
+        loader1.setLocation(Main.class.getResource("/fxml/view-commerciaux-fiches-clients.fxml"));
+        Pane FicheClientLayout = (Pane) loader1.load();
+        Stage FicheClientStage = new Stage();
+        Scene ConnectScene = new Scene(FicheClientLayout);
+        FicheClientStage.setScene(ConnectScene);
+
+        Stage stage = (Stage) btnQuitter.getScene().getWindow();
+        stage.close();
+
+        FicheClientStage.setTitle("Commerciaux - Liste des fiches clients");
+        FicheClientStage.initModality(Modality.APPLICATION_MODAL);
+        FicheClientStage.show();
+    }
+
 }

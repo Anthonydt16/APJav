@@ -31,7 +31,7 @@
     <Text fx:id="textTelContact1" layoutX="457.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prénom du contact :" />
     <TextField fx:id="inputEmailContact" layoutX="566.0" layoutY="209.0" />
     <Text fx:id="textTelContact2" layoutX="431.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse mail du contact :" />
-    <Button fx:id="btnEnregistrerClient" layoutX="564.0" layoutY="325.0" mnemonicParsing="false" onAction="#onEnregistrerClient" prefHeight="54.0" prefWidth="170.0" text="Enregistrer">
+    <Button fx:id="btnEnregistrerClient" layoutX="362.0" layoutY="334.0" mnemonicParsing="false" onAction="#onEnregistrerClient" prefHeight="54.0" prefWidth="170.0" text="Enregistrer">
         <font>
           <Font size="20.0" />
         </font>
@@ -40,7 +40,7 @@
    <Text fx:id="textPays11" layoutX="25.0" layoutY="321.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email de l'entreprise :" />
    <CheckBox fx:id="ChxContacter" layoutX="566.0" layoutY="244.0" mnemonicParsing="false" text="Contacter" />
    <ChoiceBox fx:id="DplTypeInscription" layoutX="564.0" layoutY="276.0" prefWidth="150.0" />
-   <Text fx:id="TxtErreur" fill="RED" layoutX="286.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Erreur: veuillez remplir tout les champs">
+   <Text fx:id="TxtErreur" fill="RED" layoutX="65.0" layoutY="356.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Erreur: veuillez remplir tout les champs">
       <font>
          <Font size="15.0" />
       </font>
@@ -50,4 +50,9 @@
    <Button fx:id="btnVilleDisplay" layoutX="312.0" layoutY="215.0" mnemonicParsing="false" onAction="#OnVilleDisplay" text="+" />
    <Button fx:id="btnAjoutUneVille" layoutX="308.0" layoutY="215.0" mnemonicParsing="false" onAction="#OnAjoutUneVille" prefHeight="25.0" prefWidth="107.0" text="Ajouter une ville" />
    <Button fx:id="btnRemovePays" layoutX="311.0" layoutY="171.0" mnemonicParsing="false" onAction="#OnBlankPays" text="-" />
+   <Button fx:id="btnQuitter" layoutX="566.0" layoutY="333.0" mnemonicParsing="false" onAction="#OnQuitter" prefHeight="54.0" prefWidth="170.0" text="Quitter">
+      <font>
+         <Font size="20.0" />
+      </font>
+   </Button>
 </AnchorPane>

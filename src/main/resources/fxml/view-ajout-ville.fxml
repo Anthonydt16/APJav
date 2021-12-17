@@ -4,6 +4,8 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -38,11 +40,23 @@
       <TextField fx:id="inputNomVille" layoutX="268.0" layoutY="99.0" />
       <TextField fx:id="inputCodePostal" layoutX="268.0" layoutY="186.0" />
       <ComboBox fx:id="cbxPays" layoutX="268.0" layoutY="142.0" prefWidth="150.0" />
-      <Text fx:id="txtErreur" fill="RED" layoutX="387.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Erreur : un des champs est vide">
+      <Text fx:id="txtErreur" fill="RED" layoutX="14.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Erreur : un des champs est vide">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
       <CheckBox fx:id="chxClose" layoutX="458.0" layoutY="50.0" mnemonicParsing="false" text="Fermer après ajout" />
+      <fx:define>
+         <Image fx:id="btnImage" url="@../image/back.png" />
+      </fx:define>
+      <Button fx:id="btnBack" layoutX="21.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnBack">
+         <graphic>
+            <ImageView fitHeight="38.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/back.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>
