@@ -19,7 +19,6 @@ public class Main extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Main.class.getResource("/fxml/view-Accueil.fxml"));
-			System.out.println(loader.getLocation());
 			rootLayout = loader.load();
 
 			Scene scene = new Scene(rootLayout);

@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -92,6 +93,7 @@ public class controllerConnexion implements Initializable {
                 loader1.setLocation(Main.class.getResource("/fxml/view-commerciaux-fiches-clients.fxml"));
                 Pane ConnexionLayout = (Pane) loader1.load();
                 Stage ConnexionStage = new Stage();
+                ConnexionStage.getIcons().add(new Image("/image/meetingBooking.png"));
                 Scene ConnectScene = new Scene(ConnexionLayout);
                 ConnexionStage.setScene(ConnectScene);
 

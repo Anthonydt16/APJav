@@ -27,7 +27,7 @@
             <Font size="17.0" />
          </font>
       </Text>
-      <Text fx:id="txtCodePostal" layoutX="92.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Code postal du pays :">
+      <Text fx:id="txtCodePostal" layoutX="156.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Code postal :">
          <font>
             <Font size="17.0" />
          </font>
@@ -38,7 +38,7 @@
          </font>
       </Button>
       <TextField fx:id="inputNomVille" layoutX="268.0" layoutY="99.0" />
-      <TextField fx:id="inputCodePostal" layoutX="268.0" layoutY="186.0" />
+      <TextField fx:id="inputCodePostal" layoutX="268.0" layoutY="186.0" promptText="Laissez vide, si inconnu" />
       <ComboBox fx:id="cbxPays" layoutX="268.0" layoutY="142.0" prefWidth="150.0" />
       <Text fx:id="txtErreur" fill="RED" layoutX="14.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Erreur : un des champs est vide">
          <font>

@@ -5,6 +5,8 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -31,7 +33,7 @@
     <Text fx:id="textTelContact1" layoutX="457.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prénom du contact :" />
     <TextField fx:id="inputEmailContact" layoutX="566.0" layoutY="209.0" />
     <Text fx:id="textTelContact2" layoutX="431.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse mail du contact :" />
-    <Button fx:id="btnEnregistrerClient" layoutX="564.0" layoutY="325.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="170.0" text="Enregistrer">
+    <Button fx:id="btnEnregistrerClient" layoutX="554.0" layoutY="325.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="170.0" text="Enregistrer">
         <font>
             <Font size="20.0" />
         </font>
@@ -40,7 +42,7 @@
     <Text fx:id="textMailEnt" layoutX="25.0" layoutY="321.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email de l'entreprise :" />
     <CheckBox fx:id="ChxContacter" layoutX="566.0" layoutY="244.0" mnemonicParsing="false" text="Contacter" />
     <ChoiceBox fx:id="DplTypeInscription" layoutX="564.0" layoutY="276.0" prefWidth="150.0" />
-    <Text fx:id="txtErreur" fill="RED" layoutX="286.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Erreur: veuillez remplir tout les champs">
+    <Text fx:id="txtErreur" fill="RED" layoutX="287.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Erreur: veuillez remplir tout les champs">
         <font>
             <Font size="15.0" />
         </font>
@@ -50,4 +52,16 @@
     <Button fx:id="btnVilleDisplay" layoutX="312.0" layoutY="215.0" mnemonicParsing="false" text="+" />
     <Button fx:id="btnAjoutUneVille" layoutX="308.0" layoutY="215.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Ajouter une ville" />
     <Button fx:id="btnRemovePays" layoutX="311.0" layoutY="171.0" mnemonicParsing="false" text="-" />
+   <Button fx:id="btnQuitter" layoutX="14.0" layoutY="16.0" mnemonicParsing="false" onAction="#OnQuitter" prefHeight="44.0" prefWidth="64.0">
+      <font>
+         <Font size="20.0" />
+      </font>
+      <graphic>
+         <ImageView fitHeight="27.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../image/back.png" />
+            </image>
+         </ImageView>
+      </graphic>
+   </Button>
 </AnchorPane>

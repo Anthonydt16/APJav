@@ -11,25 +11,18 @@ import fr.ap.apjavafx.model.DTO.LoueurDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
-import java.awt.event.WindowEvent;
+
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class controllerAjoutFichesClients {
@@ -54,6 +47,7 @@ public class controllerAjoutFichesClients {
     @FXML private ChoiceBox DplTypeInscription;
     @FXML private Text TxtErreur;
     ArrayList<String> LesPays = PaysDAO.getAllPaysName();
+
     //Je dois instancier la variable "LesVilles" je met France par defaut
     ArrayList<String> LesVilles = VilleDAO.getAllVilleNameByPays("France");
 
@@ -211,6 +205,7 @@ public class controllerAjoutFichesClients {
         loader1.setLocation(Main.class.getResource("/fxml/view-commerciaux-fiches-clients.fxml"));
         Pane FicheClientLayout = (Pane) loader1.load();
         Stage FicheClientStage = new Stage();
+        FicheClientStage.getIcons().add(new Image("/image/meetingBooking.png"));
         Scene ConnectScene = new Scene(FicheClientLayout);
         FicheClientStage.setScene(ConnectScene);
 

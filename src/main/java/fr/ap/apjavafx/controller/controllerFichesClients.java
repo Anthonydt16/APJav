@@ -16,7 +16,9 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -30,9 +32,9 @@ import static fr.ap.apjavafx.model.DAO.LoueurDAO.loueurByFicheClient;
 
 public class controllerFichesClients {
 
-    @FXML private Button btnQuitter;
     @FXML private  Button btnAjouter;
     @FXML private Button btnSupprimer;
+    @FXML private Button btnModifier;
     @FXML private Text txtErreur;
     @FXML private  TableView<FicheClient> tableListeClient;
     @FXML private  TableColumn<FicheClient, String> collNomEnt;
@@ -74,11 +76,6 @@ public class controllerFichesClients {
         remplirTableau();
     }
 
-    public void buttonCloseListeFichesComptableClick(ActionEvent e) {
-        Stage stage = (Stage) btnQuitter.getScene().getWindow();
-        stage.close();
-    }
-
     public void buttonAjouterClients(ActionEvent e) throws IOException {
         FXMLLoader loader1 = new FXMLLoader();
         loader1.setLocation(Main.class.getResource("/fxml/view-ajout-fiches-clients.fxml"));
@@ -97,43 +94,49 @@ public class controllerFichesClients {
     @FXML
     private void OnRemoveItems(ActionEvent e) throws IOException {
         FicheClient unFicheClient = tableListeClient.getSelectionModel().getSelectedItem();
-        int numEnt = (int) FicheClientDAO.getIdEnt(unFicheClient);
-        LoueurDAO.deleteLoueur(numEnt);
-        EntrepriseDAO.deleteEnt(numEnt);
-        //TODO Supprimer de la table "contacter" + Afficher un message
-        remplirTableau();
+        if(unFicheClient != null){
+            int numEnt = (int) FicheClientDAO.getIdEnt(unFicheClient);
+            LoueurDAO.deleteLoueur(numEnt);
+            EntrepriseDAO.deleteEnt(numEnt);
+            //TODO Supprimer de la table "contacter"
+            txtErreur.setVisible(true);
+            txtErreur.setFill(Color.GREEN);
+            txtErreur.setText("Succès : le loueur a été supprimé");
+            remplirTableau();
+        }
+        else {
+            txtErreur.setVisible(true);
+        }
     }
+
     @FXML
     private void OnModifClient(ActionEvent e) throws IOException, SQLException {
         FicheClient unFicheClient = tableListeClient.getSelectionModel().getSelectedItem();
-        unLoueur = LoueurDAO.loueurByFicheClient(unFicheClient);
         if(unFicheClient != null){
             FXMLLoader loader1 = new FXMLLoader();
             loader1.setLocation(Main.class.getResource("/fxml/view-modifier-fiche-client.fxml"));
             Pane ConnexionLayout = (Pane) loader1.load();
             Stage ConnexionStage = new Stage();
+            ConnexionStage.getIcons().add(new Image("/image/meetingBooking.png"));
+
+            controllerModifFicheClient controller = new controllerModifFicheClient();
+            loader1.setController(controller);
+
             Scene ConnectScene = new Scene(ConnexionLayout);
             ConnexionStage.setScene(ConnectScene);
 
-            Stage thisOne = (Stage) btnAjouter.getScene().getWindow();
+            Stage thisOne = (Stage) btnModifier.getScene().getWindow();
             thisOne.close();
-
-            controllerModifFicheClient controller = new controllerModifFicheClient();
-            controller.setLoueur(unFicheClient);
-            loader1.setController(controller);
 
             ConnexionStage.setUserData(unFicheClient);
             ConnexionStage.setTitle("Commerciaux - fiches clients");
             ConnexionStage.initModality(Modality.APPLICATION_MODAL);
             ConnexionStage.show();
+
+            controller.setLoueur(unFicheClient);
         }
         else{
             txtErreur.setVisible(true);
         }
     }
-
-    public static LoueurDTO test(){
-        return unLoueur;
-    }
-
 }
