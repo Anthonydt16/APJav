@@ -1,9 +1,11 @@
 package fr.ap.apjavafx.controller;
 
 import fr.ap.apjavafx.Main;
+import fr.ap.apjavafx.model.DAO.ContacterDAO;
 import fr.ap.apjavafx.model.DAO.EntrepriseDAO;
 import fr.ap.apjavafx.model.DAO.FicheClientDAO;
 import fr.ap.apjavafx.model.DAO.LoueurDAO;
+import fr.ap.apjavafx.model.DTO.ContacterDTO;
 import fr.ap.apjavafx.model.DTO.Entreprise;
 import fr.ap.apjavafx.model.DTO.FicheClient;
 import fr.ap.apjavafx.model.DTO.LoueurDTO;
@@ -42,6 +44,7 @@ public class controllerFichesClients {
     @FXML private  TableColumn<FicheClient, String> colVillePays;
     @FXML private  TableColumn<FicheClient, String> collTel;
     @FXML private  TableColumn<FicheClient, String> colEmail;
+    @FXML private  TableColumn<FicheClient, String> colContacter;
     @FXML private  TableColumn<FicheClient, String> colPrenomNom;
     @FXML private  TableColumn<FicheClient, String> colMailContact;
     @FXML private  TableColumn<FicheClient, String> colTelContact;
@@ -62,10 +65,10 @@ public class controllerFichesClients {
         colVillePays.setCellValueFactory(new PropertyValueFactory<FicheClient, String>("VillePays"));
         collTel.setCellValueFactory(new PropertyValueFactory<FicheClient, String>("telEnt"));
         colEmail.setCellValueFactory(new PropertyValueFactory<FicheClient, String>("emailEnt"));
+        colContacter.setCellValueFactory(new PropertyValueFactory<FicheClient, String>("contacter"));
         colPrenomNom.setCellValueFactory(new PropertyValueFactory<FicheClient, String>("nomPrenomContact"));
         colMailContact.setCellValueFactory(new PropertyValueFactory<FicheClient, String>("mailContact"));
         colTelContact.setCellValueFactory(new PropertyValueFactory<FicheClient, String>("telContact"));
-
 
         tableListeClient.setItems(data);
     }
@@ -81,6 +84,7 @@ public class controllerFichesClients {
         loader1.setLocation(Main.class.getResource("/fxml/view-ajout-fiches-clients.fxml"));
         Pane ConnexionLayout = (Pane) loader1.load();
         Stage ConnexionStage = new Stage();
+        ConnexionStage.getIcons().add(new Image("/image/MB.png"));
         Scene ConnectScene = new Scene(ConnexionLayout);
         ConnexionStage.setScene(ConnectScene);
 
@@ -92,13 +96,13 @@ public class controllerFichesClients {
     }
 
     @FXML
-    private void OnRemoveItems(ActionEvent e) throws IOException {
+    private void OnRemoveItems(ActionEvent e) throws IOException, InterruptedException {
         FicheClient unFicheClient = tableListeClient.getSelectionModel().getSelectedItem();
         if(unFicheClient != null){
             int numEnt = (int) FicheClientDAO.getIdEnt(unFicheClient);
             LoueurDAO.deleteLoueur(numEnt);
             EntrepriseDAO.deleteEnt(numEnt);
-            //TODO Supprimer de la table "contacter"
+            ContacterDAO.removeContacter(numEnt);
             txtErreur.setVisible(true);
             txtErreur.setFill(Color.GREEN);
             txtErreur.setText("Succès : le loueur a été supprimé");
@@ -117,7 +121,7 @@ public class controllerFichesClients {
             loader1.setLocation(Main.class.getResource("/fxml/view-modifier-fiche-client.fxml"));
             Pane ConnexionLayout = (Pane) loader1.load();
             Stage ConnexionStage = new Stage();
-            ConnexionStage.getIcons().add(new Image("/image/meetingBooking.png"));
+            ConnexionStage.getIcons().add(new Image("/image/MB.png"));
 
             controllerModifFicheClient controller = new controllerModifFicheClient();
             loader1.setController(controller);
@@ -134,6 +138,7 @@ public class controllerFichesClients {
             ConnexionStage.show();
 
             controller.setLoueur(unFicheClient);
+            controller.remplirForm();
         }
         else{
             txtErreur.setVisible(true);

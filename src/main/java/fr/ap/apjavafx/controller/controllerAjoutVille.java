@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -73,6 +74,7 @@ public class controllerAjoutVille {
                     loader1.setLocation(Main.class.getResource("/fxml/view-ajout-fiches-clients.fxml"));
                     Pane AjoutVilleLayout = (Pane) loader1.load();
                     Stage AjoutVilleStage = new Stage();
+                    AjoutVilleStage.getIcons().add(new Image("/image/MB.png"));
                     Scene ConnectScene = new Scene(AjoutVilleLayout);
                     AjoutVilleStage.setScene(ConnectScene);
 
@@ -105,6 +107,7 @@ public class controllerAjoutVille {
         loader1.setLocation(Main.class.getResource("/fxml/view-ajout-fiches-clients.fxml"));
         Pane AjoutVilleLayout = (Pane) loader1.load();
         Stage AjoutVilleStage = new Stage();
+        AjoutVilleStage.getIcons().add(new Image("/image/MB.png"));
         Scene ConnectScene = new Scene(AjoutVilleLayout);
         AjoutVilleStage.setScene(ConnectScene);
 

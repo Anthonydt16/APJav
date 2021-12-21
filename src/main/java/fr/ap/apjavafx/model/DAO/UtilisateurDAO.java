@@ -8,6 +8,7 @@ import fr.ap.apjavafx.model.DTO.administrateur;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class UtilisateurDAO {
@@ -112,7 +113,7 @@ public class UtilisateurDAO {
 			return unCommercial;
 		}
 	}
-	public static administrateur statutAdmin(Utilisateur user) throws SQLException {
+	public static administrateur statutAdmin(Utilisateur user){
 		administrateur unAdministrateur = null;
 		try (PreparedStatement statement = DBConnex.getConnexion().prepareStatement("select A.* from utilisateur as U, admin as A where U.login = A.login and U.login = ?")) {
 			statement.setString(1, user.getLOGIN());
@@ -139,4 +140,20 @@ public class UtilisateurDAO {
 			return unAdministrateur;
 		}
 	}
+
+	public static ArrayList<String> getAllCommercial(){
+		ArrayList<String> nomCommerciaux = new ArrayList<>();
+		try (PreparedStatement statement = DBConnex.getConnexion().prepareStatement("SELECT CONCAT(PRENOM, ' ', NOM) AS `PrenomNomContact` FROM commercial ORDER BY PrenomNomContact")){
+			try(ResultSet result = statement.executeQuery()){
+				while(result.next()){
+					nomCommerciaux.add(result.getString("PrenomNomContact"));
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return nomCommerciaux;
+	}
+
 }
+

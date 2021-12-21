@@ -2,10 +2,8 @@ package fr.ap.apjavafx.controller;
 
 import fr.ap.apjavafx.Main;
 import fr.ap.apjavafx.lib.AutoCompleteBox;
-import fr.ap.apjavafx.model.DAO.EntrepriseDAO;
-import fr.ap.apjavafx.model.DAO.LoueurDAO;
-import fr.ap.apjavafx.model.DAO.PaysDAO;
-import fr.ap.apjavafx.model.DAO.VilleDAO;
+import fr.ap.apjavafx.model.DAO.*;
+import fr.ap.apjavafx.model.DTO.ContacterDTO;
 import fr.ap.apjavafx.model.DTO.Entreprise;
 import fr.ap.apjavafx.model.DTO.LoueurDTO;
 import javafx.collections.FXCollections;
@@ -23,7 +21,12 @@ import javafx.stage.Stage;
 
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.chrono.ChronoLocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class controllerAjoutFichesClients {
 
@@ -44,9 +47,12 @@ public class controllerAjoutFichesClients {
     @FXML private TextField inputTelContact;
     @FXML private TextField inputEmailContact;
     @FXML private CheckBox ChxContacter;
+    @FXML private ChoiceBox DplContacter;
+    @FXML private DatePicker dtpDateContacter;
     @FXML private ChoiceBox DplTypeInscription;
     @FXML private Text TxtErreur;
     ArrayList<String> LesPays = PaysDAO.getAllPaysName();
+    ArrayList<String> LesCommerciaux = UtilisateurDAO.getAllCommercial();
 
     //Je dois instancier la variable "LesVilles" je met France par defaut
     ArrayList<String> LesVilles = VilleDAO.getAllVilleNameByPays("France");
@@ -72,8 +78,17 @@ public class controllerAjoutFichesClients {
         listChoix.add("Commercial");
         DplTypeInscription.setItems(listChoix);
 
+        ObservableList<String> listCommerciaux = FXCollections.observableArrayList();
+        for(String unCommerciaux: LesCommerciaux){
+            listCommerciaux.add(unCommerciaux);
+        }
+        DplContacter.setItems(listCommerciaux);
+
+        DplContacter.setDisable(true);
+        dtpDateContacter.setDisable(true);
+
         TxtErreur.setVisible(false);
-        //btnEnregistrerClient.setOnAction(this::onEnregistrerClient);
+
         btnVilleDisplay.setOnAction(this::OnVilleDisplay);
         btnRemovePays.setOnAction(this::OnBlankPays);
     }
@@ -85,6 +100,20 @@ public class controllerAjoutFichesClients {
             listVille.add(uneVille);
         }
         cbxVille.setItems(listVille);
+    }
+
+    @FXML
+    private void OnContacter(ActionEvent e){
+        if(ChxContacter.isSelected()){
+            DplContacter.setDisable(false);
+            dtpDateContacter.setDisable(false);
+        }
+        else{
+            DplContacter.setDisable(true);
+            dtpDateContacter.setDisable(true);
+            DplContacter.setValue(null);
+            dtpDateContacter.setValue(null);
+        }
     }
 
     @FXML
@@ -113,8 +142,15 @@ public class controllerAjoutFichesClients {
         }
     }
 
+    //Permet de convertir un LocalDate en Date via les date sql
+    public Date convertToDateViaSqlDate(LocalDate dateToConvert) {
+        return java.sql.Date.valueOf(dateToConvert);
+    }
+
     @FXML
     protected void onEnregistrerClient(ActionEvent e) throws IOException {
+        Date dateNow = new Date();
+        Date dateSaisie = convertToDateViaSqlDate(dtpDateContacter.getValue());
         //Contrôle de saisie : NOT NULL
         if(inputNom.getText() != "" || inputAdresse.getText() != "" || cbxVille.getValue() != "" || inputTel.getText() != "" || inputEmailEnt.getText() != "" || inputNomContact.getText() != ""
                 || inputPrenomContact.getText() != "" || inputTelContact.getText() != "" || inputEmailContact.getText() != ""){
@@ -124,35 +160,49 @@ public class controllerAjoutFichesClients {
                     if(EntrepriseDAO.getEntExist(inputNom.getText())){
                         //On vérifie si c'est bien un numéro de téléphone
                         if(inputTel.getText().matches("^[0-9]*$") || inputTelContact.getText().matches("^[0-9]*$")){
-                            //On vérifie si c'est bien un mail
-                            if(inputEmailEnt.getText().matches("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?") || inputEmailContact .getText().matches("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")){
-                                int lastIdEnt = EntrepriseDAO.getLastIdEnt() +1;
-                                int idVille = VilleDAO.getIdVilleByName((String) cbxVille.getValue());
-                                Entreprise uneEntreprise = new Entreprise(lastIdEnt, idVille, (String) inputNom.getText(), (String) inputAdresse.getText(), (String) inputTel.getText(), (String) inputEmailEnt.getText());
-                                EntrepriseDAO.insertEnt(uneEntreprise);
-                                LoueurDTO unLoueur = new LoueurDTO(uneEntreprise.getNum(), uneEntreprise.getNom(), uneEntreprise.getNom(), uneEntreprise.getAdresse(),
-                                        (String) cbxVille.getValue(), (String) cbxPays.getValue(), uneEntreprise.getMail(), uneEntreprise.getTel(),
-                                        ChxContacter.isSelected(),(String) DplTypeInscription.getValue(),
-                                        inputPrenomContact.getText(), inputNomContact.getText(), inputEmailContact.getText(), inputTelContact.getText());
-                                LoueurDAO.insertLoueur(unLoueur);
-                                //Todo Le changement de scene
-                                FXMLLoader loader1 = new FXMLLoader();
-                                loader1.setLocation(Main.class.getResource("/fxml/view-commerciaux-fiches-clients.fxml"));
-                                Pane ConnexionLayout = (Pane) loader1.load();
-                                Stage ConnexionStage = new Stage();
-                                Scene ConnectScene = new Scene(ConnexionLayout);
-                                ConnexionStage.setScene(ConnectScene);
+                            //On vérifie si la date saisie est pas après la date d'aujourd'hui
+                            if(dateNow.after(dateSaisie)){
+                                //On vérifie si c'est bien un mail
+                                if (inputEmailEnt.getText().matches("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?") || inputEmailContact.getText().matches("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")) {
+                                    int lastIdEnt = EntrepriseDAO.getLastIdEnt() + 1;
+                                    int idVille = VilleDAO.getIdVilleByName((String) cbxVille.getValue());
+                                    Entreprise uneEntreprise = new Entreprise(lastIdEnt, idVille, (String) inputNom.getText(), (String) inputAdresse.getText(), (String) inputTel.getText(), (String) inputEmailEnt.getText());
+                                    EntrepriseDAO.insertEnt(uneEntreprise);
+                                    //J'ajoute un loueur
+                                    LoueurDTO unLoueur = new LoueurDTO(uneEntreprise.getNum(), uneEntreprise.getNom(), uneEntreprise.getNom(), uneEntreprise.getAdresse(),
+                                            (String) cbxVille.getValue(), (String) cbxPays.getValue(), uneEntreprise.getMail(), uneEntreprise.getTel(),
+                                            ChxContacter.isSelected(), (String) DplTypeInscription.getValue(),
+                                            inputPrenomContact.getText(), inputNomContact.getText(), inputEmailContact.getText(), inputTelContact.getText());
+                                    LoueurDAO.insertLoueur(unLoueur);
 
-                                Stage stage = (Stage) btnEnregistrerClient.getScene().getWindow();
-                                stage.close();
+                                    //Je gère la gestion des commercial chargé de suivre un loueur
+                                    SimpleDateFormat formatter= new SimpleDateFormat("dd/MM/yyyy");
+                                    String dateSaisieString  = formatter.format(dateSaisie);
+                                    String nom = CommercialDAO.getLoginByNom(DplContacter.getValue().toString());
+                                    ContacterDTO contacter = new ContacterDTO(nom , dateSaisieString , lastIdEnt);
+                                    ContacterDAO.insertContacter(contacter);
 
-                                ConnexionStage.setTitle("Commerciaux - modifiez fiches clients");
-                                ConnexionStage.initModality(Modality.APPLICATION_MODAL);
-                                ConnexionStage.show();
+                                    //Je change de scene après l'ajout d'un loueur
+                                    FXMLLoader loader1 = new FXMLLoader();
+                                    loader1.setLocation(Main.class.getResource("/fxml/view-commerciaux-fiches-clients.fxml"));
+                                    Pane ConnexionLayout = (Pane) loader1.load();
+                                    Stage ConnexionStage = new Stage();
+                                    ConnexionStage.getIcons().add(new Image("/image/MB.png"));
+                                    Scene ConnectScene = new Scene(ConnexionLayout);
+                                    ConnexionStage.setScene(ConnectScene);
 
+                                    Stage stage = (Stage) btnEnregistrerClient.getScene().getWindow();
+                                    stage.close();
+
+                                    ConnexionStage.setTitle("Commerciaux - modifiez fiches clients");
+                                    ConnexionStage.initModality(Modality.APPLICATION_MODAL);
+                                    ConnexionStage.show();
+                                } else {
+                                    TxtErreur.setVisible(true);
+                                }
                             }
                             else{
-                                TxtErreur.setText("Erreur : veuillez entrer une adresse mail valide");
+                                TxtErreur.setText("Erreur : la date saisie est pas valide");
                                 TxtErreur.setVisible(true);
                             }
                         }
@@ -188,6 +238,7 @@ public class controllerAjoutFichesClients {
         loader1.setLocation(Main.class.getResource("/fxml/view-ajout-ville.fxml"));
         Pane AjoutVilleLayout = (Pane) loader1.load();
         Stage AjoutVilleStage = new Stage();
+        AjoutVilleStage.getIcons().add(new Image("/image/MB.png"));
         Scene ConnectScene = new Scene(AjoutVilleLayout);
         AjoutVilleStage.setScene(ConnectScene);
 
@@ -205,7 +256,7 @@ public class controllerAjoutFichesClients {
         loader1.setLocation(Main.class.getResource("/fxml/view-commerciaux-fiches-clients.fxml"));
         Pane FicheClientLayout = (Pane) loader1.load();
         Stage FicheClientStage = new Stage();
-        FicheClientStage.getIcons().add(new Image("/image/meetingBooking.png"));
+        FicheClientStage.getIcons().add(new Image("/image/MB.png"));
         Scene ConnectScene = new Scene(FicheClientLayout);
         FicheClientStage.setScene(ConnectScene);
 

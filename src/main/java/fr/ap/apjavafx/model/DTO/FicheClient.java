@@ -6,19 +6,34 @@ public class FicheClient {
     private String VillePays;
     private String telEnt;
     private String emailEnt;
+    private String contacter;
     private String nomPrenomContact;
     private String mailContact;
     private String telContact;
 
-    public FicheClient(String nomEnt, String adresseEnt, String villePays, String telEnt, String emailEnt, String nomPrenomContact, String mailContact, String telContact) {
+    public FicheClient(String nomEnt, String adresseEnt, String villePays, String telEnt, String emailEnt, Boolean contacter,String nomPrenomContact, String mailContact, String telContact) {
         this.nomEnt = nomEnt;
         this.adresseEnt = adresseEnt;
         VillePays = villePays;
         this.telEnt = telEnt;
         this.emailEnt = emailEnt;
+        if(contacter == true){
+            this.contacter = "oui";
+        }
+        else{
+            this.contacter = "non";
+        }
         this.nomPrenomContact = nomPrenomContact;
         this.mailContact = mailContact;
         this.telContact = telContact;
+    }
+
+    public String getContacter() {
+        return contacter;
+    }
+
+    public void setContacter(String contacter) {
+        this.contacter = contacter;
     }
 
     public String getNomEnt() {

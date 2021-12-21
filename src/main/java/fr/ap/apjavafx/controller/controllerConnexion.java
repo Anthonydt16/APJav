@@ -93,7 +93,7 @@ public class controllerConnexion implements Initializable {
                 loader1.setLocation(Main.class.getResource("/fxml/view-commerciaux-fiches-clients.fxml"));
                 Pane ConnexionLayout = (Pane) loader1.load();
                 Stage ConnexionStage = new Stage();
-                ConnexionStage.getIcons().add(new Image("/image/meetingBooking.png"));
+                ConnexionStage.getIcons().add(new Image("/image/MB.png"));
                 Scene ConnectScene = new Scene(ConnexionLayout);
                 ConnexionStage.setScene(ConnectScene);
 

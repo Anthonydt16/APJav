@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
@@ -37,6 +38,7 @@ public class controllerAccueil implements Initializable {
         Pane ConnexionLayout = (Pane) loader1.load();
 
         Stage ConnexionStage = new Stage();
+        ConnexionStage.getIcons().add(new Image("/image/MB.png"));
         Scene ConnectScene = new Scene(ConnexionLayout);
         ConnexionStage.setScene(ConnectScene);
         Stage AccueilStage = (Stage) inputConnex.getScene().getWindow();
@@ -51,6 +53,7 @@ public class controllerAccueil implements Initializable {
         loader.setLocation(Main.class.getResource("/fxml/view-Inscription.fxml"));
         Pane InscriptionLayout = (Pane) loader.load();
         Stage InscriptionStage = new Stage();
+        InscriptionStage.getIcons().add(new Image("/image/MB.png"));
         Scene InscriptionScene = new Scene(InscriptionLayout);
         InscriptionStage.setScene(InscriptionScene);
 

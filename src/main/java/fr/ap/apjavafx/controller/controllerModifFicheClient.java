@@ -54,8 +54,6 @@ public class controllerModifFicheClient {
     public FicheClient uneNouvelleFC;
     LoueurDTO unLoueur;
 
-
-
     @FXML
     public void initialize(){
         txtErreur.setVisible(false);
@@ -81,7 +79,7 @@ public class controllerModifFicheClient {
         loader1.setLocation(Main.class.getResource("/fxml/view-commerciaux-fiches-clients.fxml"));
         Pane FicheClientLayout = (Pane) loader1.load();
         Stage FicheClientStage = new Stage();
-        FicheClientStage.getIcons().add(new Image("/image/meetingBooking.png"));
+        FicheClientStage.getIcons().add(new Image("/image/MB.png"));
         Scene ConnectScene = new Scene(FicheClientLayout);
         FicheClientStage.setScene(ConnectScene);
 
