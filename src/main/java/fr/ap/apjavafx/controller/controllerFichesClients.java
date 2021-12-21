@@ -48,7 +48,7 @@ public class controllerFichesClients {
     @FXML private  TableColumn<FicheClient, String> colPrenomNom;
     @FXML private  TableColumn<FicheClient, String> colMailContact;
     @FXML private  TableColumn<FicheClient, String> colTelContact;
-    private static LoueurDTO unLoueur;
+    public static FicheClient rowData;
 
     public void remplirTableau() {
 
@@ -73,10 +73,43 @@ public class controllerFichesClients {
         tableListeClient.setItems(data);
     }
 
+    public static FicheClient getRowData(){
+        return rowData;
+    }
+
     @FXML
     public void initialize(){
         txtErreur.setVisible(false);
         remplirTableau();
+        btnSupprimer.setOnAction(this::OnRemoveItems);
+
+        tableListeClient.setRowFactory(tv -> {
+            TableRow<FicheClient> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    rowData = row.getItem();
+                    FXMLLoader loader1 = new FXMLLoader();
+                    loader1.setLocation(Main.class.getResource("/fxml/view-liste-lieux.fxml"));
+                    Pane ConnexionLayout = null;
+                    try {
+                        ConnexionLayout = (Pane) loader1.load();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Stage ConnexionStage = new Stage();
+                    ConnexionStage.getIcons().add(new Image("/image/MB.png"));
+                    Scene ConnectScene = new Scene(ConnexionLayout);
+                    ConnexionStage.setScene(ConnectScene);
+
+                    Stage thisOne = (Stage) btnAjouter.getScene().getWindow();
+                    thisOne.close();
+                    ConnexionStage.setTitle("Commerciaux - liste des lieux pour un client");
+                    ConnexionStage.initModality(Modality.APPLICATION_MODAL);
+                    ConnexionStage.show();
+                }
+            });
+            return row;
+        });
     }
 
     public void buttonAjouterClients(ActionEvent e) throws IOException {
@@ -96,7 +129,7 @@ public class controllerFichesClients {
     }
 
     @FXML
-    private void OnRemoveItems(ActionEvent e) throws IOException, InterruptedException {
+    private void OnRemoveItems(ActionEvent e){
         FicheClient unFicheClient = tableListeClient.getSelectionModel().getSelectedItem();
         if(unFicheClient != null){
             int numEnt = (int) FicheClientDAO.getIdEnt(unFicheClient);
