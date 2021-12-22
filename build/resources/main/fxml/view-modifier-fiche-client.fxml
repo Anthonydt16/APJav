@@ -4,6 +4,7 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -11,8 +12,8 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="modifFicheClientPane" prefHeight="401.0" prefWidth="778.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.ap.apjavafx.controller.controllerModifFicheClient">
-    <Text layoutX="215.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modification d'une fiche client">
+<AnchorPane fx:id="modifFicheClientPane" prefHeight="427.0" prefWidth="778.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.ap.apjavafx.controller.controllerModifFicheClient">
+    <Text layoutX="215.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modification d'une fiche client">
         <font>
             <Font size="25.0" />
         </font>
@@ -25,33 +26,33 @@
     <Text fx:id="textPays" layoutX="41.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pays de l'entreprise :" />
     <TextField fx:id="inputTel" layoutX="154.0" layoutY="263.0" />
     <Text fx:id="textNumTel" layoutX="25.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numéro de téléphone :" />
-    <TextField fx:id="inputNomContact" layoutX="566.0" layoutY="86.0" />
-    <Text fx:id="textNomContact" layoutX="473.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom du contact :" />
-    <TextField fx:id="inputTelContact" layoutX="566.0" layoutY="171.0" />
-    <Text fx:id="textTelContact" layoutX="382.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numéro de téléphone du contact :" />
-    <TextField fx:id="inputPrenomContact" layoutX="566.0" layoutY="130.0" />
-    <Text fx:id="textTelContact1" layoutX="457.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prénom du contact :" />
-    <TextField fx:id="inputEmailContact" layoutX="566.0" layoutY="209.0" />
-    <Text fx:id="textTelContact2" layoutX="431.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse mail du contact :" />
-    <Button fx:id="btnEnregistrerClient" layoutX="554.0" layoutY="325.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="170.0" text="Enregistrer">
+    <TextField fx:id="inputNomContact" layoutX="566.0" layoutY="59.0" />
+    <Text fx:id="textNomContact" layoutX="473.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom du contact :" />
+    <TextField fx:id="inputTelContact" layoutX="566.0" layoutY="144.0" />
+    <Text fx:id="textTelContact" layoutX="382.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numéro de téléphone du contact :" />
+    <TextField fx:id="inputPrenomContact" layoutX="566.0" layoutY="103.0" />
+    <Text fx:id="textTelContact1" layoutX="457.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prénom du contact :" />
+    <TextField fx:id="inputEmailContact" layoutX="566.0" layoutY="182.0" />
+    <Text fx:id="textTelContact2" layoutX="431.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse mail du contact :" />
+    <Button fx:id="btnEnregistrerClient" layoutX="556.0" layoutY="359.0" mnemonicParsing="false" onAction="#onEnregistrerClient" prefHeight="54.0" prefWidth="170.0" text="Enregistrer">
         <font>
             <Font size="20.0" />
         </font>
     </Button>
     <TextField fx:id="inputEmailEnt" layoutX="154.0" layoutY="304.0" />
     <Text fx:id="textMailEnt" layoutX="25.0" layoutY="321.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email de l'entreprise :" />
-    <CheckBox fx:id="ChxContacter" layoutX="566.0" layoutY="244.0" mnemonicParsing="false" text="Contacter" />
-    <ChoiceBox fx:id="DplTypeInscription" layoutX="564.0" layoutY="276.0" prefWidth="150.0" />
-    <Text fx:id="txtErreur" fill="RED" layoutX="287.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Erreur: veuillez remplir tout les champs">
+    <CheckBox fx:id="ChxContacter" layoutX="566.0" layoutY="217.0" mnemonicParsing="false" onAction="#OnContacter" text="Contacter" />
+    <ChoiceBox fx:id="DplTypeInscription" layoutX="564.0" layoutY="317.0" prefWidth="150.0" />
+    <Text fx:id="txtErreur" fill="RED" layoutX="289.0" layoutY="392.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Erreur: veuillez remplir tout les champs">
         <font>
             <Font size="15.0" />
         </font>
     </Text>
     <ComboBox fx:id="cbxPays" layoutX="154.0" layoutY="171.0" prefWidth="150.0" />
     <ComboBox fx:id="cbxVille" layoutX="153.0" layoutY="215.0" prefWidth="150.0" />
-    <Button fx:id="btnVilleDisplay" layoutX="312.0" layoutY="215.0" mnemonicParsing="false" text="+" />
-    <Button fx:id="btnAjoutUneVille" layoutX="308.0" layoutY="215.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Ajouter une ville" />
-    <Button fx:id="btnRemovePays" layoutX="311.0" layoutY="171.0" mnemonicParsing="false" text="-" />
+    <Button fx:id="btnVilleDisplay" layoutX="312.0" layoutY="215.0" mnemonicParsing="false" onAction="#OnVilleDisplay" text="+" />
+    <Button fx:id="btnAjoutUneVille" layoutX="311.0" layoutY="215.0" mnemonicParsing="false" onAction="#OnAjoutUneVille" prefHeight="25.0" prefWidth="107.0" text="Ajouter une ville" />
+    <Button fx:id="btnRemovePays" layoutX="311.0" layoutY="171.0" mnemonicParsing="false" onAction="#OnBlankPays" text="-" />
    <Button fx:id="btnQuitter" layoutX="14.0" layoutY="16.0" mnemonicParsing="false" onAction="#OnQuitter" prefHeight="44.0" prefWidth="64.0">
       <font>
          <Font size="20.0" />
@@ -64,4 +65,9 @@
          </ImageView>
       </graphic>
    </Button>
+   <Text layoutX="480.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inscrit depuis :" />
+   <DatePicker fx:id="dtpDateContacter" layoutX="563.0" layoutY="281.0" />
+   <Text layoutX="485.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contacter le :" />
+   <ChoiceBox fx:id="DplContacter" layoutX="564.0" layoutY="246.0" prefWidth="150.0" />
+   <Text layoutX="480.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contacter par :" />
 </AnchorPane>

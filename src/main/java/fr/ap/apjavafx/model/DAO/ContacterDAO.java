@@ -2,8 +2,10 @@ package fr.ap.apjavafx.model.DAO;
 
 import fr.ap.apjavafx.model.DTO.ContacterDTO;
 import fr.ap.apjavafx.model.DTO.Entreprise;
+import fr.ap.apjavafx.model.DTO.LoueurDTO;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ContacterDAO {
@@ -26,6 +28,21 @@ public class ContacterDAO {
         catch (SQLException e){
             e.printStackTrace();
         }
+    }
+
+    public static ContacterDTO getContacterByIdEnt(LoueurDTO unLoueur){
+        ContacterDTO contacter = null;
+        try(PreparedStatement statement = DBConnex.getConnexion().prepareStatement("SELECT LOGIN, DATECONTACT, IDENT FROM contacter WHERE IDENT = ?")){
+            statement.setInt(1, unLoueur.getIdEnt());
+            try(ResultSet result = statement.executeQuery()){
+                if(result.next()){
+                    contacter = new ContacterDTO(result.getString("LOGIN"), result.getString("DATECONTACT"), result.getInt("IDENT"));
+                }
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return contacter;
     }
 
 }

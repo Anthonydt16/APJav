@@ -7,11 +7,12 @@ public class FicheClient {
     private String telEnt;
     private String emailEnt;
     private String contacter;
+    private String inscription;
     private String nomPrenomContact;
     private String mailContact;
     private String telContact;
 
-    public FicheClient(String nomEnt, String adresseEnt, String villePays, String telEnt, String emailEnt, Boolean contacter,String nomPrenomContact, String mailContact, String telContact) {
+    public FicheClient(String nomEnt, String adresseEnt, String villePays, String telEnt, String emailEnt, Boolean contacter, String inscription,String nomPrenomContact, String mailContact, String telContact) {
         this.nomEnt = nomEnt;
         this.adresseEnt = adresseEnt;
         VillePays = villePays;
@@ -23,6 +24,7 @@ public class FicheClient {
         else{
             this.contacter = "non";
         }
+        this.inscription = inscription;
         this.nomPrenomContact = nomPrenomContact;
         this.mailContact = mailContact;
         this.telContact = telContact;

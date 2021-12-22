@@ -56,6 +56,7 @@ public class controllerAjoutFichesClients {
 
     //Je dois instancier la variable "LesVilles" je met France par defaut
     ArrayList<String> LesVilles = VilleDAO.getAllVilleNameByPays("France");
+    ObservableList<String> listChoix = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() throws IOException {
@@ -73,9 +74,8 @@ public class controllerAjoutFichesClients {
         }
         cbxPays.setItems(listPays);
 
-        ObservableList<String> listChoix = FXCollections.observableArrayList();
+
         listChoix.add("Site");
-        listChoix.add("Commercial");
         DplTypeInscription.setItems(listChoix);
 
         ObservableList<String> listCommerciaux = FXCollections.observableArrayList();
@@ -107,12 +107,17 @@ public class controllerAjoutFichesClients {
         if(ChxContacter.isSelected()){
             DplContacter.setDisable(false);
             dtpDateContacter.setDisable(false);
+            listChoix.add("Commercial");
+            DplTypeInscription.setItems(listChoix);
         }
         else{
             DplContacter.setDisable(true);
             dtpDateContacter.setDisable(true);
             DplContacter.setValue(null);
             dtpDateContacter.setValue(null);
+            listChoix.remove("Commercial");
+            DplTypeInscription.setItems(listChoix);
+            DplTypeInscription.setValue("Site");
         }
     }
 
@@ -149,8 +154,6 @@ public class controllerAjoutFichesClients {
 
     @FXML
     protected void onEnregistrerClient(ActionEvent e) throws IOException {
-        Date dateNow = new Date();
-        Date dateSaisie = convertToDateViaSqlDate(dtpDateContacter.getValue());
         //Contrôle de saisie : NOT NULL
         if(inputNom.getText() != "" || inputAdresse.getText() != "" || cbxVille.getValue() != "" || inputTel.getText() != "" || inputEmailEnt.getText() != "" || inputNomContact.getText() != ""
                 || inputPrenomContact.getText() != "" || inputTelContact.getText() != "" || inputEmailContact.getText() != ""){
@@ -160,54 +163,59 @@ public class controllerAjoutFichesClients {
                     if(EntrepriseDAO.getEntExist(inputNom.getText())){
                         //On vérifie si c'est bien un numéro de téléphone
                         if(inputTel.getText().matches("^[0-9]*$") || inputTelContact.getText().matches("^[0-9]*$")){
-                            //On vérifie si la date saisie est pas après la date d'aujourd'hui
-                            if(dateNow.after(dateSaisie)){
-                                //On vérifie si c'est bien un mail
-                                if (inputEmailEnt.getText().matches("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?") || inputEmailContact.getText().matches("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")) {
-                                    int lastIdEnt = EntrepriseDAO.getLastIdEnt() + 1;
-                                    int idVille = VilleDAO.getIdVilleByName((String) cbxVille.getValue());
-                                    Entreprise uneEntreprise = new Entreprise(lastIdEnt, idVille, (String) inputNom.getText(), (String) inputAdresse.getText(), (String) inputTel.getText(), (String) inputEmailEnt.getText());
-                                    EntrepriseDAO.insertEnt(uneEntreprise);
-                                    //J'ajoute un loueur
-                                    LoueurDTO unLoueur = new LoueurDTO(uneEntreprise.getNum(), uneEntreprise.getNom(), uneEntreprise.getNom(), uneEntreprise.getAdresse(),
-                                            (String) cbxVille.getValue(), (String) cbxPays.getValue(), uneEntreprise.getMail(), uneEntreprise.getTel(),
-                                            ChxContacter.isSelected(), (String) DplTypeInscription.getValue(),
-                                            inputPrenomContact.getText(), inputNomContact.getText(), inputEmailContact.getText(), inputTelContact.getText());
-                                    LoueurDAO.insertLoueur(unLoueur);
+                            //On vérifie si c'est bien un mail
+                            if (inputEmailEnt.getText().matches("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?") || inputEmailContact.getText().matches("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")) {
+                                int lastIdEnt = EntrepriseDAO.getLastIdEnt() + 1;
+                                int idVille = VilleDAO.getIdVilleByName((String) cbxVille.getValue());
+                                Entreprise uneEntreprise = new Entreprise(lastIdEnt, idVille, (String) inputNom.getText(), (String) inputAdresse.getText(), (String) inputTel.getText(), (String) inputEmailEnt.getText());
+                                EntrepriseDAO.insertEnt(uneEntreprise);
+                                //J'ajoute un loueur
+                                LoueurDTO unLoueur = new LoueurDTO(uneEntreprise.getNum(), uneEntreprise.getNom(), uneEntreprise.getNom(), uneEntreprise.getAdresse(),
+                                        (String) cbxVille.getValue(), (String) cbxPays.getValue(), uneEntreprise.getMail(), uneEntreprise.getTel(),
+                                        ChxContacter.isSelected(), (String) DplTypeInscription.getValue(),
+                                        inputPrenomContact.getText(), inputNomContact.getText(), inputEmailContact.getText(), inputTelContact.getText());
+                                LoueurDAO.insertLoueur(unLoueur);
 
-                                    //Je gère la gestion des commercial chargé de suivre un loueur
-                                    SimpleDateFormat formatter= new SimpleDateFormat("dd/MM/yyyy");
-                                    String dateSaisieString  = formatter.format(dateSaisie);
-                                    String nom = CommercialDAO.getLoginByNom(DplContacter.getValue().toString());
-                                    ContacterDTO contacter = new ContacterDTO(nom , dateSaisieString , lastIdEnt);
-                                    ContacterDAO.insertContacter(contacter);
-
-                                    //Je change de scene après l'ajout d'un loueur
-                                    FXMLLoader loader1 = new FXMLLoader();
-                                    loader1.setLocation(Main.class.getResource("/fxml/view-commerciaux-fiches-clients.fxml"));
-                                    Pane ConnexionLayout = (Pane) loader1.load();
-                                    Stage ConnexionStage = new Stage();
-                                    ConnexionStage.getIcons().add(new Image("/image/MB.png"));
-                                    Scene ConnectScene = new Scene(ConnexionLayout);
-                                    ConnexionStage.setScene(ConnectScene);
-
-                                    Stage stage = (Stage) btnEnregistrerClient.getScene().getWindow();
-                                    stage.close();
-
-                                    ConnexionStage.setTitle("Commerciaux - modifiez fiches clients");
-                                    ConnexionStage.initModality(Modality.APPLICATION_MODAL);
-                                    ConnexionStage.show();
-                                } else {
-                                    TxtErreur.setVisible(true);
+                                if(ChxContacter.isSelected()){
+                                    Date dateNow = new Date();
+                                    Date dateSaisie = convertToDateViaSqlDate(dtpDateContacter.getValue());
+                                    //On vérifie si la date saisie est pas après la date d'aujourd'hui
+                                    if(dateNow.after(dateSaisie)){
+                                        //Je gère la gestion des commercial chargé de suivre un loueur
+                                        SimpleDateFormat formatter= new SimpleDateFormat("dd/MM/yyyy");
+                                        String dateSaisieString  = formatter.format(dateSaisie);
+                                        String nom = CommercialDAO.getLoginByNom(DplContacter.getValue().toString());
+                                        ContacterDTO contacter = new ContacterDTO(nom , dateSaisieString , lastIdEnt);
+                                        ContacterDAO.insertContacter(contacter);
+                                    }
+                                    else{
+                                        TxtErreur.setText("Erreur : la date saisie est pas valide");
+                                        TxtErreur.setVisible(true);
+                                    }
                                 }
-                            }
-                            else{
-                                TxtErreur.setText("Erreur : la date saisie est pas valide");
+
+                                //Je change de scene après l'ajout d'un loueur
+                                FXMLLoader loader1 = new FXMLLoader();
+                                loader1.setLocation(Main.class.getResource("/fxml/view-commerciaux-fiches-clients.fxml"));
+                                Pane ConnexionLayout = (Pane) loader1.load();
+                                Stage ConnexionStage = new Stage();
+                                ConnexionStage.getIcons().add(new Image("/image/MB.png"));
+                                Scene ConnectScene = new Scene(ConnexionLayout);
+                                ConnexionStage.setScene(ConnectScene);
+
+                                Stage stage = (Stage) btnEnregistrerClient.getScene().getWindow();
+                                stage.close();
+
+                                ConnexionStage.setTitle("Commerciaux - modifiez fiches clients");
+                                ConnexionStage.initModality(Modality.APPLICATION_MODAL);
+                                ConnexionStage.show();
+                            } else {
+                                TxtErreur.setText("Erreur : veuillez entrer une adresse \n email valide");
                                 TxtErreur.setVisible(true);
                             }
                         }
                         else{
-                            TxtErreur.setText("Erreur : veuillez entrer un numéro de téléphone valide");
+                            TxtErreur.setText("Erreur : veuillez entrer un numéro \n de téléphone valide");
                             TxtErreur.setVisible(true);
                         }
                     }

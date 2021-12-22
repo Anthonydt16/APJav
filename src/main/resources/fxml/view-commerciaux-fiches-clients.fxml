@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="fichesClientsPane" prefHeight="573.0" prefWidth="985.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.ap.apjavafx.controller.controllerFichesClients">
+<AnchorPane fx:id="fichesClientsPane" prefHeight="573.0" prefWidth="1070.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.ap.apjavafx.controller.controllerFichesClients">
     <Pane layoutX="-29.0" layoutY="-83.0" prefHeight="200.0" prefWidth="80.0">
       <children>
          <ImageView fitHeight="35.0" fitWidth="15.0" layoutX="58.0" layoutY="133.0" pickOnBounds="true" preserveRatio="true">
@@ -19,7 +19,7 @@
             </image>
          </ImageView>
       </children></Pane>
-    <TableView fx:id="tableListeClient" layoutX="29.0" layoutY="65.0" prefHeight="400.0" prefWidth="927.0">
+    <TableView fx:id="tableListeClient" layoutX="29.0" layoutY="65.0" prefHeight="400.0" prefWidth="1014.0">
         <columns>
             <TableColumn fx:id="collNomEnt" prefWidth="130.0" text="Nom de l'entreprise" />
             <TableColumn fx:id="collAdEnt" prefWidth="108.0" text="Adresse de l'entreprise" />
@@ -27,9 +27,10 @@
             <TableColumn fx:id="collTel" prefWidth="117.0" text="N° de téléphone" />
          <TableColumn fx:id="colEmail" editable="false" prefWidth="101.0" sortable="false" text="Email" />
          <TableColumn fx:id="colContacter" editable="false" prefWidth="69.0" sortable="false" text="Contacter?" />
+         <TableColumn fx:id="colInscription" editable="false" prefWidth="95.0" sortable="false" text="Inscription" />
          <TableColumn fx:id="colPrenomNom" editable="false" prefWidth="99.0" sortable="false" text="Nom Prénom du contact" />
          <TableColumn fx:id="colMailContact" editable="false" prefWidth="98.0" sortable="false" text="Mail du contact" />
-         <TableColumn fx:id="colTelContact" editable="false" prefWidth="117.0" sortable="false" text="N° de téléphone du contact" />
+         <TableColumn fx:id="colTelContact" editable="false" prefWidth="109.0" sortable="false" text="N° de téléphone du contact" />
         </columns>
     </TableView>
    <Button id="btnAjouter" fx:id="btnAjouter" layoutX="29.0" layoutY="503.0" mnemonicParsing="false" onAction="#buttonAjouterClients" prefHeight="52.0" prefWidth="230.0" text="Ajouter">
@@ -43,7 +44,7 @@
             </image>
          </ImageView>
       </graphic></Button>
-   <Button fx:id="btnSupprimer" layoutX="726.0" layoutY="503.0" mnemonicParsing="false" onAction="#OnRemoveItems" prefHeight="52.0" prefWidth="230.0" text="Supprimer">
+   <Button fx:id="btnSupprimer" layoutX="813.0" layoutY="503.0" mnemonicParsing="false" onAction="#OnRemoveItems" prefHeight="52.0" prefWidth="230.0" text="Supprimer">
       <font>
          <Font size="25.0" />
       </font>
@@ -54,7 +55,7 @@
             </image>
          </ImageView>
       </graphic></Button>
-   <Button fx:id="btnModifier" layoutX="378.0" layoutY="503.0" mnemonicParsing="false" onAction="#OnModifClient" prefHeight="52.0" prefWidth="230.0" text="Modifier">
+   <Button fx:id="btnModifier" layoutX="437.0" layoutY="503.0" mnemonicParsing="false" onAction="#OnModifClient" prefHeight="52.0" prefWidth="230.0" text="Modifier">
       <font>
          <Font size="25.0" />
       </font>
@@ -66,12 +67,12 @@
          </ImageView>
       </graphic>
    </Button>
-   <Text fx:id="txtErreur" fill="RED" layoutX="337.0" layoutY="489.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Erreur : Veuillez sélectionner une fiche client">
+   <Text fx:id="txtErreur" fill="RED" layoutX="387.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Erreur : Veuillez sélectionner une fiche client">
       <font>
          <Font size="17.0" />
       </font>
    </Text>
-   <Text fx:id="textTitre" layoutX="353.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion des loueurs">
+   <Text fx:id="textTitre" layoutX="413.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion des loueurs">
       <font>
          <Font size="32.0" />
       </font>

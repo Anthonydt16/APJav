@@ -36,15 +36,6 @@ public class LoueurDTO {
         this.telContact = telContact;
     }
 
-    public LoueurDTO(String login, String nom, Boolean contacter, String typeInscription, String mailContact, String telContact){
-        this.login = login;
-        this.nom = nom;
-        this.contacter = contacter;
-        this.typeInscription = typeInscription;
-        this.telContact = telContact;
-        this.mailContact = mailContact;
-    }
-
     public String getMail() {
         return mail;
     }

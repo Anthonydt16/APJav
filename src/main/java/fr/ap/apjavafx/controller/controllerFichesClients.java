@@ -45,10 +45,12 @@ public class controllerFichesClients {
     @FXML private  TableColumn<FicheClient, String> collTel;
     @FXML private  TableColumn<FicheClient, String> colEmail;
     @FXML private  TableColumn<FicheClient, String> colContacter;
+    @FXML private TableColumn<FicheClient, String> colInscription;
     @FXML private  TableColumn<FicheClient, String> colPrenomNom;
     @FXML private  TableColumn<FicheClient, String> colMailContact;
     @FXML private  TableColumn<FicheClient, String> colTelContact;
     public static FicheClient rowData;
+    public static FicheClient unFicheClient;
 
     public void remplirTableau() {
 
@@ -66,6 +68,7 @@ public class controllerFichesClients {
         collTel.setCellValueFactory(new PropertyValueFactory<FicheClient, String>("telEnt"));
         colEmail.setCellValueFactory(new PropertyValueFactory<FicheClient, String>("emailEnt"));
         colContacter.setCellValueFactory(new PropertyValueFactory<FicheClient, String>("contacter"));
+        colInscription.setCellValueFactory(new PropertyValueFactory<FicheClient, String>("inscription"));
         colPrenomNom.setCellValueFactory(new PropertyValueFactory<FicheClient, String>("nomPrenomContact"));
         colMailContact.setCellValueFactory(new PropertyValueFactory<FicheClient, String>("mailContact"));
         colTelContact.setCellValueFactory(new PropertyValueFactory<FicheClient, String>("telContact"));
@@ -146,18 +149,19 @@ public class controllerFichesClients {
         }
     }
 
+    public static FicheClient getUnFicheClient(){
+        return unFicheClient;
+    }
+
     @FXML
     private void OnModifClient(ActionEvent e) throws IOException, SQLException {
-        FicheClient unFicheClient = tableListeClient.getSelectionModel().getSelectedItem();
+        unFicheClient = tableListeClient.getSelectionModel().getSelectedItem();
         if(unFicheClient != null){
             FXMLLoader loader1 = new FXMLLoader();
             loader1.setLocation(Main.class.getResource("/fxml/view-modifier-fiche-client.fxml"));
             Pane ConnexionLayout = (Pane) loader1.load();
             Stage ConnexionStage = new Stage();
             ConnexionStage.getIcons().add(new Image("/image/MB.png"));
-
-            controllerModifFicheClient controller = new controllerModifFicheClient();
-            loader1.setController(controller);
 
             Scene ConnectScene = new Scene(ConnexionLayout);
             ConnexionStage.setScene(ConnectScene);
@@ -169,9 +173,6 @@ public class controllerFichesClients {
             ConnexionStage.setTitle("Commerciaux - fiches clients");
             ConnexionStage.initModality(Modality.APPLICATION_MODAL);
             ConnexionStage.show();
-
-            controller.setLoueur(unFicheClient);
-            controller.remplirForm();
         }
         else{
             txtErreur.setVisible(true);

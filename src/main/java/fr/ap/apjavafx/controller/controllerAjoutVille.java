@@ -71,7 +71,7 @@ public class controllerAjoutVille {
                 }
                 if(chxClose.isSelected()){
                     FXMLLoader loader1 = new FXMLLoader();
-                    loader1.setLocation(Main.class.getResource("/fxml/view-ajout-fiches-clients.fxml"));
+                    loader1.setLocation(Main.class.getResource("/fxml/view-commerciaux-fiches-clients.fxml"));
                     Pane AjoutVilleLayout = (Pane) loader1.load();
                     Stage AjoutVilleStage = new Stage();
                     AjoutVilleStage.getIcons().add(new Image("/image/MB.png"));
@@ -104,7 +104,7 @@ public class controllerAjoutVille {
     @FXML
     public void OnBack(ActionEvent e) throws IOException {
         FXMLLoader loader1 = new FXMLLoader();
-        loader1.setLocation(Main.class.getResource("/fxml/view-ajout-fiches-clients.fxml"));
+        loader1.setLocation(Main.class.getResource("/fxml/view-commerciaux-fiches-clients.fxml"));
         Pane AjoutVilleLayout = (Pane) loader1.load();
         Stage AjoutVilleStage = new Stage();
         AjoutVilleStage.getIcons().add(new Image("/image/MB.png"));
