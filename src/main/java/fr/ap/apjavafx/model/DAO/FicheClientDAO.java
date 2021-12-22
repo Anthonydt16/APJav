@@ -13,11 +13,11 @@ public class FicheClientDAO {
         FicheClient uneFicheClient;
         ArrayList<FicheClient> lesFichesClient = new ArrayList<FicheClient>();
         int i = 0;
-        try (PreparedStatement statement = DBConnex.getConnexion().prepareStatement("SELECT e.NOMENT as `nomEntreprise`, e.ADRESSEENT as `adresseEntreprise`, CONCAT(V.NOMVILLE,'/', P.NOMPAYS) as `villePays`, e.TELENT as `telEntreprise`, e.EMAIL as `emailEntreprise`, l.CONTACTEO_N as `contacter` , l.TYPEINSCRIPTION as `typeInscription`,CONCAT(l.NOM, ' ', l.PRENOM) AS `nomPrenomContact`, l.MAILCONTACT as `mailContact`, l.TELCONTACT as `telContact`" +
+        try (PreparedStatement statement = DBConnex.getConnexion().prepareStatement("SELECT e.NOMENT as `nomEntreprise`, e.ADRESSEENT as `adresseEntreprise`, CONCAT(V.NOMVILLE,'/', P.NOMPAYS) as `villePays`, e.TELENT as `telEntreprise`, e.EMAIL as `emailEntreprise`, l.CONTACTEO_N as `contacter` , l.TYPEINSCRIPTION as `inscription`,CONCAT(l.NOM, ' ', l.PRENOM) AS `nomPrenomContact`, l.MAILCONTACT as `mailContact`, l.TELCONTACT as `telContact`" +
                 "FROM loueur as l JOIN entreprise as e ON l.IDENT = e.IDENT JOIN `ville` AS V ON e.IDVILLE = V.IDVILLE JOIN `pays` AS P ON V.IDPAYS = P.IDPAYS")) {
             try (ResultSet result = statement.executeQuery()) {
                 while (result.next()) {
-                    uneFicheClient = new FicheClient(result.getString("nomEntreprise"),result.getString("adresseEntreprise"),result.getString("villePays"),result.getString("telEntreprise"),result.getString("emailEntreprise"), result.getBoolean("contacter"), result.getString("typeInscription"),result.getString("nomPrenomContact"),result.getString("mailContact"),result.getString("telContact"));
+                    uneFicheClient = new FicheClient(result.getString("nomEntreprise"),result.getString("adresseEntreprise"),result.getString("villePays"),result.getString("telEntreprise"),result.getString("emailEntreprise"), result.getBoolean("contacter"), result.getString("inscription"),result.getString("nomPrenomContact"),result.getString("mailContact"),result.getString("telContact"));
                     lesFichesClient.add(uneFicheClient);
                 }
                 return lesFichesClient;

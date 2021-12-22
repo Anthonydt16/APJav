@@ -45,4 +45,30 @@ public class ContacterDAO {
         return contacter;
     }
 
+    public static Boolean getExistContacter(LoueurDTO unLoueur){
+        boolean rep = false;
+        try(PreparedStatement statement = DBConnex.getConnexion().prepareStatement("SELECT * FROM contacter WHERE IDENT = ?")){
+            statement.setInt(1, unLoueur.getIdEnt());
+            try(ResultSet result = statement.executeQuery()){
+                if(result.next()){
+                    rep = true;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rep;
+    }
+
+    public static void UpdateContacter(ContacterDTO contacter){
+        try (PreparedStatement statement = DBConnex.getConnexion().prepareStatement("UPDATE contacter set LOGIN = ?,  DATECONTACT = ?, IDENT = ?")) {
+            statement.setString(1, contacter.getLOGIN());
+            statement.setString(2, contacter.getDateContact());
+            statement.setInt(3, contacter.getIdEnt());
+            statement.executeUpdate();
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
 }

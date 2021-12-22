@@ -4,6 +4,7 @@ import fr.ap.apjavafx.Main;
 import fr.ap.apjavafx.lib.AutoCompleteBox;
 import fr.ap.apjavafx.model.DAO.*;
 import fr.ap.apjavafx.model.DTO.ContacterDTO;
+import fr.ap.apjavafx.model.DTO.Entreprise;
 import fr.ap.apjavafx.model.DTO.FicheClient;
 import fr.ap.apjavafx.model.DTO.LoueurDTO;
 import javafx.collections.FXCollections;
@@ -30,10 +31,12 @@ import javafx.stage.Window;
 
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.sql.SQLException;
+import java.util.Date;
 
 import static fr.ap.apjavafx.model.DAO.LoueurDAO.loueurByFicheClient;
 
@@ -82,6 +85,7 @@ public class controllerModifFicheClient {
     public FicheClient uneNouvelleFC;
     LoueurDTO unLoueur;
     ContacterDTO contacter;
+    Entreprise uneEntreprise;
     ObservableList<String> listChoix = FXCollections.observableArrayList();
     ArrayList<String> LesPays = PaysDAO.getAllPaysName();
     ArrayList<String> LesCommerciaux = UtilisateurDAO.getAllCommercial();
@@ -183,11 +187,13 @@ public class controllerModifFicheClient {
             DplContacter.setDisable(false);
             dtpDateContacter.setDisable(false);
             contacter = ContacterDAO.getContacterByIdEnt(unLoueur);
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate localDate = LocalDate.parse(contacter.getDateContact(), formatter);
-            dtpDateContacter.setValue(localDate);
-            String prenomNomComm = CommercialDAO.getNomByLogin(contacter);
-            DplContacter.setValue(prenomNomComm);
+            if(contacter != null){
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate localDate = LocalDate.parse(contacter.getDateContact(), formatter);
+                dtpDateContacter.setValue(localDate);
+                String prenomNomComm = CommercialDAO.getNomByLogin(contacter);
+                DplContacter.setValue(prenomNomComm);
+            }
             listChoix.add("Commercial");
             DplTypeInscription.setItems(listChoix);
             DplTypeInscription.setValue("Commercial");
@@ -222,11 +228,13 @@ public class controllerModifFicheClient {
             DplContacter.setDisable(false);
             dtpDateContacter.setDisable(false);
             contacter = ContacterDAO.getContacterByIdEnt(unLoueur);
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate localDate = LocalDate.parse(contacter.getDateContact(), formatter);
-            dtpDateContacter.setValue(localDate);
-            String prenomNomComm = CommercialDAO.getNomByLogin(contacter);
-            DplContacter.setValue(prenomNomComm);
+            if(contacter != null){
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate localDate = LocalDate.parse(contacter.getDateContact(), formatter);
+                dtpDateContacter.setValue(localDate);
+                String prenomNomComm = CommercialDAO.getNomByLogin(contacter);
+                DplContacter.setValue(prenomNomComm);
+            }
             DplTypeInscription.setValue("Commercial");
         } else {
             DplContacter.setDisable(true);
@@ -258,7 +266,105 @@ public class controllerModifFicheClient {
 
     @FXML
     protected void onEnregistrerClient(ActionEvent e) throws IOException {
+        //Je fais les même vérfication que l'ajout
+        //Contrôle de saisie : NOT NULL
+        if(inputNom.getText() != "" || inputAdresse.getText() != "" || cbxVille.getValue() != "" || inputTel.getText() != "" || inputEmailEnt.getText() != "" || inputNomContact.getText() != ""
+                || inputPrenomContact.getText() != "" || inputTelContact.getText() != "" || inputEmailContact.getText() != ""){
+            if(LesPays.contains((String) cbxPays.getValue())) {
+                if (VilleDAO.getVilleExist((String) cbxVille.getValue())) {
+                    if(cbxVille.isVisible()){
+                        if (inputTel.getText().matches("^[0-9]*$") || inputTelContact.getText().matches("^[0-9]*$")) {
+                            if (inputEmailEnt.getText().matches("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?") || inputEmailContact.getText().matches("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")) {
+                                //Je récupère toute les données nécessaire pour la créations de mes objets
+                                if(!ChxContacter.isSelected() && ContacterDAO.getExistContacter(unLoueur)){
+                                    unLoueur.setContacter(false);
+                                    ContacterDAO.removeContacter(unLoueur.getIdEnt());
+                                }
 
+                                //Objet entreprise
+                                int idVille = VilleDAO.getIdVilleByName((String) cbxVille.getValue());
+                                uneEntreprise = new Entreprise(unLoueur.getIdEnt(), idVille, inputNom.getText(), inputAdresse.getText(), inputTel.getText(), inputEmailEnt.getText());
+
+                                //Objet loueur
+                                unLoueur = new LoueurDTO(uneEntreprise.getNum(), uneEntreprise.getNom(), uneEntreprise.getNom(), uneEntreprise.getAdresse(),
+                                        (String) cbxVille.getValue(), (String) cbxPays.getValue(), uneEntreprise.getMail(), uneEntreprise.getTel(),
+                                        ChxContacter.isSelected(), (String) DplTypeInscription.getValue(),
+                                        inputPrenomContact.getText(), inputNomContact.getText(), inputEmailContact.getText(), inputTelContact.getText());
+
+                                if(ChxContacter.isSelected()){
+                                    if(DplContacter.getValue() != null && dtpDateContacter.getValue() != null) {
+                                        Date dateNow = new Date();
+                                        Date dateSaisie = controllerAjoutFichesClients.convertToDateViaSqlDate(dtpDateContacter.getValue());
+                                        if (dateNow.after(dateSaisie)) {
+                                            //Objet contacter
+                                            String nom = CommercialDAO.getLoginByNom(DplContacter.getValue().toString());
+                                            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                                            String dateSaisieString = formatter.format(dateSaisie);
+                                            contacter = new ContacterDTO(nom, dateSaisieString, unLoueur.getIdEnt());
+                                            if (ChxContacter.isSelected() && !ContacterDAO.getExistContacter(unLoueur)) {
+                                                ContacterDAO.insertContacter(contacter);
+                                            } else {
+                                                ContacterDAO.UpdateContacter(contacter);
+                                            }
+                                        } else {
+                                            txtErreur.setText("Erreur : la date saisie est pas valide");
+                                            txtErreur.setVisible(true);
+                                        }
+                                    }
+                                    else{
+                                        txtErreur.setText("Erreur : veuillez saisir une date de contact \n et/ou un commercial");
+                                        txtErreur.setVisible(true);
+                                    }
+                                }
+                                //On fait les updates
+                                EntrepriseDAO.UpdateEntreprise(uneEntreprise);
+                                LoueurDAO.updateLoueur(unLoueur);
+
+                                //On retour sur la liste des loueurs
+                                FXMLLoader loader1 = new FXMLLoader();
+                                loader1.setLocation(Main.class.getResource("/fxml/view-commerciaux-fiches-clients.fxml"));
+                                Pane FicheClientLayout = (Pane) loader1.load();
+                                Stage FicheClientStage = new Stage();
+                                FicheClientStage.getIcons().add(new Image("/image/MB.png"));
+                                Scene ConnectScene = new Scene(FicheClientLayout);
+                                FicheClientStage.setScene(ConnectScene);
+
+                                Stage stage = (Stage) btnEnregistrerClient.getScene().getWindow();
+                                stage.close();
+
+                                FicheClientStage.setTitle("Commerciaux - Liste des fiches clients");
+                                FicheClientStage.initModality(Modality.APPLICATION_MODAL);
+                                FicheClientStage.show();
+
+                            }
+                            else {
+                                txtErreur.setText("Erreur : veuillez saisir une \n adresse mail valide");
+                                txtErreur.setVisible(true);
+                            }
+                        }
+                        else {
+                            txtErreur.setText("Erreur : veuillez saisir un numéro \n de téléphone valide");
+                            txtErreur.setVisible(true);
+                        }
+                    }
+                    else{
+                        txtErreur.setText("Erreur : veuillez selectionnez une ville");
+                        txtErreur.setVisible(true);
+                    }
+                }
+                else {
+                    txtErreur.setText("Erreur : la ville sélectionner n'existe pas");
+                    txtErreur.setVisible(true);
+                }
+            }
+            else{
+                txtErreur.setText("Erreur : le pays sélectionner n'existe pas");
+                txtErreur.setVisible(true);
+            }
+        }
+        else {
+            txtErreur.setVisible(true);
+        }
 
     }
 }

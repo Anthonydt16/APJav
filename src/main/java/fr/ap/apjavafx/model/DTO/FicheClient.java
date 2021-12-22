@@ -12,12 +12,13 @@ public class FicheClient {
     private String mailContact;
     private String telContact;
 
-    public FicheClient(String nomEnt, String adresseEnt, String villePays, String telEnt, String emailEnt, Boolean contacter, String inscription,String nomPrenomContact, String mailContact, String telContact) {
+    public FicheClient(String nomEnt, String adresseEnt, String villePays, String telEnt, String emailEnt, Boolean contacter, String inscription, String nomPrenomContact, String mailContact, String telContact) {
         this.nomEnt = nomEnt;
         this.adresseEnt = adresseEnt;
         VillePays = villePays;
         this.telEnt = telEnt;
         this.emailEnt = emailEnt;
+        //Pour mieux l'afficher dans la tableView a la place de True & False
         if(contacter == true){
             this.contacter = "oui";
         }
@@ -28,6 +29,14 @@ public class FicheClient {
         this.nomPrenomContact = nomPrenomContact;
         this.mailContact = mailContact;
         this.telContact = telContact;
+    }
+
+    public String getInscription() {
+        return inscription;
+    }
+
+    public void setInscription(String inscription) {
+        this.inscription = inscription;
     }
 
     public String getContacter() {

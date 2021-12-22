@@ -58,5 +58,19 @@ public class EntrepriseDAO {
             e.printStackTrace();
         }
     }
+
+    public static void UpdateEntreprise(Entreprise unEntreprise) {
+        try(PreparedStatement statement = DBConnex.getConnexion().prepareStatement("UPDATE entreprise set IDVILLE = ?,  NOMENT = ?, ADRESSEENT = ?, TELENT = ?, EMAIL = ? WHERE IDENT = ?")){
+            statement.setInt(1, unEntreprise.getIdVille());
+            statement.setString(2, unEntreprise.getNom());
+            statement.setString(3, unEntreprise.getAdresse());
+            statement.setString(4, unEntreprise.getTel());
+            statement.setString(5, unEntreprise.getMail());
+            statement.setInt(6, unEntreprise.getNum());
+            statement.executeUpdate();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
 

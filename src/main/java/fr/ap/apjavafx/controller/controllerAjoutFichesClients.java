@@ -148,7 +148,7 @@ public class controllerAjoutFichesClients {
     }
 
     //Permet de convertir un LocalDate en Date via les date sql
-    public Date convertToDateViaSqlDate(LocalDate dateToConvert) {
+    public static Date convertToDateViaSqlDate(LocalDate dateToConvert) {
         return java.sql.Date.valueOf(dateToConvert);
     }
 
