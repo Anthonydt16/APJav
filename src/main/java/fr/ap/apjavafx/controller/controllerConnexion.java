@@ -87,23 +87,25 @@ public class controllerConnexion implements Initializable {
             else{
                 textIncorrect.setText("Le login ou le mot de passe est incorrecte");
             }
+            if(unUtilisateur != null){
+                if(unUtilisateur.getStatut() == "Commercial"){
+                    FXMLLoader loader1 = new FXMLLoader();
+                    loader1.setLocation(Main.class.getResource("/fxml/view-commerciaux-fiches-clients.fxml"));
+                    Pane ConnexionLayout = (Pane) loader1.load();
+                    Stage ConnexionStage = new Stage();
+                    ConnexionStage.getIcons().add(new Image("/image/MB.png"));
+                    Scene ConnectScene = new Scene(ConnexionLayout);
+                    ConnexionStage.setScene(ConnectScene);
 
-            if(unUtilisateur.getStatut() == "Commercial"){
-                FXMLLoader loader1 = new FXMLLoader();
-                loader1.setLocation(Main.class.getResource("/fxml/view-commerciaux-fiches-clients.fxml"));
-                Pane ConnexionLayout = (Pane) loader1.load();
-                Stage ConnexionStage = new Stage();
-                ConnexionStage.getIcons().add(new Image("/image/MB.png"));
-                Scene ConnectScene = new Scene(ConnexionLayout);
-                ConnexionStage.setScene(ConnectScene);
+                    Stage stage = (Stage) btnValider.getScene().getWindow();
+                    stage.close();
 
-                Stage stage = (Stage) btnValider.getScene().getWindow();
-                stage.close();
-
-                ConnexionStage.setTitle("Commerciaux - fiches clients");
-                ConnexionStage.initModality(Modality.APPLICATION_MODAL);
-                ConnexionStage.show();
+                    ConnexionStage.setTitle("Commerciaux - fiches clients");
+                    ConnexionStage.initModality(Modality.APPLICATION_MODAL);
+                    ConnexionStage.show();
+                }
             }
+
         }
     }
 

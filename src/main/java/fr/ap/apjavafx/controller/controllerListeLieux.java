@@ -1,7 +1,6 @@
 package fr.ap.apjavafx.controller;
 
 import fr.ap.apjavafx.Main;
-import fr.ap.apjavafx.model.DAO.FicheClientDAO;
 import fr.ap.apjavafx.model.DAO.LieuDAO;
 import fr.ap.apjavafx.model.DAO.LoueurDAO;
 import fr.ap.apjavafx.model.DTO.FicheClient;
@@ -59,12 +58,13 @@ public class controllerListeLieux {
         collListeLieux.setCellValueFactory(new PropertyValueFactory<LieuDTO,String>("libLieu"));
         tableListeLieux.setItems(data);
 
+
+
         tableListeLieux.setRowFactory(tv -> {
             TableRow<LieuDTO> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 1 && (!row.isEmpty())) {
                     lieuData = row.getItem();
-                    System.out.println(lieuData.getLibLieu());
                     tableListeReservation.setVisible(true);
                 }
             });
