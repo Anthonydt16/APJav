@@ -1,9 +1,6 @@
 package fr.ap.apjavafx.model.DAO;
 
-import fr.ap.apjavafx.model.DTO.ChiffreDAffaireDTO;
-import fr.ap.apjavafx.model.DTO.LieuDTO;
-import fr.ap.apjavafx.model.DTO.SalleDTO;
-import fr.ap.apjavafx.model.DTO.Utilisateur;
+import fr.ap.apjavafx.model.DTO.*;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -196,7 +193,34 @@ public class SalleDAO {
         return desCA;
     }
 
+    public static ArrayList<ChiffreDAffaireMoisDTO> selectMoisCA(int idSalle, int annee){
+        ArrayList<ChiffreDAffaireMoisDTO> desCA= new ArrayList<>();
+        ChiffreDAffaireMoisDTO ca;
+        try (PreparedStatement statement = DBConnex.getConnexion().prepareStatement("select sum(S.prixDemiJournee) as totalAnnee, MONTH(DATERESA) from Salle as S, reservation as R where s.IDSALLE = R.IDSALLE and Year(DATERESA) = ? AND S.IDSALLE = ?")) {
+            statement.setInt(2,idSalle);
+            statement.setInt(1,annee);
 
+            try (ResultSet result = statement.executeQuery()) {
+
+
+
+                while(result.next()) {
+                    System.out.println(result.getInt(1));
+                    ca  = new ChiffreDAffaireMoisDTO(result.getInt(1),result.getInt(2));
+                    desCA.add(ca);
+                }
+                return desCA;
+
+
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
+        return desCA;
+    }
 
 
 

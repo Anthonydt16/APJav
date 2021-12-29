@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -27,6 +28,7 @@ public class controllerConnexion implements Initializable {
      * Les variables du fichier FXML associ�
      */
 
+    @FXML private Pane pane;
     @FXML private TextField inputLogin;
     @FXML private TextField inputPassword;
     @FXML private Button btnValider;
@@ -97,7 +99,11 @@ public class controllerConnexion implements Initializable {
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        this.pane.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                this.btnValider.fire();
+            }
+        });
     }
 
 

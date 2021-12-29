@@ -1,10 +1,10 @@
 package fr.ap.apjavafx.model.DTO;
 
-public class photoDTO {
+public class PhotoDTO {
     private int idPhoto;
     private int idSalle;
     private String lienphoto;
-    private boolean principal;
+    private Boolean principal;
 
     public int getIdPhoto() {
         return idPhoto;
@@ -30,7 +30,7 @@ public class photoDTO {
         this.lienphoto = lienphoto;
     }
 
-    public boolean isPrincipal() {
+    public boolean getPrincipal() {
         return principal;
     }
 
@@ -38,7 +38,7 @@ public class photoDTO {
         this.principal = principal;
     }
 
-    public photoDTO(int idPhoto, int idSalle, String lienphoto, boolean principal) {
+    public PhotoDTO(int idPhoto, int idSalle, String lienphoto, boolean principal) {
         this.idPhoto = idPhoto;
         this.idSalle = idSalle;
         this.lienphoto = lienphoto;

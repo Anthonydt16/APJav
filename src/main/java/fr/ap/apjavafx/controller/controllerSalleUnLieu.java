@@ -5,10 +5,7 @@ import fr.ap.apjavafx.model.DAO.LieuDAO;
 import fr.ap.apjavafx.model.DAO.LoueurDAO;
 import fr.ap.apjavafx.model.DAO.SalleDAO;
 import fr.ap.apjavafx.model.DAO.VilleDAO;
-import fr.ap.apjavafx.model.DTO.LieuDTO;
-import fr.ap.apjavafx.model.DTO.LoueurDTO;
-import fr.ap.apjavafx.model.DTO.SalleDTO;
-import fr.ap.apjavafx.model.DTO.VilleDTO;
+import fr.ap.apjavafx.model.DTO.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,9 +24,12 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static fr.ap.apjavafx.model.DAO.SalleDAO.selectAnnuelCA;
+import static fr.ap.apjavafx.model.DAO.LieuDAO.selectMoisCA;
 
 public class controllerSalleUnLieu {
 
@@ -57,12 +57,15 @@ public class controllerSalleUnLieu {
     @FXML private RadioButton inputNonAnnulation;
     @FXML private RadioButton inputOuiAnnulation;
     @FXML private Button btnValider;
-
+    @FXML private ComboBox<Integer> comboAnnee;
+    @FXML private TableView<ChiffreDAffaireMoisDTO> tableCALieux;
+    @FXML private TableColumn<ChiffreDAffaireMoisDTO,Integer> colChiffres;
+    @FXML private TableColumn<ChiffreDAffaireMoisDTO,Integer> colMois;
     // savoir de quelle bouton il viens
-
     private String buttonindice;
     private LieuDTO unLieu;
     //recuperer les lieux existant er pour avoir l'id
+
     ArrayList <LieuDTO> desLieux = LieuDAO.SelectLieux();
 
     public LieuDTO getId() {
@@ -80,6 +83,9 @@ public class controllerSalleUnLieu {
     public void setButtonindice(String buttonindice) {
         this.buttonindice = buttonindice;
     }
+
+
+
 
 
     @FXML
@@ -105,6 +111,43 @@ public class controllerSalleUnLieu {
             ModifSalleStage.show();
         }
     }
+
+
+    //affichage du chiffre d'affaire
+    public void affichageCA(int annee){
+        ArrayList<Integer> mois= new ArrayList <Integer>();
+        for (int i = 1; i <13; i++){
+            mois.add(i);
+        }
+
+
+
+        //Affichage chiffre affaire mois
+        ArrayList<ChiffreDAffaireMoisDTO> desCAM= selectMoisCA(unLieu.getIdLieu(),annee);
+
+
+
+        ObservableList<ChiffreDAffaireMoisDTO> data2 = FXCollections.observableArrayList(desCAM) ;
+
+
+
+
+        colMois.setCellValueFactory(new PropertyValueFactory<ChiffreDAffaireMoisDTO,Integer>("mois"));
+        colChiffres.setCellValueFactory(new PropertyValueFactory<ChiffreDAffaireMoisDTO,Integer>("CA"));
+        tableCALieux.setItems(data2);
+
+
+
+
+    }
+
+    @FXML
+    private void comboSelect(ActionEvent event) {
+        System.out.println(comboAnnee.getValue());
+        affichageCA((Integer) comboAnnee.getValue());
+    }
+
+
     public void ValidationSaisi(ActionEvent actionEvent) throws IOException {
 
 
@@ -215,6 +258,8 @@ public class controllerSalleUnLieu {
             data.add(uneSalle);
             System.out.println(uneSalle.getIdSalle());
         }
+
+
         IDSalleCol.setCellValueFactory(new PropertyValueFactory<>("idSalle"));
         NomLieuCol.setCellValueFactory(new PropertyValueFactory<>("nomLieu"));
         NomSalleCol.setCellValueFactory(new PropertyValueFactory<>("nomSalle"));
@@ -229,6 +274,18 @@ public class controllerSalleUnLieu {
     }
 
     public void setup(){
+
+        ArrayList<Integer> desAnnee = new ArrayList<>();
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        //TODO trouver solution pour la date batard
+        for (int i = 2000; i <= currentYear ; i++) {
+            desAnnee.add(i);
+        }
+        List<Integer> desAnneeL = desAnnee;
+        comboAnnee.setItems(FXCollections.observableList(desAnneeL));
+
+
+
 
         if(this.buttonindice == "modif") {
 

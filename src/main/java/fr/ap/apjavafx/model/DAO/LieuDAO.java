@@ -119,6 +119,34 @@ public class LieuDAO {
         }
 
     }
+    public static ArrayList<ChiffreDAffaireMoisDTO> selectMoisCA(int idLieux, int annee){
+        ArrayList<ChiffreDAffaireMoisDTO> desCA= new ArrayList<>();
+        ChiffreDAffaireMoisDTO ca;
+        try (PreparedStatement statement = DBConnex.getConnexion().prepareStatement("select sum(S.prixDemiJournee) as totalAnnee, MONTH(DATERESA) from Salle as S, Lieu as L, reservation as R where s.IDSALLE = R.IDSALLE and Year(DATERESA) = ? AND L.idLieu = S.idLieu AND L.idLieu = ?")) {
+            statement.setInt(2,idLieux);
+            statement.setInt(1,annee);
+
+            try (ResultSet result = statement.executeQuery()) {
+
+
+
+                while(result.next()) {
+                    System.out.println(result.getInt(1));
+                    ca  = new ChiffreDAffaireMoisDTO(result.getInt(1),result.getInt(2));
+                    desCA.add(ca);
+                }
+                return desCA;
+
+
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
+        return desCA;
+    }
 }
 
 
