@@ -11,11 +11,11 @@ import java.util.ArrayList;
 public class LieuDAO {
     public static ArrayList<LieuDTO> getLieuxByLoueur(LoueurDTO unLoueur){
         ArrayList<LieuDTO> Lieux = new ArrayList<>();
-        try (PreparedStatement statement = DBConnex.getConnexion().prepareStatement("SELECT LIBELLELIEU as lbl FROM lieu WHERE IDENT= ?")){
+        try (PreparedStatement statement = DBConnex.getConnexion().prepareStatement("SELECT IDLIEU as idl ,LIBELLELIEU as lbl FROM lieu WHERE IDENT= ?")){
             statement.setInt(1, unLoueur.getIdEnt());
             try(ResultSet result = statement.executeQuery()){
                 while(result.next()){
-                    LieuDTO unLieu = new LieuDTO(result.getString("lbl"));
+                    LieuDTO unLieu = new LieuDTO(result.getInt("idl") ,result.getString("lbl"));
                     Lieux.add(unLieu);
                 }
             }

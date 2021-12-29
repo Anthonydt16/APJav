@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="496.0" prefWidth="901.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.ap.apjavafx.controller.controllerListeLieux">
    <children>
-      <Text fx:id="txtTitle" layoutX="232.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des lieux proposés par ">
+      <Text fx:id="txtTitle" layoutX="198.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Informations sur lieux proposés par ">
          <font>
             <Font size="24.0" />
          </font>
@@ -32,7 +34,9 @@
       </TableView>
       <TableView fx:id="tableListeReservation" layoutX="297.0" layoutY="86.0" prefHeight="376.0" prefWidth="299.0">
          <columns>
-            <TableColumn fx:id="collListeDesReservations" prefWidth="297.0" text="Listes des reservations pour la salle" />
+            <TableColumn fx:id="collListeDesReservations" prefWidth="106.0" text="Numéro de réservation" />
+            <TableColumn fx:id="collDateResa" prefWidth="114.0" text="Date réservation" />
+            <TableColumn fx:id="collDateDebut" prefWidth="78.0" text="Date début" />
          </columns>
       </TableView>
       <Text fx:id="txtInformatif" layoutX="48.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cliquez sur un lieu pour plus de détails">
@@ -45,5 +49,32 @@
             <Image url="@../image/information.png" />
          </image>
       </ImageView>
+      <Pane fx:id="paneReservant" layoutX="609.0" layoutY="270.0" prefHeight="129.0" prefWidth="276.0" style="-fx-background-color: #DCE8F4;">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+         <children>
+            <Text fx:id="txtReservantNom" layoutX="8.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom :" />
+            <Text fx:id="txtReservantTitre" layoutX="50.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Informations du réservant :">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <Text fx:id="txtReservantAdresse" layoutX="9.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse :" />
+            <Text fx:id="txtReservantTel" layoutX="7.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="N° de téléphone :" />
+            <Text fx:id="txtReservantMail" layoutX="8.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse mail :" />
+         </children>
+      </Pane>
+      <Pane fx:id="paneMotant" layoutX="609.0" layoutY="109.0" prefHeight="91.0" prefWidth="276.0" style="-fx-background-color: #ABBCCC;">
+         <children>
+            <Text layoutX="10.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Information montant des réservations :">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <Text fx:id="txtReservationMontantGlobal" layoutX="19.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Montant global :" />
+            <Text fx:id="txtReservationMontant" layoutX="19.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Montant de cette réservation :" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

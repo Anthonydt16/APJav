@@ -12,7 +12,8 @@ public class LieuDTO {
     private int nbEtoiles;
     private String Desc;
 
-    public LieuDTO(String libLieu) {
+    public LieuDTO(int idLieu, String libLieu) {
+        this.idLieu = idLieu;
         this.libLieu = libLieu;
     }
 

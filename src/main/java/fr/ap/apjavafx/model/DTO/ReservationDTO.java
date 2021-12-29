@@ -1,22 +1,26 @@
 package fr.ap.apjavafx.model.DTO;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class ReservationDTO {
     private int numResa;
     private int idSalle;
     private int codeDuree;
+    private int idEnt;
     private int nbPersonnes;
-    private Date dateResa;
-    private Date dateDebut;
+    private java.sql.Date dateResa;
+    private java.sql.Date dateDebut;
+    private int montantReservation;
 
-    public ReservationDTO(int numResa, int idSalle, int codeDuree, int nbPersonnes, Date dateResa, Date dateDebut) {
+    public ReservationDTO(int numResa, int idSalle, int codeDuree, int idEnt , int nbPersonnes, java.sql.Date dateResa, java.sql.Date dateDebut, int montantReservation) {
         this.numResa = numResa;
         this.idSalle = idSalle;
         this.codeDuree = codeDuree;
+        this.idEnt = idEnt;
         this.nbPersonnes = nbPersonnes;
         this.dateResa = dateResa;
         this.dateDebut = dateDebut;
+        this.montantReservation = montantReservation;
     }
 
     public int getNumResa() {
@@ -43,6 +47,14 @@ public class ReservationDTO {
         this.codeDuree = codeDuree;
     }
 
+    public int getIdEnt() {
+        return idEnt;
+    }
+
+    public void setIdEnt(int idEnt) {
+        this.idEnt = idEnt;
+    }
+
     public int getNbPersonnes() {
         return nbPersonnes;
     }
@@ -65,5 +77,13 @@ public class ReservationDTO {
 
     public void setDateDebut(Date dateDebut) {
         this.dateDebut = dateDebut;
+    }
+
+    public int getMontantReservation() {
+        return montantReservation;
+    }
+
+    public void setMontantReservation(int montantReservation) {
+        this.montantReservation = montantReservation;
     }
 }
