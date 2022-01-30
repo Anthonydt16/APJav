@@ -12,7 +12,7 @@ public class Main extends Application {
 	private Pane rootLayout;
 
 	/*
-	 * Chargement au lancement de l'application de le vue "view-inscription.fxml"
+	 * Chargement au lancement de l'application de le vue "view-inscrisption.fxml"
 	 */
 	@Override
 	public void start(Stage primaryStage) {

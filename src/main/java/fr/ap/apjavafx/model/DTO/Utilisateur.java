@@ -8,171 +8,86 @@ import java.util.ArrayList;
 
 public class Utilisateur {
 
-	private String id;
-    private String nom ;
-    private String prenom;
-    private String login;
-    private String mdp;
-    private String statut;
-    private String adresse;
-    private String cp;
-    private String ville;
-    private Date dateEmbauche;
-    private ArrayList<FicheFrais> mesFiches;
-    private UtilisateurStatus status;
-    
+	private String LOGIN;
+    private String PASSWORD ;
+    private String NOM;
+    private String PRENOM;
+    private String ADRESSE;
+    private String TELEPHONE;
+    private String MAIL;
+    private String Statut;
 
-    public Utilisateur(String unId, String unNom , String unPrenom  , String unLogin , String unMdp , String unStatut ,  String uneAdresse , String unCp , String uneVille , Date uneDateEmb)
-    {
-        id = unId;
-        nom = unNom;
-        prenom = unPrenom;
-        login = unLogin;
-        mdp = unMdp;
-        statut = unStatut;
-        adresse = uneAdresse;
-        cp = unCp;
-        ville = uneVille;
-        dateEmbauche = uneDateEmb;
-        mesFiches = new ArrayList<FicheFrais>();
-//        status = UtilisateurStatus.ADMIN;
-//
-//        if (status == UtilisateurStatus.ADMIN)
-//            UtilisateurStatus.ADMIN.name();
-//        UtilisateurStatus.valueOf("ADMIN");
-        }
-
-
-	public String getLogin() {
-		return login;
-	}
-
-
-	public void setLogin(String login) {
-		this.login = login;
-	}
-
-
-	public String getMdp() {
-		return mdp;
-	}
-
-
-	public void setMdp(String mdp) {
-		this.mdp = mdp;
-	}
-
-
-	public String getCp() {
-		return cp;
-	}
-
-
-	public void setCp(String cp) {
-		this.cp = cp;
-	}
-
-
-	public ArrayList<FicheFrais> getMesFiches() {
-		return mesFiches;
-	}
-
-
-	public void setMesFiches(ArrayList<FicheFrais> mesFiches) {
-		this.mesFiches = mesFiches;
-	}
-
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-
-
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
-	}
-
-
-	public void setAdresse(String adresse) {
-		this.adresse = adresse;
-	}
-
-
-	public void setVille(String ville) {
-		this.ville = ville;
-	}
-
-
-	public void setDateEmbauche(Date dateEmbauche) {
-		this.dateEmbauche = dateEmbauche;
-	}
-
-
-
-
-    public String getId()
-    {
-        return id;
+    public Utilisateur(String LOGIN, String PASSWORD, String NOM, String PRENOM, String ADRESSE, String TELEPHONE, String MAIL) {
+        this.LOGIN = LOGIN;
+        this.PASSWORD = PASSWORD;
+        this.NOM = NOM;
+        this.PRENOM = PRENOM;
+        this.ADRESSE = ADRESSE;
+        this.TELEPHONE = TELEPHONE;
+        this.MAIL = MAIL;
     }
 
-    public String getNom()
-    {
-        return nom;
+
+    public String getLOGIN() {
+        return LOGIN;
     }
 
-    public String getPrenom()
-    {
-        return prenom;
+    public void setLOGIN(String LOGIN) {
+        this.LOGIN = LOGIN;
     }
 
-    public String getAdresse()
-    {
-        return adresse;
+    public String getPASSWORD() {
+        return PASSWORD;
     }
 
-    public String getCodePostal()
-    {
-        return cp;
+    public void setPASSWORD(String PASSWORD) {
+        this.PASSWORD = PASSWORD;
     }
 
-    public String getVille()
-    {
-        return ville;
+    public String getNOM() {
+        return NOM;
     }
 
-    public Date getDateEmbauche()
-    {
-        return dateEmbauche;
+    public void setNOM(String NOM) {
+        this.NOM = NOM;
     }
 
-    public String getNomComplet()
-    {
-        return  nom + " " + prenom;
+    public String getPRENOM() {
+        return PRENOM;
     }
 
-    public String getCPVille()
-    {
-        return cp + " " +  ville;
+    public void setPRENOM(String PRENOM) {
+        this.PRENOM = PRENOM;
     }
 
-    public ArrayList<FicheFrais> getFichesDeFrais()
-    {
-        return mesFiches;
+    public String getADRESSE() {
+        return ADRESSE;
     }
-   
+
+    public void setADRESSE(String ADRESSE) {
+        this.ADRESSE = ADRESSE;
+    }
+
+    public String getTELEPHONE() {
+        return TELEPHONE;
+    }
+
+    public void setTELEPHONE(String TELEPHONE) {
+        this.TELEPHONE = TELEPHONE;
+    }
+
+    public String getMAIL() {
+        return MAIL;
+    }
+
+    public void setMAIL(String MAIL) {
+        this.MAIL = MAIL;
+    }
     public String getStatut() {
-		return statut;
-	}
+        return Statut;
+    }
 
-
-	public void setStatut(String statut) {
-		this.statut = statut;
-	}
+    public void setStatut(String statut) {
+        Statut = statut;
+    }
 }
-	
-

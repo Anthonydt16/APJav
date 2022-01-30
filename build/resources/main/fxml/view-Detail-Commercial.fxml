@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="563.0" prefWidth="1006.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.ap.apjavafx.controller.ControllerDetailCommerciaux">
+   <Label layoutX="47.0" layoutY="23.0" text="Detail commerciaux">
+      <font>
+         <Font size="48.0" />
+      </font></Label>
+   <Label layoutX="210.0" layoutY="93.0" text="Prenom:" />
+   <Button fx:id="buttonValiderPeriode" layoutX="319.0" layoutY="137.0" mnemonicParsing="false" text="Valider" />
+   <TableView fx:id="tableContactCommerciaux" layoutX="47.0" layoutY="182.0" prefHeight="200.0" prefWidth="418.0">
+     <columns>
+       <TableColumn fx:id="colEntreprise" prefWidth="154.1999969482422" text="Entreprise" />
+       <TableColumn fx:id="colDate" prefWidth="125.79998779296875" text="Date" />
+     </columns>
+   </TableView>
+   <Label layoutX="346.0" layoutY="93.0" text="Total contact" />
+   <Label layoutX="63.0" layoutY="93.0" text="Nom:" />
+   <Label layoutX="107.0" layoutY="93.0" text="." />
+   <Label layoutX="275.0" layoutY="93.0" text="." />
+   <Label layoutX="428.0" layoutY="93.0" text="." />
+   <Label layoutX="63.0" layoutY="141.0" text="Année" />
+   <TextField layoutX="115.0" layoutY="137.0" />
+</AnchorPane>
